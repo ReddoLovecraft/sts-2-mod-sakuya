@@ -21,7 +21,7 @@ namespace TH_Sakuya.Scripts.Main
     private static Harmony? _harmony;
     public static void Init()
     {
-        TryRegisterGodotScriptAssembly();
+         TryRegisterGodotScriptAssembly();
         _harmony = new Harmony("TH_Sakuya");
         _harmony.PatchAll();
         Log.Debug("Sakuya mod has been loaded successfully");

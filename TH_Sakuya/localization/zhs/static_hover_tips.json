@@ -1,4 +1,6 @@
 {
-	"BURN_POWER.title": "点燃",
-	"BURN_POWER.description": "回合开始时，失去层数点生命，回合结束时将层数增加[blue]1[/blue]层。"
+	"TIME_STOP.title": "时停",
+	"TIME_STOP.description": "[gold]时停[/gold]时，所有伤害将被延迟至[gold]时停[/gold]结束后再进行结算。\n打出卡牌时不再消耗能量，而是改为消耗[blue]6[/blue]倍的[purple]TSP[/purple]。",
+	"TSP.title": "TSP",
+	"TSP.description": "[gold]时停[/gold]时使用的替代能量，耗尽时立即退出[gold]时停[/gold]并获得[blue]1[/blue]层[gold]虚弱[/gold]和[gold]易伤[/gold]。\n在未进入时停的回合会自然恢复[blue]25%[/blue]的[purple]TSP[/purple]。\n每场战斗首次进入[gold]时停[/gold]时，获得此时所有意图为攻击的敌人的意图数值的[purple]TSP[/purple]。"
 }

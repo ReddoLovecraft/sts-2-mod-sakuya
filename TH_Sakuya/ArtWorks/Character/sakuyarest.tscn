@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://xoel4ij0itb8" path="res://TH_Sakuya/ArtWorks/VFX/Sakuyarest.cs" id="1_rfjk2"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://655lismd4kqr" path="res://TH_Sakuya/ArtWorks/Character/normal/sakuya.tres" id="1_xodtj"]
 
-[node name="alicerest" type="Node2D"]
+[node name="sakuyarest" type="Node2D"]
 script = ExtResource("1_rfjk2")
 
 [node name="SpineSprite" type="SpineSprite" parent="."]

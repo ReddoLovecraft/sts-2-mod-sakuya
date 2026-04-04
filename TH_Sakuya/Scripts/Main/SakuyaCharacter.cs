@@ -14,16 +14,6 @@ namespace TH_Sakuya.Scripts.Main
 {
 	public class SakuyaCharacter : PlaceholderCharacterModel
 	{
-		//设计部分：时停：时停时使用特殊能量代替原版能量，时停时不能立即对敌人造成伤害也不会立即受到伤害，所造成的伤害将会累积在时停结束时爆发
-		//时停将设计成一个特殊的正面状态，来方便其他机制的触发。
-		//初始遗物：Lunar Dial月时计，右键可切换时停状态（进入或退出）。
-		//时停计数(TimeStopCount，以下简称TSC)初始值为12，储存于月时计中，不会随时停切换重置，只会在战斗开始时重置，每打出一张牌就将此值-1，当TSC为0时，立即退出时停并结束你的回合，TSC计数将在下个你的回合开始时回满。
-		//在你的回合开始时TSC-1,若<0则立即解除时停(即TSC为1时，在你的下个回合开始时解除时停并空过你的回合)
-		//试图在角色持有该状态时将渲染改为黑白色-todo 特效，不持有时停状态的将正常彩色渲染
-		//打出卡牌时，改为消耗等量的TSP，每6点时停点(TimeStopPoint,以下简称TSP)可以换算等于1点原版能量的消耗，向上取整，x牌的消耗需要patch特殊处理。
-		//TSP的初始上限为160点，初始值为0，TSP在未进入时停的回合会自然恢复1/4。
-		//每场战斗首次进入时停时，获得此时所有意图为攻击的敌人的意图数值的TSP。
-		//TSP耗尽时将立即退出时停并获得1层虚弱和脆弱。
 		public override Color NameColor => new Color("8ca6c2ff");
 		public override Color EnergyLabelOutlineColor => new Color("8ca6c2ff");
 		public override Color DialogueColor => new Color("8ca6c2ff");
@@ -31,6 +21,7 @@ namespace TH_Sakuya.Scripts.Main
 		public override Color RemoteTargetingLineColor => new Color("96b9faff");
 		public override Color RemoteTargetingLineOutline => new Color("5c68ffff");
 		public override CharacterGender Gender => CharacterGender.Feminine;
+		public override bool ShouldAlwaysShowStarCounter => true;
 		public override int StartingHp => 80;
         public override string CustomVisualPath => "res://TH_Sakuya/ArtWorks/Character/sakuya.tscn";
         public override string CustomTrailPath => "res://TH_Sakuya/ArtWorks/VFX/SakuyaCardTrail.tscn";

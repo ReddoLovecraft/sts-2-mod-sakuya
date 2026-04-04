@@ -25,6 +25,10 @@
 			<HintPath>$(Sts2Dir)/mods/BaseLib/BaseLib.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+	<Reference Include="Patchoulib">
+			<HintPath>$(Sts2Dir)/mods/Patchoulib/Patchoulib.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 	</ItemGroup>
 
 	<Target Name="Copy Mod" AfterTargets="PostBuildEvent" Condition="'$(SkipCopyMod)' != 'true'">

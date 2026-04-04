@@ -1,0 +1,109 @@
+[gd_scene load_steps=8 format=3 uid="uid://0wjqx0p1er0u"]
+
+[ext_resource type="Script" uid="uid://7b57kahf5il" path="res://TH_Sakuya/Scripts/Nodes/Combat/NTimeStopPointCounter.cs" id="1_tsp"]
+[ext_resource type="Texture2D" uid="uid://bt0tnqbw0whyv" path="res://TH_Sakuya/ArtWorks/Character/card_orb.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://ii1ya33gr2ip" path="res://TH_Sakuya/ArtWorks/VFX/bigOrb000.png" id="2_whuqc"]
+[ext_resource type="Shader" path="res://shaders/hsv.gdshader" id="3_hsv"]
+[ext_resource type="FontVariation" path="res://themes/kreon_bold_glyph_space_two.tres" id="4_font"]
+[ext_resource type="Script" path="res://addons/mega_text/MegaRichTextLabel.cs" id="5_rich"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tsp"]
+shader = ExtResource("3_hsv")
+shader_parameter/h = 0.78
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="TimeStopPointCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -102.99999
+offset_top = -107.0
+offset_right = 25.000008
+offset_bottom = 21.000122
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_tsp")
+metadata/_edit_group_ = true
+
+[node name="Icon" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_tsp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.999994
+offset_top = 6.25
+offset_right = -8.000023
+offset_bottom = 6.999878
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_whuqc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RotationLayers" type="Control" parent="Icon"]
+unique_name_in_owner = true
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Layer1" type="TextureRect" parent="Icon/RotationLayers"]
+visible = false
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -89.25001
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_whuqc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Layer2" type="TextureRect" parent="Icon/RotationLayers"]
+visible = false
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CountLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 23.749994
+offset_top = 52.5
+offset_right = -16.750015
+offset_bottom = -33.000122
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("4_font")
+theme_override_colors/default_color = Color(0.98039216, 1, 0.99607843, 1)
+theme_override_colors/font_outline_color = Color(0.101961, 0.0901961, 0.0784314, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]0/160[/center]"
+script = ExtResource("5_rich")
