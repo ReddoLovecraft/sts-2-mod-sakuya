@@ -1,0 +1,14 @@
+{
+  "SILKSONGRELICS-BURN_POWER.description": "回合开始时，失去层数点生命，回合结束时将层数增加[blue]1[/blue]层。",
+  "SILKSONGRELICS-BURN_POWER.smartDescription": "回合开始时，失去[blue]{Amount}[/blue]点生命，回合结束时将层数增加[blue]1[/blue]层。",
+  "SILKSONGRELICS-BURN_POWER.title": "点燃",
+  "SILKSONGRELICS-SNARE_SETTER_POWER.description": "下[blue]1[/blue]次被攻击时，对所有敌人造成[blue]25[/blue]点伤害[blue]。",
+  "SILKSONGRELICS-SNARE_SETTER_POWER.smartDescription": "下[blue]{Amount}[/blue]次被攻击时，对所有敌人造成[blue]25[/blue]点伤害[blue]。",
+  "SILKSONGRELICS-SNARE_SETTER_POWER.title": "陷阱",
+  "SILKSONGRELICS-FLINTSLATE_POWER.description": "本回合内造成的伤害增加[blue]50%[/blue]，每当你对敌人造成伤害时，给予[blue]3[/blue]层[gold]点燃[/gold]。",
+  "SILKSONGRELICS-FLINTSLATE_POWER.smartDescription": "本回合内造成的伤害增加[blue]50%[/blue]，每当你对敌人造成伤害时，给予[blue]{Amount}[/blue]层[gold]点燃[/gold]。",
+  "SILKSONGRELICS-FLINTSLATE_POWER.title": "火焰附加",
+  "SILKSONGRELICS-COGFLY_POWER.description": "在你的回合开始时，随机造成[blue]3[/blue]点伤害。",
+  "SILKSONGRELICS-COGFLY_POWER.smartDescription": "在你的回合开始时，随机造成[blue]3[/blue]点伤害[blue]{Amount}[/blue]次。",
+  "SILKSONGRELICS-COGFLY_POWER.title": "齿轮蜂"
+}

@@ -1,0 +1,4 @@
+{
+	"BURN_POWER.title": "点燃",
+	"BURN_POWER.description": "回合开始时，失去层数点生命，回合结束时将层数增加[blue]1[/blue]层。"
+}

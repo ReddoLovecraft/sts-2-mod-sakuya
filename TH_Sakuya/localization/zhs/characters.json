@@ -1,0 +1,17 @@
+{
+  "TH_SAKUYA-SAKUYA_CHARACTER.aromaPrinciple": "[sine][red]……蕾米莉亚大小姐……[/red][/sine]",
+  "TH_SAKUYA-SAKUYA_CHARACTER.banter.alive.endTurnPing": "即使是我也没办法控制时间流动的更快么……",
+  "TH_SAKUYA-SAKUYA_CHARACTER.banter.dead.endTurnPing": "……",
+  "TH_SAKUYA-SAKUYA_CHARACTER.cardsModifierDescription": "咲夜的卡牌现在会出现在奖励和商店中。",
+  "TH_SAKUYA-SAKUYA_CHARACTER.cardsModifierTitle": "咲夜卡牌",
+  "TH_SAKUYA-SAKUYA_CHARACTER.description": "完美潇洒的女仆长，\n操纵时间和使用飞刀来战胜敌人。",
+  "TH_SAKUYA-SAKUYA_CHARACTER.eventDeathPrevention": "……不，我还不能死……大小姐还在等着我……",
+  "TH_SAKUYA-SAKUYA_CHARACTER.goldMonologue": "[sine]这些金币……也许用来重建红魔馆……[/sine]",
+  "TH_SAKUYA-SAKUYA_CHARACTER.possessiveAdjective": "她的",
+  "TH_SAKUYA-SAKUYA_CHARACTER.pronounObject": "她",
+  "TH_SAKUYA-SAKUYA_CHARACTER.pronounPossessive": "她的",
+  "TH_SAKUYA-SAKUYA_CHARACTER.pronounSubject": "她",
+  "TH_SAKUYA-SAKUYA_CHARACTER.title": "十六夜咲夜",
+  "TH_SAKUYA-SAKUYA_CHARACTER.titleObject": "咲夜",
+  "TH_SAKUYA-SAKUYA_CHARACTER.unlockText": "用[pink]{Prerequisite}[/pink]进行一局游戏来解锁这个角色。"
+}

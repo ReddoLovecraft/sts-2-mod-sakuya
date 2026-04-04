@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://655lismd4kqr"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cqt0ts22vayqp" path="res://TH_Sakuya/ArtWorks/Character/normal/skeleton.atlas" id="1_jvby6"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://8fhk1mnhj307" path="res://TH_Sakuya/ArtWorks/Character/rest/skeleton.skel" id="2_eiufn"]
+
+[resource]
+atlas_res = ExtResource("1_jvby6")
+skeleton_file_res = ExtResource("2_eiufn")

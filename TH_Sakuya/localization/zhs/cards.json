@@ -1,0 +1,6 @@
+{
+	"TH_SAKUYA-STRIKE.title": "打击",
+	"TH_SAKUYA-STRIKE.description": "造成{Damage:diff()}点伤害。",
+	"TH_SAKUYA-DEFEND.title": "防御",
+	"TH_SAKUYA-DEFEND.description": "获得{Block:diff()}点[gold]格挡[/gold]。"
+}

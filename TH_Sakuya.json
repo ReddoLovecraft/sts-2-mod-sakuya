@@ -1,0 +1,11 @@
+{
+  "id": "TH_Sakuya",          
+  "name": "十六夜咲夜",
+  "author": "Reddo",
+  "description": "增加了一个来东方Project的人物，十六夜咲夜。",
+  "version": "0.1",
+  "has_pck": true,         
+  "has_dll": true,       
+  "dependencies": ["BaseLib"],    
+  "affects_gameplay": true 
+}

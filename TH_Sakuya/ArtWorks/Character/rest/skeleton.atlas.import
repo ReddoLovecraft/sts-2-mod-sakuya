@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://5kei5s3q5fto"
+path="res://.godot/imported/skeleton.atlas-055e5b89f26cb8f78ccd6cb6b90d2a75.spatlas"
+
+[deps]
+
+source_file="res://TH_Sakuya/ArtWorks/Character/rest/skeleton.atlas"
+dest_files=["res://.godot/imported/skeleton.atlas-055e5b89f26cb8f78ccd6cb6b90d2a75.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
