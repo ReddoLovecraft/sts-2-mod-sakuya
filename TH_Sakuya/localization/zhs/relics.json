@@ -1,5 +1,5 @@
 {
   "SAKUYA_WATCH.title": "咲夜的怀表",
   "SAKUYA_WATCH.description": "[gold]右键该遗物时[/gold]，进入/退出[gold]时停[/gold]。\n计数上限[blue]12[/blue]，每场战斗开始时，将计数恢复至上限。每当你打出[blue]1[/blue]张牌，或是在你的回合开始时处于[gold]时停[/gold]时，将计数减少[blue]1[/blue]，计数归零时立即退出[gold]时停[/gold]并结束你的回合。",
-  "SAKUYA_WATCH.flavor": "十六夜咲夜随身携带的怀表，也是她发动时停的道具之一。"
+  "SAKUYA_WATCH.flavor": "十六夜咲夜随身携带的怀表，也是她用于发动时停的道具之一。"
 }

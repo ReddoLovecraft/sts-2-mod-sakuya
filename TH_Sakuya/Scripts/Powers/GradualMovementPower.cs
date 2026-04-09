@@ -5,13 +5,13 @@ using TH_Sakuya.Scripts.Main;
 
 namespace TH_Sakuya.Scripts.Powers
 {
-public sealed class LaterDamagePower : SakuyaPowerModel
+public sealed class GradualMovementPower : SakuyaPowerModel
 {
-	public override PowerType Type => PowerType.Debuff;
+	public override PowerType Type => PowerType.Buff;
 	public override PowerStackType StackType => PowerStackType.Counter;
 	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
-    public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/LDP32.png";
-    public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/LDP64.png";
+    public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/GMP32.png";
+    public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/GMP64.png";
 }
 }
 

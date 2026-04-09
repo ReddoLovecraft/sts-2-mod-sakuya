@@ -62,12 +62,14 @@ namespace TH_Sakuya.Scripts.Main
 			 ModelDb.Card<Defend>(),
 			 ModelDb.Card<Defend>(),
 			 ModelDb.Card<Defend>(),
-			 ModelDb.Card<Defend>()
+			 ModelDb.Card<Defend>(),
+			 ModelDb.Card<MaidSecret>(),
+			 ModelDb.Card<Sweep>()
 	];
 
 		// 初始遗物
 		public override IReadOnlyList<RelicModel> StartingRelics => [
-		    ModelDb.Relic<SakuyaWatch>(),
+		    ModelDb.Relic<SakuyaWatch>()
 	];
 
 		// 攻击建筑师的攻击特效列表
@@ -107,6 +109,19 @@ namespace TH_Sakuya.Scripts.Main
 			creatureAnimator.AddAnyState("TimeStop", animState7);
 			creatureAnimator.AddAnyState("Knife", animState8);
             return creatureAnimator;
+		}
+		private static int cnt=0;
+		public static int UsedKnivesCount()
+		{
+		return cnt;
+		}
+		public static void ResetUsedKnivesCount()
+		{
+			cnt=0;
+		}
+		public static void AddUsedKnivesCount(int amount)
+		{
+			cnt+=amount;
 		}
 	}
 }

@@ -13,6 +13,7 @@ using TH_Sakuya.Scripts.Nodes.Combat;
 using TH_Sakuya.Scripts.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Combat;
 
 namespace TH_Sakuya.Scripts.Patches;
 
@@ -166,5 +167,21 @@ public static class TimeStopPatches
 		{
 			__instance.EnergyCounterContainer.AddChildSafely(counter);
 		}
+	}
+
+	[HarmonyPatch(typeof(Hook), nameof(Hook.AfterEnergySpent))]
+	[HarmonyPostfix]
+	private static void Hook_AfterEnergySpent_Postfix(CombatState combatState, CardModel card, int amount)
+	{
+		if (amount <= 0)
+		{
+			return;
+		}
+		Player? player = card?.Owner;
+		if (player == null || !TimeStopPointSystem.IsEnabledFor(player))
+		{
+			return;
+		}
+		TimeStopPointSystem.OnEnergySpent(player, amount);
 	}
 }

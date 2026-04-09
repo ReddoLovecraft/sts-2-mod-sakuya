@@ -28,7 +28,6 @@ public sealed class TimeStopPower : SakuyaPowerModel
 
 	public override PowerType Type => PowerType.Buff;
 	public override PowerStackType StackType => PowerStackType.None;
-
 	protected override bool IsVisibleInternal => false;
 
 	public override async Task AfterApplied(Creature? applier, CardModel? cardSource)

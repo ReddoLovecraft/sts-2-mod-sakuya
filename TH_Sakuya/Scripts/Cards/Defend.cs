@@ -5,7 +5,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TH_Sakuya.Scripts.Main;
-namespace TH_Sakuya.Scrpits.Cards;
+namespace TH_Sakuya.Scrpits.Cards
+{
 [Pool(typeof(SakuyaCardPool))]
 public sealed class Defend : SakuyaCardModel
 {
@@ -28,4 +29,6 @@ public sealed class Defend : SakuyaCardModel
     {
         base.DynamicVars.Block.UpgradeValueBy(3);
     }
+}
+
 }

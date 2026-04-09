@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 using TH_Sakuya.Scripts.Main;
 using TH_Sakuya.Scripts.Powers;
 using Patchoulib.Scrpits.Main;
+using MegaCrit.Sts2.Core.Models;
+using TH_Sakuya.Scrpits.Cards;
+using MegaCrit.Sts2.Core.Models.Cards;
 
 [Pool(typeof(SakuyaRelicPool))]
     public class SakuyaWatch : CustomRelicModel, IRightCilckable
@@ -44,6 +47,10 @@ using Patchoulib.Scrpits.Main;
         public override Task BeforeCombatStart()
         {
             ResetCounter();
+            if(Owner.Creature.Player.Character is SakuyaCharacter)
+            {
+                SakuyaCharacter.ResetUsedKnivesCount();
+            }
             _shouldRefillOnNextTurnStart = false;
             _hasGrantedFirstTimeStopTspThisCombat = false;
             TimeStopPointSystem.InitForCombat(Owner);
@@ -100,17 +107,82 @@ using Patchoulib.Scrpits.Main;
 
         private async Task ToggleTimeStop(Player player)
         {
+            if (player.Creature.HasPower<CannotTimeStopPower>())
+            {
+                return;
+            }
             if (player.Creature.HasPower<TimeStopPower>())
             {
+                if(Owner.Creature.HasPower<OverMindPower>())
+            {
+                OverMindPower omp = Owner.Creature.GetPower<OverMindPower>();
+                await omp.TriggerOverMind(true);
+            }
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+                List<CardModel> list = new List<CardModel>();
+                list.AddRange(PileType.Hand.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
+                list.AddRange(PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
+                list.AddRange(PileType.Discard.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
                 await PowerCmd.Remove<TimeStopPower>(player.Creature);
+                if(list.Count>0)
+                foreach (CardModel card in list)
+                {
+                   CardModel cardModel = player.Creature.CombatState.CreateCard<Sweep>(base.Owner);
+                    if (card.IsUpgraded)
+                    {
+                    CardCmd.Upgrade(cardModel);
+                    }
+                    await CardCmd.Transform(card, cardModel);
+                }
+                
             }
             else
             {
                 TryGrantFirstTimeStopTsp(player);
+                await CreatureCmd.TriggerAnim(base.Owner.Creature, "TimeStop", base.Owner.Character.CastAnimDelay);
                 await PowerCmd.Apply<TimeStopPower>(player.Creature, 1m, player.Creature, cardSource: null, silent: true);
+                await TriggerWhenEnterTimeStop(player);
             }
         }
-
+        private async Task TriggerWhenEnterTimeStop(Player player)
+        {
+            if(Owner.Creature.HasPower<OverMindPower>())
+            {
+                OverMindPower omp = Owner.Creature.GetPower<OverMindPower>();
+                await omp.TriggerOverMind();
+            }
+                List<CardModel> list =
+                [
+                    .. PileType.Hand.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Sweep),
+                    .. PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Sweep),
+                    .. PileType.Discard.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Sweep),
+                ];
+                 if(list.Count>0)
+                foreach (CardModel card in list)
+                {
+                   CardModel cardModel = player.Creature.CombatState.CreateCard<FinishHomework>(base.Owner);
+                    if (card.IsUpgraded)
+                    {
+                    CardCmd.Upgrade(cardModel);
+                    }
+                    await CardCmd.Transform(card, cardModel);
+                }
+                 List<CardModel> list2 =
+                 [
+                     .. PileType.Hand.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Circle),
+                     .. PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Circle),
+                     .. PileType.Discard.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Circle),
+                 ];
+                 if(list2.Count>0)
+                foreach (Circle c in list2)
+                {
+                   await c.MoveUpperCardPile();
+                }
+                if(Owner.Creature.HasPower<OverMindPower>())
+                {
+                    
+                }
+        }
         private void TryGrantFirstTimeStopTsp(Player player)
         {
             if (_hasGrantedFirstTimeStopTspThisCombat)
@@ -154,7 +226,7 @@ using Patchoulib.Scrpits.Main;
             return sum;
         }
 
-        private void ResetCounter()
+        public void ResetCounter()
         {
             _timeStopCount = MaxTimeStopCount;
             InvokeDisplayAmountChanged();
@@ -168,6 +240,13 @@ using Patchoulib.Scrpits.Main;
             }
             _timeStopCount -= 1;
             InvokeDisplayAmountChanged();
+             //能力逻辑
+            if(player.Creature.HasPower<MoonNightPower>())
+            {
+                int cnt=player.Creature.GetPowerAmount<MoonNightPower>();
+                TimeStopPointSystem.Gain(player, cnt);
+            }
+            //以上
             if (_timeStopCount == 0)
             {
                 _shouldRefillOnNextTurnStart = true;

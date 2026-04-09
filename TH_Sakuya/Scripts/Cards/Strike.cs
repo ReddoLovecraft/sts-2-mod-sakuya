@@ -6,7 +6,8 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using TH_Sakuya.Scripts.Main;
 
-namespace TH_Sakuya.Scrpits.Cards;
+namespace TH_Sakuya.Scrpits.Cards
+{
 [Pool(typeof(SakuyaCardPool))]
 public class Strike : SakuyaCardModel
 {
@@ -23,4 +24,6 @@ public class Strike : SakuyaCardModel
 	{
 		DynamicVars.Damage.UpgradeValueBy(3); 
 	}
+}
+
 }

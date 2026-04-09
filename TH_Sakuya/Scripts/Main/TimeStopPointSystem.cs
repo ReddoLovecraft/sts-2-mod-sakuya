@@ -1,6 +1,8 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using System;
 using System.Runtime.CompilerServices;
+using TH_Sakuya.Scripts.Powers;
 
 namespace TH_Sakuya.Scripts.Main;
 
@@ -50,11 +52,35 @@ public static class TimeStopPointSystem
 		}
 		State state = _states.GetOrCreateValue(player);
 		int old = state.Current;
+        //能力逻辑
+		if(state.Current+amount>state.Max&&player.Creature.HasPower<MoonNightPower>())
+        {
+            SakuyaWatch sw=player.GetRelic<SakuyaWatch>();
+            if(sw!=null)
+			{
+				player.Creature.GetPower<MoonNightPower>().Trigger();
+				sw.ResetCounter();
+			}
+        }
+        //重置怀表计数
 		state.Current = Math.Clamp(state.Current + amount, 0, state.Max);
 		if (old != state.Current)
 		{
 			state.Changed?.Invoke(old, state.Current);
 		}
+	}
+
+	public static void OnEnergySpent(Player player, int energySpent)
+	{
+		if (player == null || energySpent <= 0)
+		{
+			return;
+		}
+		if (player.Creature == null || !player.Creature.HasPower<InfinitePower>())
+		{
+			return;
+		}
+		Gain(player, energySpent * PointsPerEnergy);
 	}
 
 	public static bool TrySpend(Player player, int amount)
@@ -72,6 +98,13 @@ public static class TimeStopPointSystem
 		{
 			return false;
 		}
+        //能力逻辑👇
+        if (player.Creature != null && player.Creature.HasPower<InfinitePower>())
+		{
+             int cnt = amount / PointsPerEnergy;
+			 PlayerCmd.GainEnergy(cnt, player);
+		}
+        //能力逻辑👆
 		int old = state.Current;
 		state.Current = Math.Max(state.Current - amount, 0);
 		if (old != state.Current)
