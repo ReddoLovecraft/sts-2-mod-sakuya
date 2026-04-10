@@ -14,18 +14,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TH_Sakuya.Scripts.Main;
+using TH_Sakuya.Scripts.Powers;
 
 namespace TH_Sakuya.Scripts.Powers;
 
 public sealed class TimeStopPower : SakuyaPowerModel
 {
-	private static readonly object _renderLock = new object();
-	private static float _prevExposure = 1f;
-	private static float _prevBrightness = 1f;
-	private static float _prevContrast = 1f;
-	private static float _prevSaturation = 1f;
-	private static bool _renderApplied;
-
 	public override PowerType Type => PowerType.Buff;
 	public override PowerStackType StackType => PowerStackType.None;
 	protected override bool IsVisibleInternal => false;
@@ -61,6 +55,11 @@ public sealed class TimeStopPower : SakuyaPowerModel
 		bool isSelfDamageFromOwner = dealer == Owner && target == Owner;
 
 		if (!isIncomingToOwner && !isOutgoingFromOwner && !isSelfDamageFromOwner)
+		{
+			return amount;
+		}
+
+		if ((target?.HasPower<SakuyaClock>() ?? false) || (dealer?.HasPower<SakuyaClock>() ?? false))
 		{
 			return amount;
 		}
@@ -101,24 +100,7 @@ public sealed class TimeStopPower : SakuyaPowerModel
 		{
 			return;
 		}
-		lock (_renderLock)
-		{
-			if (_renderApplied)
-			{
-				return;
-			}
-			WorldEnvironment worldEnvironment = NGame.Instance.ActivateWorldEnvironment();
-			_prevExposure = worldEnvironment.Environment.TonemapExposure;
-			_prevBrightness = worldEnvironment.Environment.AdjustmentBrightness;
-			_prevContrast = worldEnvironment.Environment.AdjustmentContrast;
-			_prevSaturation = worldEnvironment.Environment.AdjustmentSaturation;
-			worldEnvironment.Environment.TonemapExposure = 1f;
-			worldEnvironment.Environment.AdjustmentEnabled = true;
-			worldEnvironment.Environment.AdjustmentBrightness = 0.95f;
-			worldEnvironment.Environment.AdjustmentContrast = 1.1f;
-			worldEnvironment.Environment.AdjustmentSaturation = 0f;
-			_renderApplied = true;
-		}
+		TimeStopScreenOverlay.ApplyIfNeeded();
 	}
 
 	private void RestoreRenderIfLocalPlayer()
@@ -131,18 +113,6 @@ public sealed class TimeStopPower : SakuyaPowerModel
 		{
 			return;
 		}
-		lock (_renderLock)
-		{
-			if (!_renderApplied)
-			{
-				return;
-			}
-			WorldEnvironment worldEnvironment = NGame.Instance.ActivateWorldEnvironment();
-			worldEnvironment.Environment.TonemapExposure = _prevExposure;
-			worldEnvironment.Environment.AdjustmentBrightness = _prevBrightness;
-			worldEnvironment.Environment.AdjustmentContrast = _prevContrast;
-			worldEnvironment.Environment.AdjustmentSaturation = _prevSaturation;
-			_renderApplied = false;
-		}
+		TimeStopScreenOverlay.Restore();
 	}
 }

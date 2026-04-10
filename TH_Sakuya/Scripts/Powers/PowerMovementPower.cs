@@ -1,6 +1,9 @@
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
+using Patchoulib.Scrpits.Main;
 using TH_Sakuya.Scripts.Main;
 
 namespace TH_Sakuya.Scripts.Powers
@@ -12,6 +15,8 @@ public sealed class PowerMovementPower : SakuyaPowerModel
 	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
     public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/PMP232.png";
     public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/PMP264.png";
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Knife"), HoverTipFactory.FromPower<StrengthPower>()];
+
 }
 }
 

@@ -2,9 +2,12 @@ using Godot;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using Patchoulib.Scrpits.Main;
 using TH_Sakuya.Scripts.Main;
 
 namespace TH_Sakuya.Scripts.Powers
@@ -16,6 +19,7 @@ public sealed class LunaDialPower : SakuyaPowerModel
 	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
     public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/LDP232.png";
     public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/LDP264.png";
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("TimeStop"),HoverTipFactory.FromKeyword(CardKeyword.Retain)];
 	 public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
 	{
 		if (side == CombatSide.Player&&Owner.HasPower<TimeStopPower>() )

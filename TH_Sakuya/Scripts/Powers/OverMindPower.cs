@@ -5,7 +5,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using Patchoulib.Scrpits.Main;
 using TH_Sakuya.Scripts.Main;
 using TH_Sakuya.Scrpits.Cards;
 
@@ -19,6 +21,7 @@ public sealed class OverMindPower : SakuyaPowerModel
     public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/OMP32.png";
     public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/OMP64.png";
 	private int cnt=0;
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("TimeStop"),HoverTipFactory.ForEnergy(this),HoverTipFactory.FromCard<SelfDisolve>()];
 
 	public void ResetCounter()
 	{

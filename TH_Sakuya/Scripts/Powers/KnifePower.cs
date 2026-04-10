@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -23,6 +24,7 @@ public sealed class KnifePower : SakuyaPowerModel
 	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
     public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/KP32.png";
     public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/KP64.png";
+	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
 	private decimal CalculateDamage(decimal dmg)
 	{
 		decimal result=dmg;
@@ -75,13 +77,11 @@ public sealed class KnifePower : SakuyaPowerModel
 			return;
 		   }
 		   KnifeType kt=knifeType;
-		//此处留给新的能力效果，将目标强制改为全体
-           if(false)
+           if(Owner.HasPower<SilverAcutePower>())
 		   {
 			 kt=KnifeType.AllEnemies;
 		   }
-		//此处留给新的能力效果，将伤害强制改为不可格挡和不可加成
-		   if(false)
+		   if(Owner.HasPower<TunnelEffectPower>())
 		   {
 			damageVar=new DamageVar(dmg,ValueProp.Unblockable|ValueProp.Unpowered);
 		   }
@@ -118,12 +118,12 @@ public sealed class KnifePower : SakuyaPowerModel
 				}
 					break;
 				case KnifeType.AnyEnemy:
+				if(target==null)
+				return;
 				for(int j=0;j<count;j++)
 				{
-
-				NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NShivThrowVfx.Create(base.Owner, target, Colors.Silver));
+					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NShivThrowVfx.Create(base.Owner, target, Colors.Silver));
 					await CreatureCmd.Damage(choiceContext,target, damageVar, base.Owner);
-					
 				}
 				break;
 				case KnifeType.RandomEnemy:
