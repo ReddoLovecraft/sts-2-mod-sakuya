@@ -25,7 +25,12 @@ public static class TimeStopPointSystem
 
 	public static int GetMax(Player player)
 	{
-		return _states.TryGetValue(player, out State? state) ? state.Max : DefaultMax;
+		int result=_states.TryGetValue(player, out State? state) ? state.Max : DefaultMax;
+		if(player.Creature.HasPower<ChangeMaxTimePower>())
+		{
+			result+=player.Creature.GetPowerAmount<ChangeMaxTimePower>();
+		}
+		return result;
 	}
 
 	public static void InitForCombat(Player player, int? max = null, int initial = 0)

@@ -30,15 +30,12 @@ public sealed class PerfectMaidPower : SakuyaPowerModel
 	private bool flag=false;
 	public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 	{
-		if(flag)
-		{
-			flag=false;
-		}
-		if (target == base.Owner && dealer != null &&dealer!=base.Owner&& (props.IsPoweredAttack_() )&&Owner.HasPower<KnifePower>()&&Owner.GetPowerAmount<KnifePower>()>=16)
+	
+		if (target == base.Owner && dealer != null &&dealer!=base.Owner&& (props.IsPoweredAttack_() )&&flag)
 		{
 			Flash();
 			await Owner.GetPower<KnifePower>().ThrowKnife(choiceContext,dealer,KnifeType.AnyEnemy,1,16);
-			flag=true;
+			flag=false;
 		}
 		
 	}
@@ -56,10 +53,11 @@ public sealed class PerfectMaidPower : SakuyaPowerModel
 		{
 			return 1m;
 		}
-        if(!flag)
+        if(!Owner.HasPower<KnifePower>()||Owner.GetPowerAmount<KnifePower>()<16)
 		{
 			return 1m;
 		}
+		flag=true;
 		return 0;
 	}
 }

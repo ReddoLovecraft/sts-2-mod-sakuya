@@ -11,6 +11,9 @@ public static class TimeStopScreenOverlay
 {
 	private const string OverlayName = "TimeStopGrayscaleOverlay";
 	private const string ShaderPath = "res://TH_Sakuya/ArtWorks/VFX/screen_grayscale.gdshader";
+	private const float OverlayOverscanFactor = 0.35f;
+	private const int OverlayOverscanMinPx = 400;
+	private const int OverlayOverscanMaxPx = 2000;
 
 	private static ColorRect? _overlay;
 	private static ShaderMaterial? _mat;
@@ -20,6 +23,7 @@ public static class TimeStopScreenOverlay
 	{
 		if (GodotObject.IsInstanceValid(_overlay))
 		{
+			UpdateOverlayRectIfPossible();
 			RefreshExemptCreatures();
 			return;
 		}
@@ -48,13 +52,10 @@ public static class TimeStopScreenOverlay
 		overlay.AnchorTop = 0f;
 		overlay.AnchorRight = 1f;
 		overlay.AnchorBottom = 1f;
-		overlay.OffsetLeft = 0f;
-		overlay.OffsetTop = 0f;
-		overlay.OffsetRight = 0f;
-		overlay.OffsetBottom = 0f;
 
 		room.SceneContainer.AddChildSafely(overlay);
 		_overlay = overlay;
+		UpdateOverlayRectIfPossible();
 		RefreshExemptCreatures();
 	}
 
@@ -111,6 +112,29 @@ public static class TimeStopScreenOverlay
 				_savedZ.Remove(node);
 			}
 		}
+	}
+
+	private static void UpdateOverlayRectIfPossible()
+	{
+		if (!GodotObject.IsInstanceValid(_overlay))
+		{
+			return;
+		}
+		NCombatRoom? room = NCombatRoom.Instance;
+		if (room == null || room.SceneContainer == null)
+		{
+			return;
+		}
+		Vector2 parentSize = room.SceneContainer.Size;
+		float maxDim = Mathf.Max(parentSize.X, parentSize.Y);
+		int overscan = maxDim <= 0f
+			? 1024
+			: Mathf.Clamp((int)(maxDim * OverlayOverscanFactor), OverlayOverscanMinPx, OverlayOverscanMaxPx);
+
+		_overlay.OffsetLeft = -overscan;
+		_overlay.OffsetTop = -overscan;
+		_overlay.OffsetRight = overscan;
+		_overlay.OffsetBottom = overscan;
 	}
 
 	private readonly struct SavedZ

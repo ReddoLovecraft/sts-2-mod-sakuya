@@ -113,11 +113,13 @@ using MegaCrit.Sts2.Core.Models.Cards;
             }
             if (player.Creature.HasPower<TimeStopPower>())
             {
+                if(player.Creature.HasPower<SakuyaWorldPower>())
+                return;
                 if(Owner.Creature.HasPower<OverMindPower>())
-            {
+                {
                 OverMindPower omp = Owner.Creature.GetPower<OverMindPower>();
                 await omp.TriggerOverMind(true);
-            }
+                }
                 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
                 List<CardModel> list = new List<CardModel>();
                 list.AddRange(PileType.Hand.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
@@ -231,11 +233,26 @@ using MegaCrit.Sts2.Core.Models.Cards;
             _timeStopCount = MaxTimeStopCount;
             InvokeDisplayAmountChanged();
         }
+        public void SetCounter(int count)
+        {
+            _timeStopCount = count;
+            InvokeDisplayAmountChanged();
+        }
 
-        private void DecrementCounterAndMaybeEndTurn(Player player)
+        public void DecrementCounterAndMaybeEndTurn(Player player)
         {
             if (_timeStopCount <= 0)
             {
+                return;
+            }
+            if(Owner.Creature.HasPower<ReverseTimePower>()&&Owner.Creature.HasPower<TimeStopPower>())
+            {
+                _timeStopCount += 1;
+                if(_timeStopCount>MaxTimeStopCount)
+                {
+                    _timeStopCount=MaxTimeStopCount;
+                }
+                InvokeDisplayAmountChanged();
                 return;
             }
             _timeStopCount -= 1;
@@ -250,6 +267,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
             if (_timeStopCount == 0)
             {
                 _shouldRefillOnNextTurnStart = true;
+                if(!player.Creature.HasPower<SakuyaWorldPower>())
                 TaskHelper.RunSafely(PowerCmd.Remove<TimeStopPower>(player.Creature));
                 PlayerCmd.EndTurn(player, canBackOut: false);
             }

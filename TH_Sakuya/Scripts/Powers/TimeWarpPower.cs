@@ -18,8 +18,8 @@ public sealed class TimeWarpPower : SakuyaPowerModel
 	public override PowerStackType StackType => PowerStackType.Counter;
 	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 	public override bool IsInstanced => true;
-    public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/TWP32.png";
-    public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/TWP64.png";
+    public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/TWP232.png";
+    public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/TWP264.png";
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [ HoverTipFactory.FromPower<StrengthPower>(),
 	 HoverTipFactory.FromPower<DexterityPower>()];
 	 protected override IEnumerable<DynamicVar> CanonicalVars => [(new CardsVar(0))];

@@ -53,6 +53,21 @@ public sealed class KnifePower : SakuyaPowerModel
 			Owner.GetPower<KnifeMagicianPower>().Trigger();
 			TimeStopPointSystem.Gain(Owner.Player, cnt);
 		 }	
+		 if(Owner.HasPower<KnifeProtectPower>())
+		 {
+
+		  	KnifeProtectPower kpp=Owner.GetPower<KnifeProtectPower>();
+		  	kpp.Trigger();
+			IEnumerable<Creature> enumerable = from c in base.CombatState.GetTeammatesOf(base.Owner)
+			where c != null && c.IsAlive && c.IsPlayer&&c!=Owner
+			select c;
+			if(enumerable.Count()>0)
+			foreach (Creature item in enumerable)
+			{
+				await CreatureCmd.GainBlock(item, new BlockVar(kpp.Amount*cnt,ValueProp.Unpowered), null);
+			}
+
+		 }
  		if(Owner.HasPower<PowerMovementPower>())
 		 {
 		    PowerMovementPower pmp=Owner.GetPower<PowerMovementPower>();
@@ -80,14 +95,21 @@ public sealed class KnifePower : SakuyaPowerModel
            if(Owner.HasPower<SilverAcutePower>())
 		   {
 			 kt=KnifeType.AllEnemies;
+			 Owner.GetPower<SilverAcutePower>().Trigger();
 		   }
 		   if(Owner.HasPower<TunnelEffectPower>())
 		   {
 			damageVar=new DamageVar(dmg,ValueProp.Unblockable|ValueProp.Unpowered);
+			 Owner.GetPower<TunnelEffectPower>().Trigger();
 		   }
 		   else
 		   {
 			 damageVar=new DamageVar(dmg,ValueProp.Unpowered);
+		   }
+		   if(Owner.HasPower<SilverJumpPower>())
+		   {
+			  count+=Owner.GetPowerAmount<SilverJumpPower>();
+			  Owner.GetPower<SilverJumpPower>().Trigger();
 		   }
 		   for(int i=0;i<cnt;i++)
 		   {

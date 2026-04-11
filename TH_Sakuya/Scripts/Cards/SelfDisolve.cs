@@ -25,7 +25,7 @@ public class SelfDisolve : SakuyaCardModel
 	{
 		if (card == this)
 		{ 
-			if(Owner.Creature.HasPower<TimeStopPower>())
+			if(Owner.Creature.HasPower<TimeStopPower>()&&!Owner.Creature.HasPower<SakuyaWorldPower>())
 			{
 				await PowerCmd.Remove<TimeStopPower>(Owner.Creature);
 				await PowerCmd.Apply<CannotTimeStopPower>(Owner.Creature,1,null,this);
