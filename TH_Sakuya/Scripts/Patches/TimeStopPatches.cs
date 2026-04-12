@@ -97,6 +97,7 @@ public static class TimeStopPatches
 		TimeStopPointSystem.TrySpend(card.Owner, tspToSpend);
 		if (TimeStopPointSystem.Get(card.Owner) == 0 && card.Owner.Creature.HasPower<TimeStopPower>())
 		{
+			SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/tsprunout.wav"));
 			 if(!card.Owner.Creature.HasPower<SakuyaWorldPower>())
 			_ = TaskHelper.RunSafely(PowerCmd.Remove<TimeStopPower>(card.Owner.Creature));
 			_ = TaskHelper.RunSafely(PowerCmd.Apply<WeakPower>(card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true));

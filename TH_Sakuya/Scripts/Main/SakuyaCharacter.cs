@@ -42,13 +42,13 @@ namespace TH_Sakuya.Scripts.Main
 	    public override string CustomCharacterSelectTransitionPath => "res://materials/transitions/silent_transition_mat.tres";
 		public override string CustomMapMarkerPath => "res://TH_Sakuya/ArtWorks/Character/map_marker_sakuya.png";
 		// 攻击音效
-		// public override string CustomAttackSfx => null;
+		public override string CustomAttackSfx => SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/attack.wav");
 		// 施法音效
-		// public override string CustomCastSfx => null;
+		public override string CustomCastSfx => SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/cast.wav");
 		// 死亡音效
-		// public override string CustomDeathSfx => null;
-	   // public override string CharacterSelectSfx  => SakuyaInit.ToModSfxPath("ArtWorks/SFX/silkshot.mp3");
-		public override string CharacterTransitionSfx => "event:/sfx/ui/wipe_ironclad";
+		public override string CustomDeathSfx => SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/die.ogg");
+	    public override string CharacterSelectSfx  => SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/characterselect.wav");
+		public override string CharacterTransitionSfx => SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/transition.wav");
 		public override CardPoolModel CardPool => ModelDb.CardPool<SakuyaCardPool>();
 		public override RelicPoolModel RelicPool => ModelDb.RelicPool<SakuyaRelicPool>();
 		public override PotionPoolModel PotionPool => ModelDb.PotionPool<SakuyaPotionPool>();
@@ -110,16 +110,16 @@ namespace TH_Sakuya.Scripts.Main
 			creatureAnimator.AddAnyState("Knife", animState8);
             return creatureAnimator;
 		}
-		private static int cnt=0;
-		public static int UsedKnivesCount()
+		private int cnt=0;
+		public int UsedKnivesCount()
 		{
 		return cnt;
 		}
-		public static void ResetUsedKnivesCount()
+		public void ResetUsedKnivesCount()
 		{
 			cnt=0;
 		}
-		public static void AddUsedKnivesCount(int amount)
+		public void AddUsedKnivesCount(int amount)
 		{
 			cnt+=amount;
 		}

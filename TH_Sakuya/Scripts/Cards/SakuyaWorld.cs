@@ -37,6 +37,7 @@ public class SakuyaWorld: SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
+		SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/world.wav"));
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 		 List<PowerModel> to_remove=new List<PowerModel>();
         foreach(PowerModel debuff in Owner.Creature.Powers)

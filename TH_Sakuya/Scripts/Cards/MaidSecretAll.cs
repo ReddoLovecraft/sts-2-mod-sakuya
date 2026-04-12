@@ -38,7 +38,10 @@ public class MaidSecretAll: SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		if (base.Owner.Character is SakuyaCharacter)
+		{
+			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		}
 			SfxCmd.Play("event:/sfx/characters/silent/silent_dagger_spray");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
 			.TargetingAllOpponents(base.CombatState)

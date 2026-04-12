@@ -47,9 +47,10 @@ using MegaCrit.Sts2.Core.Models.Cards;
         public override Task BeforeCombatStart()
         {
             ResetCounter();
-            if(Owner.Creature.Player.Character is SakuyaCharacter)
+            SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/entercombat.wav"));
+            if(Owner.Creature.Player.Character is SakuyaCharacter sc)
             {
-                SakuyaCharacter.ResetUsedKnivesCount();
+                sc.ResetUsedKnivesCount();
             }
             _shouldRefillOnNextTurnStart = false;
             _hasGrantedFirstTimeStopTspThisCombat = false;
@@ -141,6 +142,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
             else
             {
                 TryGrantFirstTimeStopTsp(player);
+                SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/entertimestop.wav"));
                 await CreatureCmd.TriggerAnim(base.Owner.Creature, "TimeStop", base.Owner.Character.CastAnimDelay);
                 await PowerCmd.Apply<TimeStopPower>(player.Creature, 1m, player.Creature, cardSource: null, silent: true);
                 await TriggerWhenEnterTimeStop(player);
@@ -235,6 +237,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
         }
         public void SetCounter(int count)
         {
+            if(count>12)count=12;
             _timeStopCount = count;
             InvokeDisplayAmountChanged();
         }
@@ -269,6 +272,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
                 _shouldRefillOnNextTurnStart = true;
                 if(!player.Creature.HasPower<SakuyaWorldPower>())
                 TaskHelper.RunSafely(PowerCmd.Remove<TimeStopPower>(player.Creature));
+                SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/timestop.wav"));
                 PlayerCmd.EndTurn(player, canBackOut: false);
             }
         }

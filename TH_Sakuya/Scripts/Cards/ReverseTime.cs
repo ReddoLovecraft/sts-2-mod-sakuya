@@ -31,7 +31,10 @@ public class ReverseTime: SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "TimeStop", base.Owner.Character.CastAnimDelay);
+		if (base.Owner.Character is SakuyaCharacter)
+		{
+			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "TimeStop", base.Owner.Character.CastAnimDelay);
+		}
 		 await PowerCmd.Apply<ReverseTimePower>(Owner.Creature, 1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()

@@ -46,8 +46,15 @@ public sealed class KnifePower : SakuyaPowerModel
 	}
 	public async Task ThrowKnife(PlayerChoiceContext choiceContext,Creature target,KnifeType knifeType,decimal damage,int maxKnifeThrow,int count=1)
 	{
-		 await CreatureCmd.TriggerAnim(Owner, "Knife", Owner.Player.Character.CastAnimDelay);
+		if (Owner.Player.Character is SakuyaCharacter)
+		{
+			 await CreatureCmd.TriggerAnim(Owner, "Knife", Owner.Player.Character.CastAnimDelay);
+		}
 		 int cnt=Math.Min(maxKnifeThrow,Amount);
+         if(Owner.Player.Character is SakuyaCharacter sc)
+		 {
+            sc.AddUsedKnivesCount(cnt);
+		 }
 		 if(Owner.HasPower<KnifeMagicianPower>())
 		 {
 			Owner.GetPower<KnifeMagicianPower>().Trigger();
@@ -82,7 +89,7 @@ public sealed class KnifePower : SakuyaPowerModel
 		  int ct=gmp.Amount;
 		  await CardPileCmd.Draw(choiceContext,ct,Owner.Player);
 		 }
-
+         
 
 
 		 DamageVar damageVar=null;
@@ -119,6 +126,7 @@ public sealed class KnifePower : SakuyaPowerModel
 				for(int j=0;j<count;j++)
 				{
 					 List<Creature> enemies = base.CombatState.Enemies.Where((Creature e) => e.IsAlive).ToList();
+					 SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/all.wav"));
 					  if(enemies.Count>0)
 					 {
 						NShivThrowVfx Nvfx=NShivThrowVfx.Create(base.Owner, enemies.Last(), Colors.Silver);
@@ -144,6 +152,7 @@ public sealed class KnifePower : SakuyaPowerModel
 				return;
 				for(int j=0;j<count;j++)
 				{
+					SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/single.wav"));
 					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NShivThrowVfx.Create(base.Owner, target, Colors.Silver));
 					await CreatureCmd.Damage(choiceContext,target, damageVar, base.Owner);
 				}
@@ -154,6 +163,7 @@ public sealed class KnifePower : SakuyaPowerModel
 				{
 					for(int j=0;j<count;j++)
 				{
+					SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/random.wav"));
 					if(creature.IsAlive&&creature.IsHittable)
 					{
 					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NShivThrowVfx.Create(base.Owner, creature, Colors.Silver));

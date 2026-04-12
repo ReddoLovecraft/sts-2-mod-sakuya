@@ -34,7 +34,10 @@ public class SilverAcute: SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		 if (base.Owner.Character is SakuyaCharacter)
+		{
+			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+		}
 		 await PowerCmd.Apply<KnifePower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 		 await PowerCmd.Apply<SilverAcutePower>(Owner.Creature, 1,Owner.Creature,this);
 	}
