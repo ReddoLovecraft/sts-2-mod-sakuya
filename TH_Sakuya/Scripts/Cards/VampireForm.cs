@@ -21,6 +21,7 @@ namespace TH_Sakuya.Scrpits.Cards
 [Pool(typeof(SakuyaCardPool))]
 public class VampireForm: SakuyaCardModel
 {
+	   public override bool CanBeGeneratedInCombat => false;
 	 public override bool GainsBlock => true;
         protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[1]
   {

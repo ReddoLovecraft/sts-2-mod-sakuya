@@ -20,7 +20,7 @@ using TH_Sakuya.Scripts.Powers;
 namespace TH_Sakuya.Scrpits.Cards
 {
 [Pool(typeof(SakuyaCardPool))]
-public class DisapperMagic: SakuyaCardModel
+public class DisappearMagic: SakuyaCardModel
 {
 	 public override bool GainsBlock => true;
      protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -28,7 +28,7 @@ public class DisapperMagic: SakuyaCardModel
 		new BlockVar(8, ValueProp.Move),
         new CardsVar(2)
      ];
-	public DisapperMagic() : base(1, CardType.Skill, CardRarity.Common, TargetType.None)
+	public DisappearMagic() : base(1, CardType.Skill, CardRarity.Common, TargetType.None)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

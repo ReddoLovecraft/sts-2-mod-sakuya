@@ -25,7 +25,7 @@ public class BounceKnife: SakuyaCardModel
   {
 		 Tools.GetStaticKeyword("Knife")
   });
-   protected override bool IsPlayable => Owner.Creature.HasPower<TimeStopPower>();
+   protected override bool IsPlayable => Owner.Creature.HasPower<KnifePower>();
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
 		 new DynamicVar("Power", 8),

@@ -39,7 +39,7 @@ public class RedSoul: SakuyaCardModel
 		double num2 = ((SaveManager.Instance.PrefsSave.FastMode == FastModeType.Fast) ? 0.2 : 0.3);
 		NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NHorizontalLinesVfx.Create(color, 0.8 + 8 * num2));
 		SfxCmd.Play("event:/sfx/characters/ironclad/ironclad_whirlwind");
-		await DamageCmd.Attack(base.DynamicVars.CalculatedDamage).WithHitCount(this.DynamicVars.Cards.IntValue).FromCard(this)
+		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(this.DynamicVars.Cards.IntValue).FromCard(this)
          .TargetingRandomOpponents(base.CombatState)
          .WithHitFx("vfx/vfx_attack_slash")
          .Execute(choiceContext);

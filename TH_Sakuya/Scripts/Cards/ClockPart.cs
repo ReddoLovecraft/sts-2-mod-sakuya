@@ -49,7 +49,7 @@ public class ClockPart: SakuyaCardModel
 		{
 			if(Owner.GetRelic<SakuyaWatch>()!=null)
 			{
-                Owner.GetRelic<SakuyaWatch>().SetCounter(Owner.GetRelic<SakuyaWatch>().StackCount+this.DynamicVars.Cards.IntValue);
+                Owner.GetRelic<SakuyaWatch>().SetCounter(Owner.GetRelic<SakuyaWatch>().DisplayAmount+this.DynamicVars.Cards.IntValue);
 			}
 		}
 

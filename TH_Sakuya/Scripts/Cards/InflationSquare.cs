@@ -8,8 +8,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -20,29 +20,35 @@ using TH_Sakuya.Scripts.Powers;
 namespace TH_Sakuya.Scrpits.Cards
 {
 [Pool(typeof(SakuyaCardPool))]
-public class VanishingEvething: SakuyaCardModel
+public class InflationSquare: SakuyaCardModel
 {
-	   public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust,CardKeyword.Ethereal];
+	 public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust,CardKeyword.Ethereal];
         protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[1]
   {
-         HoverTipFactory.FromPower<IntangiblePower>()
+        HoverTipFactory.FromKeyword(CardKeyword.Ethereal)
   });
-     protected override IEnumerable<DynamicVar> CanonicalVars =>
-     [
-        new CardsVar(1)
-     ];
-	public VanishingEvething() : base(0, CardType.Skill, CardRarity.Rare, TargetType.None)
+	public InflationSquare() : base(3, CardType.Skill, CardRarity.Rare, TargetType.None)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		await CardCmd.Discard(choiceContext, PileType.Hand.GetPile(base.Owner).Cards);
-		await PowerCmd.Apply<IntangiblePower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+		 List<CardModel> list = PileType.Hand.GetPile(base.Owner).Cards.ToList();
+		int cardCount = list.Count;
+		foreach (CardModel item in list)
+		{
+			CardModel card = item.CreateClone();
+			CardCmd.ApplyKeyword(card, CardKeyword.Ethereal);
+			card.EnergyCost.SetThisTurn(0);
+			if(IsUpgraded)
+			await CardCmd.Discard(choiceContext, item);
+			else
+			await CardCmd.Exhaust(choiceContext, item);
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, addedByPlayer: true), 0.8f);
+		}
 	}
 	protected override void OnUpgrade()
 	{
-		this.DynamicVars.Cards.UpgradeValueBy(1);
 		this.RemoveKeyword(CardKeyword.Ethereal);
 	}
 }

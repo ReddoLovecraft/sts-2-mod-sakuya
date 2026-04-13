@@ -27,7 +27,7 @@ public class MagicStarSword: SakuyaCardModel
         Tools.GetStaticKeyword("Stop"),
 		Tools.GetStaticKeyword("Knife")
   });
-     protected override bool IsPlayable => Owner.Creature.HasPower<TimeStopPower>();
+     protected override bool IsPlayable => Owner.Creature.HasPower<KnifePower>();
   protected override bool ShouldGlowGoldInternal => Owner.Creature.HasPower<TimeStopPower>();
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
@@ -41,7 +41,7 @@ public class MagicStarSword: SakuyaCardModel
 		if(Owner.Creature.HasPower<KnifePower>())
 		{
 			int cnt=0;
-			if(ShouldGlowRedInternal)
+			if(ShouldGlowGoldInternal)
 			{
 				cnt+=this.DynamicVars.Cards.IntValue;
 			}

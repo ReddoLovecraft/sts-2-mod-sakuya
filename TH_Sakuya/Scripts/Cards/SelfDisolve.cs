@@ -4,13 +4,14 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.ValueProps;
 using TH_Sakuya.Scripts.Main;
 using TH_Sakuya.Scripts.Powers;
 
 namespace TH_Sakuya.Scrpits.Cards
 {
-[Pool(typeof(SakuyaCardPool))]
+[Pool(typeof(StatusCardPool))]
 public class SelfDisolve : SakuyaCardModel
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Unpowered|ValueProp.Unblockable)];

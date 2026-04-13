@@ -21,8 +21,8 @@ public class MaidSecretM: SakuyaCardModel
   });
    protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-        new DynamicVar("Power", 1),
-        new CardsVar(2),
+        new DynamicVar("Power", 2),
+        new CardsVar(1),
      ];
 	public MaidSecretM() : base(0, CardType.Skill, CardRarity.Basic, TargetType.AnyEnemy)
 	{
@@ -35,7 +35,8 @@ public class MaidSecretM: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars["Power"].UpgradeValueBy(2);
+		base.DynamicVars["Power"].UpgradeValueBy(1);
+		base.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }
 

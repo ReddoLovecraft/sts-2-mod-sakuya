@@ -38,7 +38,7 @@ public class SquareRicochet: SakuyaCardModel
 	{
 		if(Owner.Creature.HasPower<KnifePower>())
 		{
-			await (Owner.Creature.GetPower<KnifePower>()).ThrowKnife(choiceContext,cardPlay.Target,KnifeType.AnyEnemy,1,1+base.DynamicVars.Cards.IntValue,1+base.DynamicVars["Power"].IntValue);
+			await (Owner.Creature.GetPower<KnifePower>()).ThrowKnife(choiceContext,cardPlay.Target,KnifeType.AnyEnemy,1+base.DynamicVars.Cards.IntValue,1,1+base.DynamicVars["Power"].IntValue);
 		}
 	}
 	protected override void OnUpgrade()

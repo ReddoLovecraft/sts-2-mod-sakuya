@@ -46,6 +46,8 @@ public class Killer: SakuyaCardModel
 			.WithHitFx("vfx/vfx_starry_impact")
 			.SpawningHitVfxOnEachCreature()
 			.Execute(choiceContext);
+
+		if(Owner.Creature.HasPower<KnifePower>())
 		await (Owner.Creature.GetPower<KnifePower>()).ThrowKnife(choiceContext,null,KnifeType.RandomEnemy,1,addtion);	
 	}
 	protected override void OnUpgrade()
