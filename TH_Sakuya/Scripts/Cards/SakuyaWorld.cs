@@ -76,6 +76,11 @@ public class SakuyaWorld: SakuyaCardModel
 				SakuyaWatch watch = Owner.GetRelic<SakuyaWatch>();
 				await watch.OnRightClick(choiceContext);
 			}
+			else if(Owner.GetRelic<SakuyaLunaDial>()!=null)
+			{
+				SakuyaLunaDial dial = Owner.GetRelic<SakuyaLunaDial>();
+				await dial.OnRightClick(choiceContext);
+			}
 		 }
 		 await PowerCmd.Apply<SakuyaWorldPower>(Owner.Creature, this.DynamicVars.Cards.IntValue,Owner.Creature,this);
 			

@@ -29,6 +29,10 @@ public sealed class ImaginaryVerticalTimePower : SakuyaPowerModel
 			{
 				Owner.Player.GetRelic<SakuyaWatch>().SetCounter(Amount);
 			}
+			else if(Owner.Player.GetRelic<SakuyaLunaDial>()!=null)
+			{
+				Owner.Player.GetRelic<SakuyaLunaDial>().SetCounter(Amount);
+			}
 			await PowerCmd.Remove(this);
         }
 

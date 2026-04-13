@@ -55,6 +55,10 @@ public class TimeDelay: SakuyaCardModel
 		{
             Owner.GetRelic<SakuyaWatch>().SetCounter(Owner.GetRelic<SakuyaWatch>().DisplayAmount+2);
 		}
+		else if(Owner.GetRelic<SakuyaLunaDial>()!=null)
+		{
+			Owner.GetRelic<SakuyaLunaDial>().SetCounter(Owner.GetRelic<SakuyaLunaDial>().DisplayAmount+2);
+		}
 	   }
 	}
 	protected override void OnUpgrade()

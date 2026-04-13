@@ -66,6 +66,12 @@ public static class TimeStopPointSystem
 				player.Creature.GetPower<MoonNightPower>().Trigger();
 				sw.ResetCounter();
 			}
+			SakuyaLunaDial dial=player.GetRelic<SakuyaLunaDial>();
+			if(dial!=null)
+			{
+				player.Creature.GetPower<MoonNightPower>().Trigger();
+				dial.ResetCounter();
+			}
         }
         //重置怀表计数
 		state.Current = Math.Clamp(state.Current + amount, 0, state.Max);

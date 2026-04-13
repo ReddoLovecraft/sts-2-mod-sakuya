@@ -39,6 +39,10 @@ public class DeflationWorld: SakuyaCardModel
 	    {
 	        muti-=Owner.GetRelic<SakuyaWatch>().DisplayAmount;
 	    }
+	    else if(Owner.GetRelic<SakuyaLunaDial>()!=null)
+	    {
+	        muti-=Owner.GetRelic<SakuyaLunaDial>().DisplayAmount;
+	    }
 		int totaldmg=this.DynamicVars.Cards.IntValue;
 		for(int i=0;i<muti;i++)
 		{

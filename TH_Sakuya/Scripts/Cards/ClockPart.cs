@@ -51,6 +51,10 @@ public class ClockPart: SakuyaCardModel
 			{
                 Owner.GetRelic<SakuyaWatch>().SetCounter(Owner.GetRelic<SakuyaWatch>().DisplayAmount+this.DynamicVars.Cards.IntValue);
 			}
+			else if(Owner.GetRelic<SakuyaLunaDial>()!=null)
+			{
+				Owner.GetRelic<SakuyaLunaDial>().SetCounter(Owner.GetRelic<SakuyaLunaDial>().DisplayAmount+this.DynamicVars.Cards.IntValue);
+			}
 		}
 
 	}

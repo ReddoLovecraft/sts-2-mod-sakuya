@@ -43,6 +43,11 @@ public class ImaginaryVerticalTime: SakuyaCardModel
 			 cnt=Owner.GetRelic<SakuyaWatch>().DisplayAmount;
 			await PowerCmd.Apply<ImaginaryVerticalTimePower>(Owner.Creature, cnt,Owner.Creature,this);
 		 }
+		 else if(Owner.GetRelic<SakuyaLunaDial>()!=null)
+		 {
+			 cnt=Owner.GetRelic<SakuyaLunaDial>().DisplayAmount;
+			await PowerCmd.Apply<ImaginaryVerticalTimePower>(Owner.Creature, cnt,Owner.Creature,this);
+		 }
 	}
 	protected override void OnUpgrade()
 	{

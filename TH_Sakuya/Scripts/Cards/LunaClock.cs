@@ -38,6 +38,11 @@ public class LunaClock: SakuyaCardModel
 		  SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/timestop.wav"));
           Owner.GetRelic<SakuyaWatch>().ResetCounter();
 		}
+		else if(Owner.GetRelic<SakuyaLunaDial>()!=null)
+		{
+		  SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/timestop.wav"));
+          Owner.GetRelic<SakuyaLunaDial>().ResetCounter();
+		}
 	}
 	protected override void OnUpgrade()
 	{
