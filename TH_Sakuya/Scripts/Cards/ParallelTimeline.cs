@@ -25,7 +25,7 @@ public class ParallelTimeline: SakuyaCardModel
 	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new DamageVar(9, ValueProp.Move)
+		new DamageVar(7, ValueProp.Move)
      ];
 	public ParallelTimeline() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{
@@ -38,7 +38,7 @@ public class ParallelTimeline: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(4);
+		base.DynamicVars.Damage.UpgradeValueBy(3);
 	}
 }
 

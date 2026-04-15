@@ -21,6 +21,7 @@ namespace TH_Sakuya.Scrpits.Cards
 [Pool(typeof(SakuyaCardPool))]
 public class SakuyaClock: SakuyaCardModel
 {
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
         protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[1]
   {
 		 Tools.GetStaticKeyword("TimeStop")

@@ -31,7 +31,7 @@ public class MagicStarSword: SakuyaCardModel
   protected override bool ShouldGlowGoldInternal => Owner.Creature.HasPower<TimeStopPower>();
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-        new CardsVar(3)
+        new CardsVar(2)
      ];
 	public MagicStarSword() : base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
 	{
@@ -50,7 +50,7 @@ public class MagicStarSword: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		this.DynamicVars.Cards.UpgradeValueBy(2);
+		this.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }
 

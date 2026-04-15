@@ -25,7 +25,7 @@ public class SmartRobber: SakuyaCardModel
 	 public override bool GainsBlock => true;
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new DamageVar(8, ValueProp.Move)
+		new DamageVar(9, ValueProp.Move)
      ];
 	public SmartRobber() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{

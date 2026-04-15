@@ -49,7 +49,7 @@ public class KnifeMagic: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		DynamicVars.Cards.UpgradeValueBy(4);
+		this.EnergyCost.UpgradeBy(-1);
 	}
 }
 

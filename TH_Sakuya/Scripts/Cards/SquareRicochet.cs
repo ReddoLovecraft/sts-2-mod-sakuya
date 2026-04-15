@@ -27,7 +27,7 @@ public class SquareRicochet: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-        new DynamicVar("Power", 3),
+        new DynamicVar("Power", 2),
         new CardsVar(3)
      ];
 	  protected override bool IsPlayable => Owner.Creature.HasPower<KnifePower>();

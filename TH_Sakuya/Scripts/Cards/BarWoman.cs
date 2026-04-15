@@ -32,7 +32,7 @@ public class BarWoman: SakuyaCardModel
         new DynamicVar("Power", 2),
         new CardsVar(2)
      ];
-	public BarWoman() : base(3, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+	public BarWoman() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -44,8 +44,7 @@ public class BarWoman: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars["Power"].UpgradeValueBy(1);
-		base.DynamicVars.Cards.UpgradeValueBy(1);
+		this.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }
 

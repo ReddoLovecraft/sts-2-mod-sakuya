@@ -29,8 +29,8 @@ public class RemoteKiller: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new DamageVar(6, ValueProp.Move),
-        new CardsVar(3)
+		new DamageVar(4, ValueProp.Move),
+        new CardsVar(4)
      ];
 	public RemoteKiller() : base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 	{
@@ -46,7 +46,6 @@ public class RemoteKiller: SakuyaCardModel
 	protected override void OnUpgrade()
 	{
 		this.DynamicVars.Damage.UpgradeValueBy(2);
-		this.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }
 

@@ -99,9 +99,11 @@ public static class TimeStopPatches
 		{
 			SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/tsprunout.wav"));
 			 if(!card.Owner.Creature.HasPower<SakuyaWorldPower>())
-			_ = TaskHelper.RunSafely(PowerCmd.Remove<TimeStopPower>(card.Owner.Creature));
-			_ = TaskHelper.RunSafely(PowerCmd.Apply<WeakPower>(card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true));
-			_ = TaskHelper.RunSafely(PowerCmd.Apply<VulnerablePower>(card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true));
+			{
+				await PowerCmd.Remove<TimeStopPower>(card.Owner.Creature);
+			}
+			await PowerCmd.Apply<WeakPower>(card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true);
+			await PowerCmd.Apply<VulnerablePower>(card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true);
 		}
 
 		int starsToSpend = Math.Max(0, card.GetStarCostWithModifiers());

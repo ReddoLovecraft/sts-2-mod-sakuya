@@ -125,7 +125,10 @@
   "TH_SAKUYA-IMAGINARY_VERTICAL_TIME_POWER.smartDescription": "在你的下个回合开始时，将你结束[gold]时停[/gold]的计数改为[blue]{Amount}[/blue]点。",
   "TH_SAKUYA-PERFECT_POWER.title": "完美而潇洒的从者",
   "TH_SAKUYA-PERFECT_POWER.description": "[gold]升级[/gold]所有被你抽到的卡牌。",
-  "TH_SAKUYA-PERFECT_POWER.smartDescription": "[gold]升级[/gold]所有被你抽到的卡牌。"
+  "TH_SAKUYA-PERFECT_POWER.smartDescription": "[gold]升级[/gold]所有被你抽到的卡牌。",
+  "TH_SAKUYA-BLOOD_CURSE_POWER.title": "猩红诅咒",
+  "TH_SAKUYA-BLOOD_CURSE_POWER.description": "分为四个阶段：[gold]狂暴[/gold]->[red]渴血[/red]->[purple]凋零[/purple]。\n狂暴：造成和受到的伤害翻倍。\n渴血：每当你造成伤害时，回复等同于未被[gold]格挡[/gold]的伤害的生命。在你的回合结束时，失去当前生命的[blue]25%[/blue]。\n凋零：在你的回合开始时，获得1层[gold]虚弱[/gold]、[gold]易伤[/gold]和[gold]脆弱[/gold]，失去[blue]1[/blue]点能量。\n进入第四阶段时直接死亡。",
+  "TH_SAKUYA-BLOOD_CURSE_POWER.smartDescription": "分为四个阶段：[gold]狂暴[/gold]->[red]渴血[/red]->[purple]凋零[/purple]。\n狂暴：造成和受到的伤害翻倍。\n渴血：每当你造成伤害时，回复等同于未被[gold]格挡[/gold]的伤害的生命。在你的回合结束时，失去当前生命的[blue]25%[/blue]。\n凋零：在你的回合开始时，获得1层[gold]虚弱[/gold]、[gold]易伤[/gold]和[gold]脆弱[/gold]，失去[blue]1[/blue]点能量。\n进入第四阶段时直接死亡。\n当前阶段：{Cards}。"
 
 
 }

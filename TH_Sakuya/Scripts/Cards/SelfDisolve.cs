@@ -14,6 +14,7 @@ namespace TH_Sakuya.Scrpits.Cards
 [Pool(typeof(StatusCardPool))]
 public class SelfDisolve : SakuyaCardModel
 {
+	public override int MaxUpgradeLevel => 0;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Unpowered|ValueProp.Unblockable)];
 	public SelfDisolve() : base(1, CardType.Status, CardRarity.Status, TargetType.None)
 	{

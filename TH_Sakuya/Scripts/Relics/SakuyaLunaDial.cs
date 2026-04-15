@@ -68,11 +68,11 @@ using MegaCrit.Sts2.Core.Models.Cards;
             return Task.CompletedTask;
         }
 
-        public override Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
+        public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
         {
             if (player != Owner)
             {
-                return Task.CompletedTask;
+                return;
             }
 
             if (_shouldRefillOnNextTurnStart)
@@ -84,29 +84,26 @@ using MegaCrit.Sts2.Core.Models.Cards;
             if (!player.Creature.HasPower<TimeStopPower>())
             {
                 int max = TimeStopPointSystem.GetMax(player);
-                TimeStopPointSystem.Gain(player, max / 4);
+                TimeStopPointSystem.Gain(player, max / 8);
             }
 
             if (player.Creature.HasPower<TimeStopPower>())
             {
-                DecrementCounterAndMaybeEndTurn(player);
+                await DecrementCounterAndMaybeEndTurn(player);
             }
-
-            return Task.CompletedTask;
         }
 
-        public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
+        public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
         {
             if (Owner == null || cardPlay.Card.Owner != Owner)
             {
-                return Task.CompletedTask;
+                return;
             }
             if (!Owner.Creature.HasPower<TimeStopPower>())
             {
-                return Task.CompletedTask;
+                return;
             }
-            DecrementCounterAndMaybeEndTurn(Owner);
-            return Task.CompletedTask;
+            await DecrementCounterAndMaybeEndTurn(Owner);
         }
 
         private async Task ToggleTimeStop(Player player)
@@ -130,6 +127,11 @@ using MegaCrit.Sts2.Core.Models.Cards;
                 list.AddRange(PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
                 list.AddRange(PileType.Discard.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
                 await PowerCmd.Remove<TimeStopPower>(player.Creature);
+				bool hasAliveEnemy = player.Creature.CombatState?.HittableEnemies.Any(e => e != null && e.IsAlive) ?? false;
+				if (!hasAliveEnemy)
+				{
+					return;
+				}
                 if(list.Count>0)
                 foreach (CardModel card in list)
                 {
@@ -245,7 +247,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
             InvokeDisplayAmountChanged();
         }
 
-        public void DecrementCounterAndMaybeEndTurn(Player player)
+        public async Task DecrementCounterAndMaybeEndTurn(Player player)
         {
             if (_timeStopCount <= 0)
             {
@@ -274,9 +276,15 @@ using MegaCrit.Sts2.Core.Models.Cards;
             {
                 _shouldRefillOnNextTurnStart = true;
                 if(!player.Creature.HasPower<SakuyaWorldPower>())
-                TaskHelper.RunSafely(PowerCmd.Remove<TimeStopPower>(player.Creature));
+                {
+                    await PowerCmd.Remove<TimeStopPower>(player.Creature);
+                }
                 SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/timestop.wav"));
-                PlayerCmd.EndTurn(player, canBackOut: false);
+                bool hasAliveEnemy = player.Creature.CombatState?.HittableEnemies.Any(e => e != null && e.IsAlive) ?? false;
+                if (hasAliveEnemy)
+                {
+                    PlayerCmd.EndTurn(player, canBackOut: false);
+                }
             }
         }
 

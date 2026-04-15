@@ -18,7 +18,7 @@ public class FinishHomework : SakuyaCardModel
   {
          Tools.GetStaticKeyword("TimeStop"),
 		 HoverTipFactory.Static(StaticHoverTip.Transform),
-         HoverTipFactory.FromCard<Sweep>(),
+         HoverTipFactory.FromCard<Sweep>(base.IsUpgraded),
 		 base.EnergyHoverTip
   });
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move),new EnergyVar(1)];
@@ -33,7 +33,7 @@ public class FinishHomework : SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		DynamicVars.Damage.UpgradeValueBy(3); 
+		DynamicVars.Damage.UpgradeValueBy(2); 
 		base.DynamicVars.Energy.UpgradeValueBy(1);
 	}
 }

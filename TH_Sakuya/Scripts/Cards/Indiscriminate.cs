@@ -24,7 +24,7 @@ public class Indiscriminate: SakuyaCardModel
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
 		new DamageVar(6, ValueProp.Move),
-        new CardsVar(3)
+        new CardsVar(4)
      ];
 	public Indiscriminate() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 	{
@@ -38,7 +38,7 @@ public class Indiscriminate: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Cards.UpgradeValueBy(2);
+		base.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }
 

@@ -2,11 +2,9 @@
 	"TIME_STOP.title": "时停",
 	"TIME_STOP.description": "[gold]时停[/gold]时，所有伤害将被延迟至[gold]时停[/gold]结束后再进行结算。\n打出卡牌时不再消耗能量，而是改为消耗[blue]6[/blue]倍的[purple]TSP[/purple]。",
 	"TSP.title": "TSP",
-	"TSP.description": "[gold]时停[/gold]时使用的替代能量，耗尽时立即退出[gold]时停[/gold]并获得[blue]1[/blue]层[gold]虚弱[/gold]和[gold]易伤[/gold]。\n在未进入时停的回合会自然恢复[blue]25%[/blue]的[purple]TSP[/purple]。\n每场战斗首次进入[gold]时停[/gold]时，获得此时所有意图为攻击的敌人的意图数值的[purple]TSP[/purple]。",
+	"TSP.description": "[gold]时停[/gold]时使用的替代能量，耗尽时立即退出[gold]时停[/gold]并获得[blue]1[/blue]层[gold]虚弱[/gold]和[gold]易伤[/gold]。\n在未进入时停的回合开始时会自然恢复[blue]12.5%[/blue]的[purple]TSP[/purple]。\n每场战斗首次进入[gold]时停[/gold]时，获得此时所有意图为攻击的敌人的意图数值的[purple]TSP[/purple]。",
 	"KNIFE.title": "飞刀",
 	"KNIFE.description": "每柄飞刀被掷出时造成[blue]1[/blue]点伤害(可被[gold]力量[/gold]加成)。",
-	"TIME_DIFF.title": "时差",
-	"TIME_DIFF.description": "这张卡牌在[gold]时停[/gold]时将会拥有完全不同的效果。",
 	"STOP.title": "时滞",
 	"STOP.description": "处于[gold]时停[/gold]时触发。"
 }

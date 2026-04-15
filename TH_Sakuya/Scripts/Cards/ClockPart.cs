@@ -22,6 +22,7 @@ namespace TH_Sakuya.Scrpits.Cards
 [Pool(typeof(StatusCardPool))]
 public class ClockPart: SakuyaCardModel
 {
+	public override int MaxUpgradeLevel => 0;
 	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
         protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[3]
   {

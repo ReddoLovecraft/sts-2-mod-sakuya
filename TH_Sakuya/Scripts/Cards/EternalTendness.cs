@@ -30,7 +30,7 @@ public class EternalTendness: SakuyaCardModel
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
 		new BlockVar(10m,ValueProp.Move),
-        new CardsVar(2)
+        new CardsVar(1)
      ];
 	public EternalTendness() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
 	{

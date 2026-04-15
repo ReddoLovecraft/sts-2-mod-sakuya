@@ -44,7 +44,6 @@ public class JackRipper: SakuyaCardModel
 	protected override void OnUpgrade()
 	{
 		base.DynamicVars.Damage.UpgradeValueBy(3);
-		base.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }
 

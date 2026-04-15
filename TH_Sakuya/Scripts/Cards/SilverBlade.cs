@@ -28,8 +28,8 @@ public class SilverBlade: SakuyaCardModel
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
 		new DamageVar(12, ValueProp.Move),
-        new DynamicVar("Power", 2),
-        new CardsVar(4)
+        new DynamicVar("Power", 1),
+        new CardsVar(3)
      ];
 	public SilverBlade() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{

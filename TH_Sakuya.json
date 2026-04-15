@@ -1,11 +1,11 @@
 {
-  "id": "TH_Sakuya",          
+  "id": "TH_Sakuya",
   "name": "十六夜咲夜",
   "author": "Reddo",
-  "description": "增加了一个来东方Project的人物，十六夜咲夜。",
-  "version": "0.6",
-  "has_pck": true,         
+  "description": "增加了一个来东方Project的人物，十六夜咲夜。\n拥有107张角色卡牌(含多人游戏卡牌与先古牌)，2个新遗物和5瓶新药水。",
+  "version": "1.2",
+  "has_pck": true,
   "has_dll": true,
-  "dependencies": [ "BaseLib", "Patchoulib" ],    
-  "affects_gameplay": true 
+  "dependencies": [ "BaseLib", "Patchoulib" ],
+  "affects_gameplay": true
 }

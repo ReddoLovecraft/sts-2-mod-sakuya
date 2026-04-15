@@ -28,7 +28,7 @@ public class Misdirection: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new BlockVar(6, ValueProp.Move),
+		new BlockVar(7, ValueProp.Move),
         new CardsVar(1)
      ];
 	public Misdirection() : base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
@@ -41,7 +41,7 @@ public class Misdirection: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		this.DynamicVars.Block.UpgradeValueBy(3);
+		this.DynamicVars.Block.UpgradeValueBy(2);
 		this.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }

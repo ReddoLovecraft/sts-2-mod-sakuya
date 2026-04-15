@@ -24,7 +24,7 @@ public class MysteriousJackper: SakuyaCardModel
 {
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new DamageVar(10, ValueProp.Move),
+		new DamageVar(16, ValueProp.Move),
      ];
 	public MysteriousJackper() : base(3, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 	{

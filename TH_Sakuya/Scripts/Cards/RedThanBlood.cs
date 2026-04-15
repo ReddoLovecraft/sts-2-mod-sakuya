@@ -26,7 +26,7 @@ public class RedThanBlood: SakuyaCardModel
 	public override bool GainsBlock => true;
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new DamageVar(10, ValueProp.Move)
+		new DamageVar(9, ValueProp.Move)
      ];
 	public RedThanBlood() : base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 	{
@@ -42,7 +42,7 @@ public class RedThanBlood: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Damage.UpgradeValueBy(5);
+		base.DynamicVars.Damage.UpgradeValueBy(4);
 	}
 }
 

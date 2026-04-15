@@ -20,7 +20,7 @@ public class PowerMovement : SakuyaCardModel
         Tools.GetStaticKeyword("Knife"),
 		HoverTipFactory.FromPower<StrengthPower>()
   });
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 	public PowerMovement() : base(0, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
@@ -31,7 +31,7 @@ public class PowerMovement : SakuyaCardModel
 	
 	protected override void OnUpgrade()
 	{
-		DynamicVars.Cards.UpgradeValueBy(2); 
+		DynamicVars.Cards.UpgradeValueBy(1); 
 	}
 }
 }

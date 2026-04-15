@@ -23,6 +23,7 @@ namespace TH_Sakuya.Scrpits.Cards
 [Pool(typeof(SakuyaCardPool))]
 public class Telekinesis: SakuyaCardModel
 {
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust,CardKeyword.Retain];
 	public Telekinesis() : base(0, CardType.Skill, CardRarity.Common, TargetType.None)
 	{
 	}
@@ -33,16 +34,13 @@ public class Telekinesis: SakuyaCardModel
 		CardModel cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner, prefs)).FirstOrDefault();
 		if (cardModel != null)
 		{
-			if(IsUpgraded)
-			{
-				cardModel.SetToFreeThisTurn();
-			}
+			cardModel.SetToFreeThisTurn();
 			await CardPileCmd.Add(cardModel, PileType.Hand);
 		}
 	}
 	protected override void OnUpgrade()
 	{
-		
+		this.RemoveKeyword(CardKeyword.Exhaust);
 	}
 }
 

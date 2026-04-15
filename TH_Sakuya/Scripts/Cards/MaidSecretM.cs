@@ -35,7 +35,6 @@ public class MaidSecretM: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars["Power"].UpgradeValueBy(1);
 		base.DynamicVars.Cards.UpgradeValueBy(1);
 	}
 }

@@ -22,7 +22,7 @@ namespace TH_Sakuya.Scrpits.Cards
 public class TimeParadox: SakuyaCardModel
 {
  	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
-	public TimeParadox() : base(2, CardType.Skill, CardRarity.Rare, TargetType.AllAllies)
+	public TimeParadox() : base(1, CardType.Skill, CardRarity.Rare, TargetType.AllAllies)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

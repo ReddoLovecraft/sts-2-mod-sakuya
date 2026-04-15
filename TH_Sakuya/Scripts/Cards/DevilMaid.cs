@@ -27,8 +27,8 @@ public class DevilMaid: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-        new DynamicVar("Power", 3),
-        new CardsVar(5)
+        new DynamicVar("Power", 2),
+        new CardsVar(2)
      ];
 	public DevilMaid() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None)
 	{
@@ -36,12 +36,12 @@ public class DevilMaid: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		VfxCmd.PlayOnCreatureCenter(base.Owner.Creature, "vfx/vfx_bloody_impact");
-		await CreatureCmd.Damage(choiceContext, base.Owner.Creature, base.DynamicVars.HpLoss.BaseValue, ValueProp.Unblockable | ValueProp.Unpowered, this);
+		await CreatureCmd.Damage(choiceContext, base.Owner.Creature, base.DynamicVars.Cards.IntValue, ValueProp.Unblockable | ValueProp.Unpowered, this);
 		await PowerCmd.Apply<StrengthPower>(Owner.Creature, DynamicVars["Power"].IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars["Power"].UpgradeValueBy(2);
+		this.DynamicVars["Power"].UpgradeValueBy(2);
 	}
 }
 

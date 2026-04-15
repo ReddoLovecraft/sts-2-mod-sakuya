@@ -23,6 +23,7 @@ namespace TH_Sakuya.Scrpits.Cards
 [Pool(typeof(StatusCardPool))]
 public class NoMethod: SakuyaCardModel
 {
+	public override int MaxUpgradeLevel => 0;
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [(CardKeyword.Unplayable)];
         protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[1]
   {
@@ -36,7 +37,7 @@ public class NoMethod: SakuyaCardModel
 			await PowerCmd.Apply<WeakPower>(Owner.Creature,2,null,null);
 		}
 	}
-	public NoMethod() : base(0, CardType.Status, CardRarity.Status, TargetType.None)
+	public NoMethod() : base(-1, CardType.Status, CardRarity.Status, TargetType.None)
 	{
 	}
 	

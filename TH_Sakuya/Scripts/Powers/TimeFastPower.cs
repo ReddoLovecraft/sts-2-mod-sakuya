@@ -39,6 +39,10 @@ public sealed class TimeFastPower : SakuyaPowerModel
             {
                 Owner.Player.GetRelic<SakuyaWatch>().DecrementCounterAndMaybeEndTurn(Owner.Player);
             }
+            else if(Owner.Player.GetRelic<SakuyaLunaDial>()!=null)
+            {
+                Owner.Player.GetRelic<SakuyaLunaDial>().DecrementCounterAndMaybeEndTurn(Owner.Player);
+            }
             return Task.CompletedTask;
     }
 	public override Task AfterModifyingHpLostBeforeOsty()

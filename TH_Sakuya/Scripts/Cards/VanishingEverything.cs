@@ -22,7 +22,7 @@ namespace TH_Sakuya.Scrpits.Cards
 [Pool(typeof(SakuyaCardPool))]
 public class VanishingEverything: SakuyaCardModel
 {
-	   public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust,CardKeyword.Ethereal];
+	   public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
         protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[1]
   {
          HoverTipFactory.FromPower<IntangiblePower>()
@@ -43,7 +43,6 @@ public class VanishingEverything: SakuyaCardModel
 	protected override void OnUpgrade()
 	{
 		this.DynamicVars.Cards.UpgradeValueBy(1);
-		this.RemoveKeyword(CardKeyword.Ethereal);
 	}
 }
 

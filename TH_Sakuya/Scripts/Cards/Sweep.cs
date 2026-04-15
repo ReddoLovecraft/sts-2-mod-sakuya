@@ -17,7 +17,7 @@ public sealed class Sweep : SakuyaCardModel
   {
          Tools.GetStaticKeyword("TimeStop"),
          HoverTipFactory.Static(StaticHoverTip.Transform),
-         HoverTipFactory.FromCard<FinishHomework>()
+         HoverTipFactory.FromCard<FinishHomework>(base.IsUpgraded)
   });
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new BlockVar(7m, ValueProp.Move) ,new CardsVar(1)};
