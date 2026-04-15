@@ -39,7 +39,7 @@ public class ChangeMaxTime: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-	  this.EnergyCost.UpgradeBy(-1);
+	    this.DynamicVars.Cards.UpgradeValueBy(20);
 	}
 }
 

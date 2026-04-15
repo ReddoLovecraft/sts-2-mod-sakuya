@@ -23,19 +23,20 @@ namespace TH_Sakuya.Scrpits.Cards
 [Pool(typeof(SakuyaCardPool))]
 public class ClockCorpse: SakuyaCardModel
 {
-	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
         protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[2]
   {
          HoverTipFactory.FromCard<ClockPart>(),
 		 HoverTipFactory.Static(StaticHoverTip.Transform)
   });
+  protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
 	public ClockCorpse() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		List<CardModel> list = (await CardSelectCmd.FromHand(prefs: new CardSelectorPrefs(base.SelectionScreenPrompt, 0, 999), context: choiceContext, player: base.Owner, filter: null, source: this)).ToList();
+		List<CardModel> list = (await CardSelectCmd.FromHand(prefs: new CardSelectorPrefs(base.SelectionScreenPrompt, 0, this.DynamicVars.Cards.IntValue), context: choiceContext, player: base.Owner, filter: null, source: this)).ToList();
 		foreach (CardModel item in list)
 		{
 			CardModel cardModel = base.CombatState.CreateCard<ClockPart>(base.Owner);
@@ -44,7 +45,7 @@ public class ClockCorpse: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		this.RemoveKeyword(CardKeyword.Exhaust);
+		this.EnergyCost.UpgradeBy(-1);
 	}
 }
 

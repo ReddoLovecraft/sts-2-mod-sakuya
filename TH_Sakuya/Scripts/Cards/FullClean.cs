@@ -28,7 +28,7 @@ public class FullClean: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new DamageVar(15, ValueProp.Move)
+		new DamageVar(13, ValueProp.Move)
      ];
 	public FullClean() : base(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 	{

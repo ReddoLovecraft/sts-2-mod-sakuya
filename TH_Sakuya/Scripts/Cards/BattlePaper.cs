@@ -34,6 +34,7 @@ public class BattlePaper: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CardPileCmd.Draw(choiceContext,base.DynamicVars.Cards.IntValue,Owner);
+		await CreatureCmd.GainBlock(Owner.Creature,this.DynamicVars.Block,cardPlay);
 	}
 	protected override void OnUpgrade()
 	{

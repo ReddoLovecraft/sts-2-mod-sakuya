@@ -25,7 +25,7 @@ public class KnifeReturn: SakuyaCardModel
   {
 		 Tools.GetStaticKeyword("Knife")
   });
-	public KnifeReturn() : base(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
+	public KnifeReturn() : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

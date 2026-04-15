@@ -38,15 +38,18 @@ public class DualVanish: SakuyaCardModel
 		List<CardModel> cardsIn = (from c in PileType.Draw.GetPile(base.Owner).Cards
 			orderby c.Rarity, c.Id
 			select c).ToList();
+		if(cardsIn.Count>0)
 		foreach(CardModel card in await CardSelectCmd.FromSimpleGrid(choiceContext, cardsIn, base.Owner, prefs))
 		{
 			if(card!=null)
 			await CardPileCmd.Add(card, PileType.Hand);
 		}
-		cardsIn = (from c in PileType.Discard.GetPile(base.Owner).Cards
+	   CardSelectorPrefs prefs2 = new CardSelectorPrefs(base.SelectionScreenPrompt, 0,2);
+		List<CardModel> cardsIn2 = (from c in PileType.Discard.GetPile(base.Owner).Cards
 			orderby c.Rarity, c.Id
 			select c).ToList();
-		foreach(CardModel card in await CardSelectCmd.FromSimpleGrid(choiceContext, cardsIn, base.Owner, prefs))
+		if(cardsIn2.Count>0)
+		foreach(CardModel card in await CardSelectCmd.FromSimpleGrid(choiceContext, cardsIn2, base.Owner, prefs2))
 		{
 			if(card!=null)
 			await CardPileCmd.Add(card, PileType.Hand);

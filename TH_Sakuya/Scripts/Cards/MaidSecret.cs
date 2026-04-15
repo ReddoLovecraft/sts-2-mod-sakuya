@@ -22,7 +22,7 @@ public class MaidSecret: SakuyaCardModel
          HoverTipFactory.FromCard<MaidSecretM>(),
          HoverTipFactory.FromCard<MaidSecretD>()
   });
-	public MaidSecret() : base(1, CardType.Skill, CardRarity.Basic, TargetType.None)
+	public MaidSecret() : base(0, CardType.Skill, CardRarity.Basic, TargetType.None)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
