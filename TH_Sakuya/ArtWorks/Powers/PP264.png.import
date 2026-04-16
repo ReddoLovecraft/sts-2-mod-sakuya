@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dujarjq2fd8nw"
-path="res://.godot/imported/SWP32.png-403481fc033f1889aacabe2076c3c904.ctex"
+uid="uid://3r051ynkx1ng"
+path="res://.godot/imported/PP264.png-f6dc9d1e22eb5d049bd755b726a7bd8a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TH_Sakuya/ArtWorks/Powers/SWP32.png"
-dest_files=["res://.godot/imported/SWP32.png-403481fc033f1889aacabe2076c3c904.ctex"]
+source_file="res://TH_Sakuya/ArtWorks/Powers/PP264.png"
+dest_files=["res://.godot/imported/PP264.png-f6dc9d1e22eb5d049bd755b726a7bd8a.ctex"]
 
 [params]
 

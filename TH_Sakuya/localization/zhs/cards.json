@@ -203,7 +203,7 @@
 	"TH_SAKUYA-SELF_DISOLVE.title": "自我溶解",
 	"TH_SAKUYA-SELF_DISOLVE.description": "抽到这张牌时，立即退出[gold]时停[/gold]且本回合内不能进入[gold]时停[/gold]。\n在你的回合结束时，如果这张牌在你的[gold]手牌[/gold]中，则失去6点生命。",
 	"TH_SAKUYA-OVER_MIND.title": "精神过载",
-	"TH_SAKUYA-OVER_MIND.description": "进入[gold]时停[/gold]时，获得{Energy:energyIcons()}并抽{Cards:diff()}张牌。\n每当你在一回合内进出超过2次[gold]时停[/gold]后再进出时，将一张[gold]自我溶解[/gold]洗入[gold]抽牌堆[/gold]。",
+	"TH_SAKUYA-OVER_MIND.description": "进入[gold]时停[/gold]时，获得{Energy:energyIcons()}并抽{Cards:diff()}张牌。\n每当你在一回合内进出超过2次[gold]时停[/gold]后再进出时，将一张[gold]自我溶解[/gold]洗入[gold]抽牌堆[/gold]。\n当你的手牌达到上限时，立即结束你的回合并重置你结束[gold]时停[/gold]的计数为12。",
 	"TH_SAKUYA-MOON_NIGHT.title": "月与十六夜",
 	"TH_SAKUYA-MOON_NIGHT.description": "你结束[gold]时停[/gold]的计数每减少1点，就获得{Cards:diff()}点[purple]TSP[/purple]，当你的[purple]TSP[/purple]达到上限时，将你结束[gold]时停[/gold]的计数重置为12。",
 	"TH_SAKUYA-DINNER.title": "一时兴起的晚宴",

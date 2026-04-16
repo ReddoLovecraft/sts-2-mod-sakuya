@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwm1q8d1gdm5q"
-path="res://.godot/imported/SWP64.png-cfb2802ebb3353d3f3c5015ef419e26e.ctex"
+uid="uid://cq4uufmln1gwq"
+path="res://.godot/imported/TH_SAKUYA-DICE.png-e0fe81f40c826e7cc66edfee53e6462a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TH_Sakuya/ArtWorks/Powers/SWP64.png"
-dest_files=["res://.godot/imported/SWP64.png-cfb2802ebb3353d3f3c5015ef419e26e.ctex"]
+source_file="res://TH_Sakuya/ArtWorks/Relics/Outlines/TH_SAKUYA-DICE.png"
+dest_files=["res://.godot/imported/TH_SAKUYA-DICE.png-e0fe81f40c826e7cc66edfee53e6462a.ctex"]
 
 [params]
 

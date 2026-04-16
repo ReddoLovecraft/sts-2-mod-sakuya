@@ -22,7 +22,7 @@ namespace TH_Sakuya.Scripts.Main
 		public override Color RemoteTargetingLineOutline => new Color("5c68ffff");
 		public override CharacterGender Gender => CharacterGender.Feminine;
 		public override bool ShouldAlwaysShowStarCounter => true;
-		public override int StartingHp => 60;
+		public override int StartingHp => 70;
         public override string CustomVisualPath => "res://TH_Sakuya/ArtWorks/Character/sakuya.tscn";
         public override string CustomTrailPath => "res://TH_Sakuya/ArtWorks/VFX/SakuyaCardTrail.tscn";
         public override string CustomIconTexturePath => "res://TH_Sakuya/ArtWorks/Character/sakuya_icon.png";

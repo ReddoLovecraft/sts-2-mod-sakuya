@@ -19,6 +19,8 @@ using Patchoulib.Scrpits.Main;
 using MegaCrit.Sts2.Core.Models;
 using TH_Sakuya.Scrpits.Cards;
 using MegaCrit.Sts2.Core.Models.Cards;
+using TH_Sakuya.Scrpits.Relics;
+using MegaCrit.Sts2.Core.Random;
 
 [Pool(typeof(SakuyaRelicPool))]
     public class SakuyaLunaDial : CustomRelicModel, IRightCilckable
@@ -28,7 +30,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
         private bool _shouldRefillOnNextTurnStart;
         private bool _hasGrantedFirstTimeStopTspThisCombat;
 
-        public override RelicRarity Rarity => RelicRarity.Starter;
+        public override RelicRarity Rarity => RelicRarity.Ancient;
         public override string PackedIconPath => $"res://TH_Sakuya/ArtWorks/Relics/{Id.Entry}.png";
         protected override string PackedIconOutlinePath => $"res://TH_Sakuya/ArtWorks/Relics/Outlines/{Id.Entry}.png";
         protected override string BigIconPath => $"res://TH_Sakuya/ArtWorks/Relics/{Id.Entry}.png";
@@ -251,6 +253,13 @@ using MegaCrit.Sts2.Core.Models.Cards;
         {
             if (_timeStopCount <= 0)
             {
+                return;
+            }
+            if(Owner.GetRelic<ClockHand>()!=null)
+            {
+                Rng rng = player.RunState.Rng.CombatCardGeneration;
+                int randomNumber = rng.NextInt(1, 11);
+                if(randomNumber>=5)
                 return;
             }
             if(Owner.Creature.HasPower<ReverseTimePower>()&&Owner.Creature.HasPower<TimeStopPower>())

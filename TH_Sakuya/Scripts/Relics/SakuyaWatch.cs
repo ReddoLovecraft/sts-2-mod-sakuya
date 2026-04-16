@@ -19,6 +19,8 @@ using Patchoulib.Scrpits.Main;
 using MegaCrit.Sts2.Core.Models;
 using TH_Sakuya.Scrpits.Cards;
 using MegaCrit.Sts2.Core.Models.Cards;
+using TH_Sakuya.Scrpits.Relics;
+using MegaCrit.Sts2.Core.Random;
 
 [Pool(typeof(SakuyaRelicPool))]
     public class SakuyaWatch : CustomRelicModel, IRightCilckable
@@ -248,6 +250,13 @@ using MegaCrit.Sts2.Core.Models.Cards;
         {
             if (_timeStopCount <= 0)
             {
+                return;
+            }
+            if(Owner.GetRelic<ClockHand>()!=null)
+            {
+                Rng rng = player.RunState.Rng.CombatCardGeneration;
+                int randomNumber = rng.NextInt(1, 11);
+                if(randomNumber>=5)
                 return;
             }
             if(Owner.Creature.HasPower<ReverseTimePower>()&&Owner.Creature.HasPower<TimeStopPower>())

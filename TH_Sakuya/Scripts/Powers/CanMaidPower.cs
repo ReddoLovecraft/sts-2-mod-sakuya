@@ -27,7 +27,15 @@ public sealed class CanMaidPower : SakuyaPowerModel
         await CardCmd.Discard(choiceContext, card);
 		CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 1);
 		CardPile pile = PileType.Discard.GetPile(base.Owner.Player);
-		CardModel cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner.Player, prefs)).FirstOrDefault();
+		CardModel? cardModel = null;
+		try
+		{
+			cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner.Player, prefs)).FirstOrDefault();
+		}
+		catch (NotImplementedException)
+		{
+			cardModel = pile.Cards.FirstOrDefault();
+		}
 		if (cardModel != null)
 		{
 			await CardPileCmd.Add(cardModel, PileType.Hand);
@@ -36,6 +44,5 @@ public sealed class CanMaidPower : SakuyaPowerModel
 
 }
 }
-
 
 
