@@ -1,0 +1,10 @@
+{
+	"TIME_STOP.title": "Time Stop",
+	"TIME_STOP.description": "While in [gold]Time Stop[/gold], all damage is delayed until [gold]Time Stop[/gold] ends.\nPlaying cards no longer costs energy, but instead costs [blue]6[/blue] times the [purple]TSP[/purple].",
+	"TSP.title": "TSP",
+	"TSP.description": "Alternative energy used during [gold]Time Stop[/gold]; when exhausted, immediately exit [gold]Time Stop[/gold] and gain [blue]1[/blue] [gold]Weak[/gold] and [gold]Vulnerable[/gold].\nAt the start of a turn when not in [gold]Time Stop[/gold], naturally recover [blue]12.5%[/blue] of [purple]TSP[/purple].\nThe first time you enter [gold]Time Stop[/gold] each combat, gain [purple]TSP[/purple] equal to the intent value of all enemies intending to attack at that moment.",
+	"KNIFE.title": "Knife",
+	"KNIFE.description": "Each knife deals [blue]1[/blue] damage when thrown (affected by [gold]Strength[/gold]).",
+	"STOP.title": "Time Lag",
+	"STOP.description": "Triggers while in [gold]Time Stop[/gold]."
+}

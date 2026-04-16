@@ -1,0 +1,17 @@
+{
+"TH_SAKUYA-SAKUYA_CHARACTER.aromaPrinciple": "[sine][red]……Lady Remilia……[/red][/sine]",
+"TH_SAKUYA-SAKUYA_CHARACTER.banter.alive.endTurnPing": "Even I can't control the flow of time to be faster……",
+"TH_SAKUYA-SAKUYA_CHARACTER.banter.dead.endTurnPing": "……",
+"TH_SAKUYA-SAKUYA_CHARACTER.cardsModifierDescription": "Sakuya's cards will now appear in rewards and the shop.",
+"TH_SAKUYA-SAKUYA_CHARACTER.cardsModifierTitle": "Sakuya Cards",
+"TH_SAKUYA-SAKUYA_CHARACTER.description": "A perfectly elegant head maid, manipulating time and using throwing knives to defeat enemies.",
+"TH_SAKUYA-SAKUYA_CHARACTER.eventDeathPrevention": "...No, I can't die yet... The young lady is still waiting for me...",
+"TH_SAKUYA-SAKUYA_CHARACTER.goldMonologue": "[sine]These gold coins...maybe to rebuild the Scarlet Devil Mansion...[/sine]",
+"TH_SAKUYA-SAKUYA_CHARACTER.possessiveAdjective": "Her",
+"TH_SAKUYA-SAKUYA_CHARACTER.pronounObject": "her",
+"TH_SAKUYA-SAKUYA_CHARACTER.pronounPossessive": "her",
+"TH_SAKUYA-SAKUYA_CHARACTER.pronounSubject": "She",
+"TH_SAKUYA-SAKUYA_CHARACTER.title": "Izayoi Sakuya",
+"TH_SAKUYA-SAKUYA_CHARACTER.titleObject": "Sakuya",
+"TH_SAKUYA-SAKUYA_CHARACTER.unlockText": "Play one game using [pink]{Prerequisite}[/pink] to unlock this character."
+}

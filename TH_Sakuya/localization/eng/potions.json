@@ -1,0 +1,12 @@
+{
+  "TH_SAKUYA-RED_TEA.description": "Heal [blue]6[/blue] HP.\nGain {Energy:energyIcons()} and draw [blue]1[/blue] card.",
+  "TH_SAKUYA-RED_TEA.title": "Scarlet Devil Mansion Black Tea",
+  "TH_SAKUYA-RED_KING_POTION.description": "Increase the count until you exit time stop by [blue]10[/blue].",
+  "TH_SAKUYA-RED_KING_POTION.title": "King Crimson",
+  "TH_SAKUYA-MANA_POTION.description": "Restore 24 [purple]TSP[/purple].",
+  "TH_SAKUYA-MANA_POTION.title": "Magic Potion",
+  "TH_SAKUYA-ALL_POTION.description": "Gain [blue]2[/blue] [gold]Artifact[/gold].",
+  "TH_SAKUYA-ALL_POTION.title": "Panacea",
+  "TH_SAKUYA-BLOOD_BAR_POTION.description": "Gain {Energy:energyIcons()}.\nHeal [green]{HealPercent}%[/green] of your Max HP.\nAdd a [red]Scarlet Curse[/red] to your [gold]deck[/gold]; if you already have [red]Scarlet Curse[/red], reduce its stage by [blue]1[/blue] instead.",
+  "TH_SAKUYA-BLOOD_BAR_POTION.title": "Blood Brew"
+}
