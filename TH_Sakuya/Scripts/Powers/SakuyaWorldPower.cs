@@ -20,6 +20,10 @@ public sealed class SakuyaWorldPower : SakuyaPowerModel
     public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/SWP64.png";
 	public override bool ShouldClearBlock(Creature creature)
 	{
+		if (base.Owner == null)
+		{
+			return true;
+		}
 		if (base.Owner != creature)
 		{
 			return true;
@@ -37,6 +41,5 @@ public sealed class SakuyaWorldPower : SakuyaPowerModel
         }
 }
 }
-
 
 

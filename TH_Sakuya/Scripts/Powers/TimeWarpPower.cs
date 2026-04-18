@@ -32,17 +32,22 @@ public sealed class TimeWarpPower : SakuyaPowerModel
         {
              if (cardPlay.Card.Owner == base.Owner.Player )
 			{
-			   this.Amount--;
-			   if(Amount<=0)
-			   {
-				this.Amount=12;
-				Flash();
-				await PowerCmd.Apply<StrengthPower>(Owner,this.DynamicVars.Cards.BaseValue,null,null);
-				await PowerCmd.Apply<DexterityPower>(Owner,this.DynamicVars.Cards.BaseValue,null,null);
+				
+			    if(this.Amount>1)
+				{
+					await PowerCmd.Decrement(this);
+				}
+				else
+				{
+					await PowerCmd.ModifyAmount(this,11,null,null);
+					Flash();
+					await PowerCmd.Apply<StrengthPower>(Owner,this.DynamicVars.Cards.BaseValue,null,null);
+					await PowerCmd.Apply<DexterityPower>(Owner,this.DynamicVars.Cards.BaseValue,null,null);
+				}
 			   }
 			}
         }
-}
+
 }
 
 

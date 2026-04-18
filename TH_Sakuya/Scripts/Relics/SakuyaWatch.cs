@@ -21,6 +21,9 @@ using TH_Sakuya.Scrpits.Cards;
 using MegaCrit.Sts2.Core.Models.Cards;
 using TH_Sakuya.Scrpits.Relics;
 using MegaCrit.Sts2.Core.Random;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Runs;
+using TH_Sakuya.Scripts.GameActions;
 
 [Pool(typeof(SakuyaRelicPool))]
     public class SakuyaWatch : CustomRelicModel, IRightCilckable
@@ -105,7 +108,7 @@ using MegaCrit.Sts2.Core.Random;
             await DecrementCounterAndMaybeEndTurn(Owner);
         }
 
-        private async Task ToggleTimeStop(Player player)
+        internal async Task ToggleTimeStop(Player player)
         {
             if (player.Creature.HasPower<CannotTimeStopPower>())
             {
@@ -298,6 +301,15 @@ using MegaCrit.Sts2.Core.Random;
         {
             if (Owner?.Creature == null)
             {
+                return Task.CompletedTask;
+            }
+            if (context is GameActionPlayerChoiceContext)
+            {
+                return ToggleTimeStop(Owner);
+            }
+            if (RunManager.Instance.IsInProgress && RunManager.Instance.NetService.Type != NetGameType.Singleplayer)
+            {
+                RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(new TimeStopToggleAction(Owner));
                 return Task.CompletedTask;
             }
             return ToggleTimeStop(Owner);

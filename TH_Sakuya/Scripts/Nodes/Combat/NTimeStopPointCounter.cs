@@ -70,7 +70,7 @@ public partial class NTimeStopPointCounter : Control
 		{
 			_displayedTsp = tsp;
 			_displayedMax = max;
-			_label.AddThemeColorOverride(ThemeConstants.Label.fontColor, (tsp == 0) ? StsColors.red : StsColors.cream);
+			_label.AddThemeColorOverride(ThemeConstants.Label.FontColor, (tsp == 0) ? StsColors.red : StsColors.cream);
 			_label.Text = $"[center]{tsp}/{max}[/center]";
 		}
 

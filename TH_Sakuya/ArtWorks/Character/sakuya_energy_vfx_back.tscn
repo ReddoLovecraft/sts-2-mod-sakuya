@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://sakuya_energy_vfx_back"]
+
+[ext_resource type="Script" path="res://src/Core/Nodes/Vfx/Utilities/NParticlesContainer.cs" id="1_container"]
+[ext_resource type="PackedScene" uid="uid://cq0m6037hbecy" path="res://scenes/vfx/common/vfx_common_glow.tscn" id="2_glow"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sakuya_back"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+
+[node name="sakuya_energy_vfx_back" type="Node2D" node_paths=PackedStringArray("_particles")]
+script = ExtResource("1_container")
+_particles = [NodePath("vfx_common_glow")]
+
+[node name="vfx_common_glow" parent="." instance=ExtResource("2_glow")]
+self_modulate = Color(0.82, 0.82, 0.84, 1)
+process_material = SubResource("ParticleProcessMaterial_sakuya_back")

@@ -29,8 +29,9 @@ public class Infinite: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new EnergyVar(1)
-	     ];
+		new EnergyVar(1),
+		new CardsVar(6)
+		     ];
 	public Infinite() : base(8, CardType.Power, CardRarity.Ancient, TargetType.Self)
 	{
 	}
