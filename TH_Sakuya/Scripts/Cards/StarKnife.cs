@@ -32,7 +32,7 @@ public class StarKnife: SakuyaCardModel
         new CardsVar(2)
      ];
 
-	public StarKnife() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+	public StarKnife() : base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

@@ -30,7 +30,11 @@ public sealed class DangerousTricksterPower : SakuyaPowerModel
 			if(cnt>0)
 			{
 				Flash();
-				await PowerCmd.Apply<KnifePower>(Owner,Amount*cnt,null,null);
+				KnifePower kp= await PowerCmd.Apply<KnifePower>(Owner, Amount*cnt, null, null);
+				if(kp!=null)
+				{	
+				await kp.ThrowKnife(choiceContext,null,KnifeType.RandomEnemy,1,Amount*cnt);
+				}
 			}
 		}
 	}
@@ -84,7 +88,11 @@ public sealed class DangerousTricksterPower : SakuyaPowerModel
 		if (total > 0)
 		{
 			Flash();
-			await PowerCmd.Apply<KnifePower>(Owner, total, null, null);
+			KnifePower kp= await PowerCmd.Apply<KnifePower>(Owner, total, null, null);
+			if(kp!=null)
+			{
+				await kp.ThrowKnife(choiceContext,null,KnifeType.RandomEnemy,1,total);
+			}
 		}
 	}
 

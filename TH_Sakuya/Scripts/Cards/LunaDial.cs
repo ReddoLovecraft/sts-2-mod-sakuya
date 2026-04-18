@@ -26,7 +26,7 @@ public class LunaDial: SakuyaCardModel
          HoverTipFactory.FromKeyword(CardKeyword.Retain),
 		 Tools.GetStaticKeyword("TimeStop")
   });
-	public LunaDial() : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+	public LunaDial() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

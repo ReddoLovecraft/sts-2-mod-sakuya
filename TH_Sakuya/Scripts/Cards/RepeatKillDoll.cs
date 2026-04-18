@@ -28,10 +28,10 @@ public class RepeatKillDoll: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new DamageVar(16, ValueProp.Move),
-        new CardsVar(16)
+		new DamageVar(8, ValueProp.Move),
+        new CardsVar(8)
      ];
-	public RepeatKillDoll() : base(3, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+	public RepeatKillDoll() : base(1, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -53,7 +53,7 @@ public class RepeatKillDoll: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		base.DynamicVars.Cards.UpgradeValueBy(16);
+		base.DynamicVars.Cards.UpgradeValueBy(8);
 	}
 }
 

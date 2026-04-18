@@ -27,7 +27,8 @@ public class ParallelBrane: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-        new CardsVar(2)
+        new BlockVar(5,ValueProp.Move),
+        new CardsVar(1)
      ];
 	public ParallelBrane() : base(1, CardType.Skill, CardRarity.Common, TargetType.None)
 	{
@@ -38,6 +39,7 @@ public class ParallelBrane: SakuyaCardModel
 		{
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
+		await CreatureCmd.GainBlock(Owner.Creature,this.DynamicVars.Block,cardPlay);
 		 await PowerCmd.Apply<KnifePower>(Owner.Creature,4,Owner.Creature,this);
 		 (await PowerCmd.Apply<KnivesNextTurnPower>(Owner.Creature,this.DynamicVars.Cards.IntValue,Owner.Creature,this)).SetKnifeCount(4);
 	}

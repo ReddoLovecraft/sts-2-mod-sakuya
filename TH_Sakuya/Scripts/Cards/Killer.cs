@@ -28,7 +28,7 @@ public class Killer: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new DamageVar(16, ValueProp.Move)
+		new DamageVar(8, ValueProp.Move)
      ];
 	public Killer() : base(4, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 	{

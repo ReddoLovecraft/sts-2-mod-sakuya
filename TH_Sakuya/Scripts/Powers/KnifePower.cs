@@ -65,15 +65,7 @@ public sealed class KnifePower : SakuyaPowerModel
 
 		  	KnifeProtectPower kpp=Owner.GetPower<KnifeProtectPower>();
 		  	kpp.Trigger();
-			IEnumerable<Creature> enumerable = from c in base.CombatState.GetTeammatesOf(base.Owner)
-			where c != null && c.IsAlive && c.IsPlayer&&c!=Owner
-			select c;
-			if(enumerable.Count()>0)
-			foreach (Creature item in enumerable)
-			{
-				await CreatureCmd.GainBlock(item, new BlockVar(kpp.Amount*cnt,ValueProp.Unpowered), null);
-			}
-
+			await CreatureCmd.GainBlock(Owner, new BlockVar(kpp.Amount*cnt,ValueProp.Unpowered), null);
 		 }
  		if(Owner.HasPower<PowerMovementPower>())
 		 {

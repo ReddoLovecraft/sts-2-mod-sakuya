@@ -21,7 +21,6 @@ namespace TH_Sakuya.Scrpits.Cards
 [Pool(typeof(SakuyaCardPool))]
 public class KnifeProtect: SakuyaCardModel
 {
-	  public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
 	   public override bool GainsBlock => true;
         protected override IEnumerable<IHoverTip> ExtraHoverTips => (new IHoverTip[1]
   {

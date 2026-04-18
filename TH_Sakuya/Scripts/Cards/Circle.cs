@@ -25,6 +25,7 @@ public class Circle : SakuyaCardModel
 	{
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue) .FromCard(this) .Targeting(cardPlay.Target).Execute(choiceContext);
 		await CardPileCmd.Draw(choiceContext, 1, Owner.Creature.Player);
+		this.EnergyCost.AddThisTurn(1);
 	}
 	public async Task MoveUpperCardPile()
 	{

@@ -23,7 +23,7 @@ public class Pad: SakuyaCardModel
         HoverTipFactory.FromPower<VulnerablePower>(),
         HoverTipFactory.FromPower<StrengthPower>()
   });
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move),new CardsVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move),new CardsVar(1)];
 	public Pad() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 	{
 	}
@@ -38,8 +38,7 @@ public class Pad: SakuyaCardModel
 	}
 	protected override void OnUpgrade()
 	{
-		DynamicVars.Damage.UpgradeValueBy(2);
-		DynamicVars.Cards.UpgradeValueBy(-1);
+		DynamicVars.Damage.UpgradeValueBy(3);
 	}
 }
 }

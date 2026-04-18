@@ -27,7 +27,7 @@ public class LunaClock: SakuyaCardModel
 		 Tools.GetStaticKeyword("TimeStop")
   });
     
-	public LunaClock() : base(2, CardType.Skill, CardRarity.Rare, TargetType.None)
+	public LunaClock() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.None)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

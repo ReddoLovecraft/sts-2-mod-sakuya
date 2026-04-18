@@ -33,9 +33,15 @@ public class TransformInstant: SakuyaCardModel
 	public TransformInstant() : base(1, CardType.Skill, CardRarity.Common, TargetType.None)
 	{
 	}
+	protected override IEnumerable<DynamicVar> CanonicalVars =>
+       [
+        new BlockVar(6,ValueProp.Move)
+       ];
+	
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+		await CreatureCmd.GainBlock(Owner.Creature,this.DynamicVars.Block,cardPlay);
 		List<CardModel> list = new List<CardModel>();
 		 if(Owner.Creature.HasPower<TimeStopPower>())
 		 {

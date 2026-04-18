@@ -30,7 +30,7 @@ public class WeaponCatch: SakuyaCardModel
      [
         new CardsVar(2)
      ];
-	public WeaponCatch() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
+	public WeaponCatch() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
