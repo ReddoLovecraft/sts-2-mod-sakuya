@@ -226,5 +226,9 @@
 	"TH_SAKUYA-DEFLATION_WORLD.title": "Shrinking World",
 	"TH_SAKUYA-DEFLATION_WORLD.description": "All enemies lose {Cards:diff()} HP once.\nFor each point the count until you exit [gold]Time Stop[/gold] is below 12, double the HP loss.",
 	"TH_SAKUYA-BLOOD_CURSE.title": "Scarlet Curse",
-	"TH_SAKUYA-BLOOD_CURSE.description": "Whenever you draw this card, gain 1 [red]Scarlet Curse[/red]; if you already have [red]Scarlet Curse[/red], increase the curse's stage by 1 instead."
+	"TH_SAKUYA-BLOOD_CURSE.description": "Whenever you draw this card, gain 1 [red]Scarlet Curse[/red]; if you already have [red]Scarlet Curse[/red], increase the curse's stage by 1 instead.",
+	"TH_SAKUYA-THANKS_NOTE.title": "Thanks Note",
+	"TH_SAKUYA-THANKS_NOTE.description": "Whenever you draw this card, gain {Energy:energyIcons()}.",
+	"TH_SAKUYA-LITTLE_KNIFE.title": "Little Knife",
+	"TH_SAKUYA-LITTLE_KNIFE.description": "Deal {Damage:diff()} damage to all enemies {Cards:diff()} times, and make them lose that much [gold]Strength[/gold]."
 }

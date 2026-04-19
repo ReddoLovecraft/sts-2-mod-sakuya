@@ -226,5 +226,9 @@
 	"TH_SAKUYA-DEFLATION_WORLD.title": "收缩的世界",
 	"TH_SAKUYA-DEFLATION_WORLD.description": "使所有敌人失去{Cards:diff()}点生命1次。\n你结束[gold]时停[/gold]的计数每比12少1，就将失去的生命翻倍一次。",
 	"TH_SAKUYA-BLOOD_CURSE.title": "猩红诅咒",
-	"TH_SAKUYA-BLOOD_CURSE.description": "每当你抽到这张牌时，获得1层[red]猩红诅咒[/red]，如果你已经拥有[red]猩红诅咒[/red]，改为将诅咒的阶段提升1。"
+	"TH_SAKUYA-BLOOD_CURSE.description": "每当你抽到这张牌时，获得1层[red]猩红诅咒[/red]，如果你已经拥有[red]猩红诅咒[/red]，改为将诅咒的阶段提升1。",
+	"TH_SAKUYA-THANKS_NOTE.title": "感谢函",
+	"TH_SAKUYA-THANKS_NOTE.description": "每当你抽到这张牌时，获得{Energy:energyIcons()}。",
+	"TH_SAKUYA-LITTLE_KNIFE.title": "小小飞刀",
+	"TH_SAKUYA-LITTLE_KNIFE.description": "对所有敌人造成{Damage:diff()}点伤害{Cards:diff()}次，并使其失去等量的[gold]力量[/gold]。"
 }

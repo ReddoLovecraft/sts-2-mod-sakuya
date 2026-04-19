@@ -29,7 +29,7 @@ public class DeflationWorld: SakuyaCardModel
      [
         new CardsVar(1)
      ];
-	public DeflationWorld() : base(1, CardType.Skill, CardRarity.Common, TargetType.AllEnemies)
+	public DeflationWorld() : base(1, CardType.Skill, CardRarity.Rare, TargetType.AllEnemies)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

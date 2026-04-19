@@ -36,5 +36,15 @@
   "TH_SAKUYA-BLOOD_PIPE.flavor": "The murderer so needs to prove his existence through some special tactile sensation.",
   "TH_SAKUYA-BLOOD_COAT.title": "Scarlet Coat",
   "TH_SAKUYA-BLOOD_COAT.description": "Whenever you lose HP, gain {Energy:energyIcons()} and draw [blue]1[/blue] extra card next turn.",
-  "TH_SAKUYA-BLOOD_COAT.flavor": "Driven by an obsession ordinary people cannot hold, you have become a monster ordinary people cannot become. You no longer feel any fear at the sight of human misery."
+  "TH_SAKUYA-BLOOD_COAT.flavor": "Driven by an obsession ordinary people cannot hold, you have become a monster ordinary people cannot become. You no longer feel any fear at the sight of human misery.",
+  "TH_SAKUYA-DOG_SAKUYA.title": "Dog Sakuya",
+  "TH_SAKUYA-DOG_SAKUYA.description": "Upon pickup, add a [gold]Little Knife[/gold] to your [gold]Deck[/gold].",
+  "TH_SAKUYA-DOG_SAKUYA.flavor": "Standard three-head-tall, with large dog ears on both sides and a big ahoge on the head that sometimes twitches like an antenna.",
+  "TH_SAKUYA-REVERSE_WATCH.title": "Reverse Watch",
+  "TH_SAKUYA-REVERSE_WATCH.description": "[gold]Right-click this relic[/gold] to reset your state to the state at the start of this turn. Cooldown of [blue]1[/blue] turn. (HP, energy, draw/discard/hand, and status effects).",
+  "TH_SAKUYA-REVERSE_WATCH.flavor": "Retrace your last few steps.",
+  "TH_SAKUYA-SCARLET_CAKE.title": "Scarlet Devil Cake",
+  "TH_SAKUYA-SCARLET_CAKE.description": "Whenever you lose HP, gain that much [gold]Strength[/gold].\nAt the start of your turn, heal [blue]2[/blue] HP.",
+  "TH_SAKUYA-SCARLET_CAKE.flavor": "A dreamy sweet made in the image of the Scarlet Devil's hat. When cut, a sweet sauce like blood flows out."
+  
 }

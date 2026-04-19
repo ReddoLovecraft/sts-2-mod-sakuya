@@ -36,5 +36,14 @@
   "TH_SAKUYA-BLOOD_PIPE.flavor": "杀人鬼是如此的需要通过某些特殊的手感来证明自己的存在。",
   "TH_SAKUYA-BLOOD_COAT.title": "血红大衣",
   "TH_SAKUYA-BLOOD_COAT.description": "每当你失去生命时，下回合获得{Energy:energyIcons()}并额外抽[blue]1[/blue]张牌。",
-  "TH_SAKUYA-BLOOD_COAT.flavor": "处于某种常人所不能执的执念，你成为了某些常人所不能成为的怪物。你不再对人类的惨状产生丝毫的恐惧。"
+  "TH_SAKUYA-BLOOD_COAT.flavor": "处于某种常人所不能执的执念，你成为了某些常人所不能成为的怪物。你不再对人类的惨状产生丝毫的恐惧。",
+  "TH_SAKUYA-DOG_SAKUYA.title": "犬咲夜",
+  "TH_SAKUYA-DOG_SAKUYA.description": "拾起时，将一张[gold]小小飞刀[/gold]加入你的[gold]牌组[/gold]。",
+  "TH_SAKUYA-DOG_SAKUYA.flavor": "个头是标准三头身，两边长着大大的狗耳，头上有根大大的呆毛，有时像天线一样抖动。",
+  "TH_SAKUYA-REVERSE_WATCH.title": "倒走表",
+  "TH_SAKUYA-REVERSE_WATCH.description": "[gold]右键该遗物[/gold]时，将你的状态重置回本回合开始时的状态，冷却[blue]1[/blue]个回合。(血量，能量，抽/弃/手牌以及状态栏)",
+  "TH_SAKUYA-REVERSE_WATCH.flavor": "重走你的最后几步。",
+  "TH_SAKUYA-SCARLET_CAKE.title": "猩红恶魔蛋糕",
+  "TH_SAKUYA-SCARLET_CAKE.description": "每当你失去生命时，获得等量的[gold]力量[/gold]。\n在你的回合开始时，回复[blue]2[/blue]点生命。",
+  "TH_SAKUYA-SCARLET_CAKE.flavor": "以猩红恶魔头上的帽子为原型制作的梦幻甜食，切开会有仿佛血液一般的甜美酱料流出。"
 }
