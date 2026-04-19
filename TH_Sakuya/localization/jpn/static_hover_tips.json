@@ -1,0 +1,10 @@
+{
+	"TIME_STOP.title": "時止め",
+	"TIME_STOP.description": "[gold]時止め[/gold]中、全てのダメージは[gold]時止め[/gold]終了後まで遅延して計算される。\nカードを使用する時、エネルギーを消費せず、代わりに[blue]6[/blue]倍の[purple]TSP[/purple]を消費する。",
+	"TSP.title": "TSP",
+	"TSP.description": "[gold]時止め[/gold]中に使用する代替エネルギー。枯渇すると即座に[gold]時止め[/gold]から退出し、[blue]1[/blue]層の[gold]弱体[/gold]と[gold]脆弱[/gold]を得る。\n[gold]時止め[/gold]に入っていないターン開始時、[purple]TSP[/purple]の[blue]12.5%[/blue]が自然回復する。\n各戦闘で初めて[gold]時止め[/gold]に入る時、その時点で攻撃意図を持つ全ての敵の意図値の合計の[purple]TSP[/purple]を得る。",
+	"KNIFE.title": "ナイフ",
+	"KNIFE.description": "ナイフ1本につき投擲時に[blue]1[/blue]ダメージ（[gold]筋力[/gold]で増加可能）。",
+	"STOP.title": "時滞",
+	"STOP.description": "[gold]時止め[/gold]中に発動する。"
+}

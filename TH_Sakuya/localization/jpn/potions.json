@@ -1,0 +1,12 @@
+{
+  "TH_SAKUYA-RED_TEA.description": "[blue]6[/blue]ライフを回復する。\n{Energy:energyIcons()}を得て[blue]1[/blue]枚引く。",
+  "TH_SAKUYA-RED_TEA.title": "紅魔館紅茶",
+  "TH_SAKUYA-RED_KING_POTION.description": "[gold]時止め[/gold]終了カウントを[blue]10[/blue]増やす。",
+  "TH_SAKUYA-RED_KING_POTION.title": "緋紅の王",
+  "TH_SAKUYA-MANA_POTION.description": "24の[purple]TSP[/purple]を回復する。",
+  "TH_SAKUYA-MANA_POTION.title": "魔法薬",
+  "TH_SAKUYA-ALL_POTION.description": "[blue]2[/blue]の人工物を得る。",
+  "TH_SAKUYA-ALL_POTION.title": "万能薬",
+  "TH_SAKUYA-BLOOD_BAR_POTION.description": "{Energy:energyIcons()}を得る。\n最大ライフの[green]{HealPercent}%[/green]を回復する。\n[red]紅い呪い[/red]を1枚[gold]デッキ[/gold]に追加する。既に[red]紅い呪い[/red]がある場合、代わりにその段階を[blue]1[/blue]下げる。",
+  "TH_SAKUYA-BLOOD_BAR_POTION.title": "血酒"
+}

@@ -1,0 +1,17 @@
+{
+  "TH_SAKUYA-SAKUYA_CHARACTER.aromaPrinciple": "[sine][red]……レミリアお嬢様……[/red][/sine]",
+  "TH_SAKUYA-SAKUYA_CHARACTER.banter.alive.endTurnPing": "私でも時間の流れを早くすることはできないのか……",
+  "TH_SAKUYA-SAKUYA_CHARACTER.banter.dead.endTurnPing": "……",
+  "TH_SAKUYA-SAKUYA_CHARACTER.cardsModifierDescription": "咲夜のカードが報酬やショップに出現するようになる。",
+  "TH_SAKUYA-SAKUYA_CHARACTER.cardsModifierTitle": "咲夜カード",
+  "TH_SAKUYA-SAKUYA_CHARACTER.description": "パーフェクトでクールなメイド長。\n時間を操り、ナイフで敵を倒す。",
+  "TH_SAKUYA-SAKUYA_CHARACTER.eventDeathPrevention": "……いや、まだ死ねない……お嬢様が待っている……",
+  "TH_SAKUYA-SAKUYA_CHARACTER.goldMonologue": "[sine]このお金……紅魔館の再建に使えるかも……[/sine]",
+  "TH_SAKUYA-SAKUYA_CHARACTER.possessiveAdjective": "彼女の",
+  "TH_SAKUYA-SAKUYA_CHARACTER.pronounObject": "彼女",
+  "TH_SAKUYA-SAKUYA_CHARACTER.pronounPossessive": "彼女の",
+  "TH_SAKUYA-SAKUYA_CHARACTER.pronounSubject": "彼女",
+  "TH_SAKUYA-SAKUYA_CHARACTER.title": "十六夜咲夜",
+  "TH_SAKUYA-SAKUYA_CHARACTER.titleObject": "咲夜",
+  "TH_SAKUYA-SAKUYA_CHARACTER.unlockText": "[pink]{Prerequisite}[/pink]で1ゲームプレイしてこのキャラクターをアンロック。"
+}
