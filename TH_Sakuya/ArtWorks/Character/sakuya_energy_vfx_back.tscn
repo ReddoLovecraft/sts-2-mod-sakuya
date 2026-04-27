@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://sakuya_energy_vfx_back"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://src/Core/Nodes/Vfx/Utilities/NParticlesContainer.cs" id="1_container"]
 [ext_resource type="PackedScene" uid="uid://cq0m6037hbecy" path="res://scenes/vfx/common/vfx_common_glow.tscn" id="2_glow"]

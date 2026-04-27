@@ -1,13 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://nfsiu6q4l27k"]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" uid="uid://ddkxh8n4favqj" path="res://TH_Sakuya/ArtWorks/VFX/NSakuyaEnergyCounter.cs" id="1_k51tk"]
+[ext_resource type="Script" path="res://TH_Sakuya/ArtWorks/VFX/NSakuyaEnergyCounter.cs" id="1_k51tk"]
 [ext_resource type="FontVariation" path="res://themes/kreon_bold_shared.tres" id="2_base_font"]
-[ext_resource type="Texture2D" uid="uid://ciu65bkqhqfss" path="res://TH_Sakuya/ArtWorks/VFX/SakuyaEnergy.png" id="3_fxdbh"]
-[ext_resource type="Texture2D" uid="uid://ds3eowq6m77sd" path="res://TH_Sakuya/ArtWorks/VFX/SakuyaEnergy2.png" id="4_2dcmw"]
+[ext_resource type="Texture2D" path="res://TH_Sakuya/ArtWorks/VFX/SakuyaEnergy.png" id="3_fxdbh"]
+[ext_resource type="Texture2D" path="res://TH_Sakuya/ArtWorks/VFX/SakuyaEnergy2.png" id="4_2dcmw"]
 [ext_resource type="Script" path="res://addons/mega_text/MegaLabel.cs" id="mega_label_script"]
-[ext_resource type="Texture2D" uid="uid://by5geqmdh11ui" path="res://TH_Sakuya/ArtWorks/VFX/SakuyaEnergy3.png" id="5_2dcmw"]
-[ext_resource type="PackedScene" uid="uid://sakuya_energy_vfx_back" path="res://TH_Sakuya/ArtWorks/Character/sakuya_energy_vfx_back.tscn" id="6_vfx_back"]
-[ext_resource type="PackedScene" uid="uid://sakuya_energy_vfx_front" path="res://TH_Sakuya/ArtWorks/Character/sakuya_energy_vfx_front.tscn" id="7_vfx_front"]
+[ext_resource type="Texture2D" path="res://TH_Sakuya/ArtWorks/VFX/SakuyaEnergy3.png" id="5_2dcmw"]
+[ext_resource type="PackedScene" path="res://TH_Sakuya/ArtWorks/Character/sakuya_energy_vfx_back.tscn" id="6_vfx_back"]
+[ext_resource type="PackedScene" path="res://TH_Sakuya/ArtWorks/Character/sakuya_energy_vfx_front.tscn" id="7_vfx_front"]
 
 [sub_resource type="FontVariation" id="FontVariation_kreon_bold_shared_font"]
 base_font = ExtResource("2_base_font")

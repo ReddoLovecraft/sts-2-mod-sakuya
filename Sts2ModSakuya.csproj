@@ -36,6 +36,8 @@
 		<MakeDir Directories="$(Sts2Dir)\mods\" />
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(Sts2Dir)\mods\$(MSBuildProjectName)\" />
 		<Copy SourceFiles="TH_Sakuya.json" DestinationFolder="$(Sts2Dir)/mods/$(MSBuildProjectName)/" />
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\TH_Sakuya.pck" DestinationFiles="$(Sts2Dir)\mods\$(MSBuildProjectName)\TH_Sakuya.pck" Condition="Exists('$(MSBuildProjectDirectory)\TH_Sakuya.pck')" />
+		<Copy SourceFiles="$(MSBuildProjectDirectory)\$(AssemblyName).pck" DestinationFiles="$(Sts2Dir)\mods\$(MSBuildProjectName)\TH_Sakuya.pck" Condition="Exists('$(MSBuildProjectDirectory)\$(AssemblyName).pck')" />
 	</Target>
 
 	<Target Name="GodotExportAssemblyAlias" AfterTargets="Publish" Condition="'$(AssemblyName)' != '$(MSBuildProjectName)'">

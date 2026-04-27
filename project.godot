@@ -20,7 +20,7 @@ settings/stdout/verbose_stdout=true
 
 [dotnet]
 
-project/assembly_name="Sts2ModSakuya"
+project/assembly_name="TH_Sakuya"
 
 [editor]
 

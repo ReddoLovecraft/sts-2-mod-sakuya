@@ -52,7 +52,7 @@ public sealed class BloodCake : CustomEventModel
 	private async Task Collect()
 	{
 		Player owner = base.Owner!;
-		List<CardModel> strikes = PileType.Deck.GetPile(owner).Cards.Where((CardModel c) => c is Strike).ToList();
+		List<CardModel> strikes = PileType.Deck.GetPile(owner).Cards.Where((CardModel c) => c.Rarity==CardRarity.Basic&&c.Tags.Contains(CardTag.Strike)).ToList();
 		if (strikes.Count > 0)
 		{
 			await CardPileCmd.RemoveFromDeck(strikes);
