@@ -123,5 +123,6 @@ namespace TH_Sakuya.Scripts.Main
 		{
 			cnt+=amount;
 		}
+		
 	}
 }

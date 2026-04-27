@@ -23,7 +23,7 @@ public sealed class PrivateVisionPower : SakuyaPowerModel
 		{
 			return playCount;
 		}
-		return playCount + 1;
+		return playCount + Amount;
 	}
 	public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
         {
