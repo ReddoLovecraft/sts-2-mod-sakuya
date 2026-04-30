@@ -77,7 +77,7 @@
 	"TH_SAKUYA-LATE_PREPARE.title": "“早”有准备",
 	"TH_SAKUYA-LATE_PREPARE.description": "消耗至多{Cards:diff()}点[purple]TSP[/purple]，然后生成等量柄[gold]飞刀[/gold]。",
 	"TH_SAKUYA-INFINITE.title": "无限",
-	"TH_SAKUYA-INFINITE.description": "每当你消耗6点[purple]TSP[/purple]，就获得{Energy:energyIcons()}。\n每当你消耗{Energy:energyIcons()}，就获得6点[purple]TSP[/purple]。",
+	"TH_SAKUYA-INFINITE.description": "每当你消耗6点[purple]TSP[/purple]，就获得{Energy:energyIcons()}并抽1张牌。\n每当你消耗{Energy:energyIcons()}，就获得6点[purple]TSP[/purple]并抽1张牌。",
 	"TH_SAKUYA-TELEKINESIS.title": "隔空取物",
 	"TH_SAKUYA-TELEKINESIS.description": "从[gold]弃牌堆[/gold]中选择一张牌放回手中，并将其在本回合内首次打出前的耗能置为0点。",
 	"TH_SAKUYA-TELEKINESIS.selectionScreenPrompt": "选择一张牌加入你的手牌",

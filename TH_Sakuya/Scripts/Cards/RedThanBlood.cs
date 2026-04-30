@@ -12,10 +12,11 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchoulib.Scrpits.Main;
 using TH_Sakuya.Scripts.Main;
+using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace TH_Sakuya.Scrpits.Cards
 {
-[Pool(typeof(SakuyaCardPool))]
+[Pool(typeof(EventCardPool))]
 public sealed class RedThanBlood : SakuyaCardModel
 {
 	protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6,ValueProp.Move)];

@@ -1,5 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -92,6 +93,7 @@ public static class TimeStopPointSystem
 			return;
 		}
 		TaskHelper.RunSafely(Gain(player, energySpent * PointsPerEnergy));
+		CardPileCmd.Draw(new ThrowingPlayerChoiceContext(),player);
 	}
 
 	public static async Task<bool> TrySpend(Player player, int amount)
@@ -114,6 +116,7 @@ public static class TimeStopPointSystem
 		{
              int cnt = amount / PointsPerEnergy;
 			 PlayerCmd.GainEnergy(cnt, player);
+			 await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(),player);
 		}
         //能力逻辑👆
 		await Set(player, Math.Max(current - amount, 0));

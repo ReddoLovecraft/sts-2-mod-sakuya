@@ -27,7 +27,7 @@ public class PerfectMaid: SakuyaCardModel
   });
      protected override IEnumerable<DynamicVar> CanonicalVars =>
      [
-		new BlockVar(10m, ValueProp.Move),
+		new BlockVar(8m, ValueProp.Move),
         new CardsVar(8)
      ];
 	public PerfectMaid() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
