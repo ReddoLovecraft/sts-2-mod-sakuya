@@ -58,7 +58,7 @@ public sealed class KnifePower : SakuyaPowerModel
 		 if(Owner.HasPower<KnifeMagicianPower>())
 		 {
 			Owner.GetPower<KnifeMagicianPower>().Trigger();
-			TimeStopPointSystem.Gain(Owner.Player, cnt);
+			await TimeStopPointSystem.Gain(Owner.Player, cnt);
 		 }	
 		 if(Owner.HasPower<KnifeProtectPower>())
 		 {

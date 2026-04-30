@@ -14,6 +14,16 @@ using TH_Sakuya.Scripts.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.GameActions;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.MonsterMoves.Intents;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Runs;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using TH_Sakuya.Scrpits.Cards;
+using TH_Sakuya.Scripts.GameActions;
 
 namespace TH_Sakuya.Scripts.Patches;
 
@@ -28,7 +38,7 @@ public static class TimeStopPatches
 	[HarmonyPrefix]
 	private static bool PlayerCombatState_HasEnoughResourcesFor_Prefix(PlayerCombatState __instance, CardModel card, ref UnplayableReason reason, ref bool __result)
 	{
-		Player player = _pcsPlayerRef(__instance);
+		Player player = card?.Owner ?? _pcsPlayerRef(__instance);
 		if (!TimeStopPointSystem.IsEnabledFor(player) || player.Creature == null || !player.Creature.HasPower<TimeStopPower>())
 		{
 			return true;
@@ -94,7 +104,10 @@ public static class TimeStopPatches
 			tspToSpend = energyCost * TimeStopPointSystem.PointsPerEnergy;
 		}
 
-		TimeStopPointSystem.TrySpend(card.Owner, tspToSpend);
+		if (!await TimeStopPointSystem.TrySpend(card.Owner, tspToSpend))
+		{
+			return (0, 0);
+		}
 		if (TimeStopPointSystem.Get(card.Owner) == 0 && card.Owner.Creature.HasPower<TimeStopPower>())
 		{
 			SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/tsprunout.wav"));
@@ -187,5 +200,99 @@ public static class TimeStopPatches
 			return;
 		}
 		TimeStopPointSystem.OnEnergySpent(player, amount);
+	}
+
+	[HarmonyPatch(typeof(NCombatCardPile), "OnPress")]
+	[HarmonyFinalizer]
+	private static Exception? NCombatCardPile_OnPress_Finalizer(Exception __exception)
+	{
+		if (__exception is ObjectDisposedException)
+		{
+			return null;
+		}
+		return __exception;
+	}
+
+	[HarmonyPatch(typeof(NCombatCardPile), "OnRelease")]
+	[HarmonyFinalizer]
+	private static Exception? NCombatCardPile_OnRelease_Finalizer(Exception __exception)
+	{
+		if (__exception is ObjectDisposedException)
+		{
+			return null;
+		}
+		return __exception;
+	}
+
+	[HarmonyPatch(typeof(ActionQueueSynchronizer), nameof(ActionQueueSynchronizer.RequestEnqueue))]
+	[HarmonyPostfix]
+	private static void ActionQueueSynchronizer_RequestEnqueue_Postfix(ActionQueueSynchronizer __instance, GameAction action)
+	{
+		if (action == null || action is SilverSpaceGrantTspAction)
+		{
+			return;
+		}
+
+		if (!RunManager.Instance.IsInProgress
+			|| string.Equals(RunManager.Instance.NetService.Type.ToString(), "Singleplayer", StringComparison.OrdinalIgnoreCase))
+		{
+			return;
+		}
+
+		CardModel? card = TryGetCardFromPlayCardAction(action);
+		if (card is not SilverSpace)
+		{
+			return;
+		}
+
+		Player? owner = card.Owner;
+		if (owner?.Creature == null || !owner.Creature.HasPower<TimeStopPower>())
+		{
+			return;
+		}
+
+		int tsp = CalculateEnemyAttackIntentTotal(owner);
+		__instance.RequestEnqueue(new SilverSpaceGrantTspAction(owner, tsp));
+	}
+
+	private static CardModel? TryGetCardFromPlayCardAction(GameAction action)
+	{
+		Type t = action.GetType();
+		if (!t.Name.Contains("PlayCardAction", StringComparison.Ordinal))
+		{
+			return null;
+		}
+
+		PropertyInfo? prop = t.GetProperty("Card", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+		if (prop == null || prop.GetIndexParameters().Length != 0)
+		{
+			return null;
+		}
+
+		return prop.GetValue(action) as CardModel;
+	}
+
+	private static int CalculateEnemyAttackIntentTotal(Player player)
+	{
+		if (player?.Creature?.CombatState == null)
+		{
+			return 0;
+		}
+
+		var combatState = player.Creature.CombatState;
+		List<Creature> targets = [player.Creature];
+		int sum = 0;
+		foreach (Creature enemy in combatState.HittableEnemies)
+		{
+			if (enemy == null || !enemy.IsAlive || enemy.Monster == null)
+			{
+				continue;
+			}
+			foreach (AttackIntent intent in enemy.Monster.NextMove.Intents.OfType<AttackIntent>())
+			{
+				sum += intent.GetTotalDamage(targets, enemy);
+			}
+		}
+		return sum;
 	}
 }

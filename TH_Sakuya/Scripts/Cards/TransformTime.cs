@@ -38,7 +38,7 @@ public class TransformTime: SakuyaCardModel
 	{
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 		await PlayerCmd.LoseEnergy(this.DynamicVars.Energy.IntValue,Owner);
-		TimeStopPointSystem.Gain(this.Owner,this.DynamicVars.Cards.IntValue);
+		await TimeStopPointSystem.Gain(this.Owner,this.DynamicVars.Cards.IntValue);
 	}
 	protected override void OnUpgrade()
 	{

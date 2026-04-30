@@ -43,7 +43,7 @@ public class ClockPart: SakuyaCardModel
 	{
 		if(Owner.Character is SakuyaCharacter)
 		{
-			TimeStopPointSystem.Gain(Owner, base.DynamicVars["Power"].IntValue);
+			await TimeStopPointSystem.Gain(Owner, base.DynamicVars["Power"].IntValue);
 		}
 		await CardPileCmd.Draw(choiceContext,base.DynamicVars.Cards.IntValue,Owner);
 		if(Owner.Creature.HasPower<TimeStopPower>())

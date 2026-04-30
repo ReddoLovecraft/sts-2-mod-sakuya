@@ -48,7 +48,7 @@ public class TimeDelay: SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-	   if(TimeStopPointSystem.TrySpend(Owner,this.DynamicVars.Cards.IntValue))
+	   if(await TimeStopPointSystem.TrySpend(Owner,this.DynamicVars.Cards.IntValue))
 	   { 
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 		if(Owner.GetRelic<SakuyaWatch>()!=null)

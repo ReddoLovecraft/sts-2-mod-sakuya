@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -115,4 +116,25 @@ public sealed class TimeStopPower : SakuyaPowerModel
 		}
 		TimeStopScreenOverlay.Restore();
 	}
+}
+
+public sealed class TimeStopPointPower : SakuyaPowerModel
+{
+	public override PowerType Type => PowerType.Buff;
+	public override PowerStackType StackType => PowerStackType.Counter;
+	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
+	protected override bool IsVisibleInternal => false;
+
+	public override bool ShouldClearBlock(Creature creature)
+	{
+		return true;
+	}
+}
+
+public sealed class TimeStopFirstGrantPower : SakuyaPowerModel
+{
+	public override PowerType Type => PowerType.Buff;
+	public override PowerStackType StackType => PowerStackType.Single;
+	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
+	protected override bool IsVisibleInternal => false;
 }

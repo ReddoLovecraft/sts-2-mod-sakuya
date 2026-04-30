@@ -16,6 +16,10 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchoulib.Scrpits.Main;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MegaCrit.Sts2.Core.Runs;
 using TH_Sakuya.Scripts.Main;
 using TH_Sakuya.Scripts.Powers;
 
@@ -39,12 +43,13 @@ public class SilverSpace: SakuyaCardModel
 	}
 	  private static int CalculateEnemyAttackIntentTotal(Player player)
         {
-            var combatState = player.Creature.CombatState;
-            if (combatState == null)
+            if (player?.Creature?.CombatState == null)
             {
                 return 0;
             }
-            var targets = combatState.PlayerCreatures;
+            var combatState = player.Creature.CombatState;
+            List<Creature> targets = [player.Creature];
+
             int sum = 0;
             foreach (Creature enemy in combatState.HittableEnemies)
             {
@@ -66,11 +71,17 @@ public class SilverSpace: SakuyaCardModel
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
 		if(!Owner.Creature.HasPower<TimeStopPower>())
-	    TimeStopPointSystem.Gain(Owner,attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage));
+	    await TimeStopPointSystem.Gain(Owner,attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage));
 		else
 		{
-           int cnt=CalculateEnemyAttackIntentTotal(Owner);
-		   TimeStopPointSystem.Gain(Owner,cnt);
+			if (RunManager.Instance.IsInProgress
+				&& !string.Equals(RunManager.Instance.NetService.Type.ToString(), "Singleplayer", StringComparison.OrdinalIgnoreCase))
+			{
+				return;
+			}
+
+			int cnt=CalculateEnemyAttackIntentTotal(Owner);
+			await TimeStopPointSystem.Gain(Owner,cnt);
 		}
 	
 	}

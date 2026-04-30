@@ -42,7 +42,7 @@ public class LatePrepare: SakuyaCardModel
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
 	     int cost=Math.Min(this.DynamicVars.Cards.IntValue,TimeStopPointSystem.Get(Owner));
-		 if(TimeStopPointSystem.TrySpend(Owner,cost))
+		 if(await TimeStopPointSystem.TrySpend(Owner,cost))
 		 {
 			await PowerCmd.Apply<KnifePower>(Owner.Creature, cost,Owner.Creature,this);
 		 }

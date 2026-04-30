@@ -30,6 +30,6 @@ public sealed class ManaPotion : CustomPotionModel
     public override string? CustomPackedOutlinePath => "res://TH_Sakuya/ArtWorks/Potions/Outlines/MANA_POTION.png"; 
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
-       TimeStopPointSystem.Gain(Owner,24);
+       await TimeStopPointSystem.Gain(Owner,24);
     }
 }

@@ -1,7 +1,8 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Helpers;
 using System;
-using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using TH_Sakuya.Scripts.Powers;
 
 namespace TH_Sakuya.Scripts.Main;
@@ -11,74 +12,73 @@ public static class TimeStopPointSystem
 	public const int DefaultMax = 160;
 	public const int PointsPerEnergy = 6;
 
-	private static readonly ConditionalWeakTable<Player, State> _states = new ConditionalWeakTable<Player, State>();
-
 	public static bool IsEnabledFor(Player player)
 	{
-		return player?.Character is SakuyaCharacter;
+		if (player == null)
+		{
+			return false;
+		}
+		if (player.Character is SakuyaCharacter)
+		{
+			return true;
+		}
+		return player.GetRelic<SakuyaWatch>() != null || player.GetRelic<SakuyaLunaDial>() != null;
 	}
 
 	public static int Get(Player player)
 	{
-		return _states.TryGetValue(player, out State? state) ? state.Current : 0;
+		return player?.Creature?.GetPowerAmount<TimeStopPointPower>() ?? 0;
 	}
 
 	public static int GetMax(Player player)
 	{
-		int result=_states.TryGetValue(player, out State? state) ? state.Max : DefaultMax;
-		if(player.Creature.HasPower<ChangeMaxTimePower>())
+		if (player == null)
 		{
-			result+=player.Creature.GetPowerAmount<ChangeMaxTimePower>();
+			return DefaultMax;
 		}
-		return result;
+		int result = DefaultMax;
+		if (player.Creature != null && player.Creature.HasPower<ChangeMaxTimePower>())
+		{
+			result += player.Creature.GetPowerAmount<ChangeMaxTimePower>();
+		}
+		return Math.Max(0, result);
 	}
 
-	public static void InitForCombat(Player player, int? max = null, int initial = 0)
+	public static async Task InitForCombat(Player player, int? max = null, int initial = 0)
 	{
-		if (player == null)
+		if (player?.Creature == null)
 		{
 			return;
 		}
-		State state = _states.GetOrCreateValue(player);
-		int old = state.Current;
-		state.Max = Math.Max(0, max ?? DefaultMax);
-		state.Current = Math.Clamp(initial, 0, state.Max);
-		if (old != state.Current)
-		{
-			state.Changed?.Invoke(old, state.Current);
-		}
+		await Set(player, initial);
+		await PowerCmd.Remove<TimeStopFirstGrantPower>(player.Creature);
 	}
 
-	public static void Gain(Player player, int amount)
+	public static async Task Gain(Player player, int amount)
 	{
 		if (player == null || amount <= 0)
 		{
 			return;
 		}
-		State state = _states.GetOrCreateValue(player);
-		int old = state.Current;
-        //能力逻辑
-		if(state.Current+amount>state.Max&&player.Creature.HasPower<MoonNightPower>())
-        {
-            SakuyaWatch sw=player.GetRelic<SakuyaWatch>();
-            if(sw!=null)
+		int current = Get(player);
+		int max = GetMax(player);
+		if (player.Creature != null && current + amount > max && player.Creature.HasPower<MoonNightPower>())
+		{
+			SakuyaWatch? sw = player.GetRelic<SakuyaWatch>();
+			if (sw != null)
 			{
 				player.Creature.GetPower<MoonNightPower>().Trigger();
 				sw.ResetCounter();
 			}
-			SakuyaLunaDial dial=player.GetRelic<SakuyaLunaDial>();
-			if(dial!=null)
+			SakuyaLunaDial? dial = player.GetRelic<SakuyaLunaDial>();
+			if (dial != null)
 			{
 				player.Creature.GetPower<MoonNightPower>().Trigger();
 				dial.ResetCounter();
 			}
-        }
-        //重置怀表计数
-		state.Current = Math.Clamp(state.Current + amount, 0, state.Max);
-		if (old != state.Current)
-		{
-			state.Changed?.Invoke(old, state.Current);
 		}
+		int next = Math.Clamp(current + amount, 0, max);
+		await Set(player, next);
 	}
 
 	public static void OnEnergySpent(Player player, int energySpent)
@@ -91,10 +91,10 @@ public static class TimeStopPointSystem
 		{
 			return;
 		}
-		Gain(player, energySpent * PointsPerEnergy);
+		TaskHelper.RunSafely(Gain(player, energySpent * PointsPerEnergy));
 	}
 
-	public static bool TrySpend(Player player, int amount)
+	public static async Task<bool> TrySpend(Player player, int amount)
 	{
 		if (player == null)
 		{
@@ -104,8 +104,8 @@ public static class TimeStopPointSystem
 		{
 			return true;
 		}
-		State state = _states.GetOrCreateValue(player);
-		if (state.Current < amount)
+		int current = Get(player);
+		if (current < amount)
 		{
 			return false;
 		}
@@ -116,41 +116,32 @@ public static class TimeStopPointSystem
 			 PlayerCmd.GainEnergy(cnt, player);
 		}
         //能力逻辑👆
-		int old = state.Current;
-		state.Current = Math.Max(state.Current - amount, 0);
-		if (old != state.Current)
-		{
-			state.Changed?.Invoke(old, state.Current);
-		}
+		await Set(player, Math.Max(current - amount, 0));
 		return true;
 	}
 
-	public static void Subscribe(Player player, Action<int, int> onChanged)
+	private static async Task Set(Player player, int value)
 	{
-		if (player == null || onChanged == null)
+		if (player?.Creature == null)
 		{
 			return;
 		}
-		State state = _states.GetOrCreateValue(player);
-		state.Changed += onChanged;
-	}
-
-	public static void Unsubscribe(Player player, Action<int, int> onChanged)
-	{
-		if (player == null || onChanged == null)
+		int max = GetMax(player);
+		int clamped = Math.Clamp(value, 0, max);
+		TimeStopPointPower? power = player.Creature.GetPower<TimeStopPointPower>();
+		if (power == null)
 		{
+			if (clamped <= 0)
+			{
+				return;
+			}
+			await PowerCmd.Apply<TimeStopPointPower>(player.Creature, clamped, player.Creature, cardSource: null, silent: true);
 			return;
 		}
-		if (_states.TryGetValue(player, out State? state))
+		int delta = clamped - power.Amount;
+		if (delta != 0)
 		{
-			state.Changed -= onChanged;
+			await PowerCmd.ModifyAmount(power, delta, applier: player.Creature, cardSource: null);
 		}
-	}
-
-	private sealed class State
-	{
-		public int Current;
-		public int Max = DefaultMax;
-		public Action<int, int>? Changed;
 	}
 }

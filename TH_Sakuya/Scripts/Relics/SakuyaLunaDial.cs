@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using Patchouib.Scrpits.Main;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TH_Sakuya.Scripts.Main;
@@ -31,7 +32,6 @@ using TH_Sakuya.Scripts.GameActions;
         private const int MaxTimeStopCount = 12;
         private int _timeStopCount = MaxTimeStopCount;
         private bool _shouldRefillOnNextTurnStart;
-        private bool _hasGrantedFirstTimeStopTspThisCombat;
 
         public override RelicRarity Rarity => RelicRarity.Ancient;
         public override string PackedIconPath => $"res://TH_Sakuya/ArtWorks/Relics/{Id.Entry}.png";
@@ -46,7 +46,7 @@ using TH_Sakuya.Scripts.GameActions;
               Tools.GetStaticKeyword("TimeStop"),
               Tools.GetStaticKeyword("Tsp")
          });
-        public override Task BeforeCombatStart()
+        public override async Task BeforeCombatStart()
         {
             ResetCounter();
             SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/entercombat.wav"));
@@ -55,9 +55,7 @@ using TH_Sakuya.Scripts.GameActions;
                 sc.ResetUsedKnivesCount();
             }
             _shouldRefillOnNextTurnStart = false;
-            _hasGrantedFirstTimeStopTspThisCombat = false;
-            TimeStopPointSystem.InitForCombat(Owner);
-            return Task.CompletedTask;
+            await TimeStopPointSystem.InitForCombat(Owner);
         }
         public override async Task AfterEnergyResetLate(Player player)
 	{
@@ -69,7 +67,6 @@ using TH_Sakuya.Scripts.GameActions;
         public override Task AfterCombatEnd(MegaCrit.Sts2.Core.Rooms.CombatRoom room)
         {
             _shouldRefillOnNextTurnStart = false;
-            _hasGrantedFirstTimeStopTspThisCombat = false;
             return Task.CompletedTask;
         }
 
@@ -89,7 +86,7 @@ using TH_Sakuya.Scripts.GameActions;
             if (!player.Creature.HasPower<TimeStopPower>())
             {
                 int max = TimeStopPointSystem.GetMax(player);
-                TimeStopPointSystem.Gain(player, max / 8);
+                await TimeStopPointSystem.Gain(player, max / 8);
             }
 
             if (player.Creature.HasPower<TimeStopPower>())
@@ -111,7 +108,7 @@ using TH_Sakuya.Scripts.GameActions;
             await DecrementCounterAndMaybeEndTurn(Owner);
         }
 
-        internal async Task ToggleTimeStop(Player player)
+        internal async Task ToggleTimeStop(Player player, int? firstGrantTspOverride = null)
         {
             if (player.Creature.HasPower<CannotTimeStopPower>())
             {
@@ -151,7 +148,7 @@ using TH_Sakuya.Scripts.GameActions;
             }
             else
             {
-                TryGrantFirstTimeStopTsp(player);
+                await TryGrantFirstTimeStopTsp(player, firstGrantTspOverride);
                 SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/entertimestop.wav"));
                 await CreatureCmd.TriggerAnim(base.Owner.Creature, "TimeStop", base.Owner.Character.CastAnimDelay);
                 await PowerCmd.Apply<TimeStopPower>(player.Creature, 1m, player.Creature, cardSource: null, silent: true);
@@ -197,34 +194,33 @@ using TH_Sakuya.Scripts.GameActions;
                     
                 }
         }
-        private void TryGrantFirstTimeStopTsp(Player player)
+        private async Task TryGrantFirstTimeStopTsp(Player player, int? firstGrantTspOverride)
         {
-            if (_hasGrantedFirstTimeStopTspThisCombat)
+            if (player?.Creature == null || player.Creature.CombatState == null)
             {
                 return;
             }
-            if (player.Creature.CombatState == null)
+            if (player.Creature.HasPower<TimeStopFirstGrantPower>())
             {
                 return;
             }
-            int gained = CalculateEnemyAttackIntentTotal(player);
-            if (gained <= 0)
+            int gained = firstGrantTspOverride ?? CalculateEnemyAttackIntentTotal(player);
+            if (gained > 0)
             {
-                _hasGrantedFirstTimeStopTspThisCombat = true;
-                return;
+                await TimeStopPointSystem.Gain(player, gained);
             }
-            TimeStopPointSystem.Gain(player, gained);
-            _hasGrantedFirstTimeStopTspThisCombat = true;
+            await PowerCmd.Apply<TimeStopFirstGrantPower>(player.Creature, 1m, player.Creature, cardSource: null, silent: true);
         }
 
         private static int CalculateEnemyAttackIntentTotal(Player player)
         {
-            var combatState = player.Creature.CombatState;
-            if (combatState == null)
+            if (player?.Creature?.CombatState == null)
             {
                 return 0;
             }
-            var targets = combatState.PlayerCreatures;
+            var combatState = player.Creature.CombatState;
+            List<Creature> targets = [player.Creature];
+
             int sum = 0;
             foreach (Creature enemy in combatState.HittableEnemies)
             {
@@ -281,7 +277,7 @@ using TH_Sakuya.Scripts.GameActions;
             if(player.Creature.HasPower<MoonNightPower>())
             {
                 int cnt=player.Creature.GetPowerAmount<MoonNightPower>();
-                TimeStopPointSystem.Gain(player, cnt);
+                await TimeStopPointSystem.Gain(player, cnt);
             }
             //以上
             if (_timeStopCount == 0)
@@ -308,13 +304,13 @@ using TH_Sakuya.Scripts.GameActions;
             }
             if (context is GameActionPlayerChoiceContext)
             {
-                return ToggleTimeStop(Owner);
+                return ToggleTimeStop(Owner, null);
             }
             if (RunManager.Instance.IsInProgress && RunManager.Instance.NetService.Type != NetGameType.Singleplayer)
             {
                 RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(new TimeStopToggleAction(Owner));
                 return Task.CompletedTask;
             }
-            return ToggleTimeStop(Owner);
+            return ToggleTimeStop(Owner, null);
         }
 }

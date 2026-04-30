@@ -33,7 +33,7 @@ public sealed class TimeMagicianPower : SakuyaPowerModel
             }
 			for(int i=0;i<base.DynamicVars.Energy.IntValue;i++)
 			{
-				if(TimeStopPointSystem.TrySpend(player,6))
+				if(await TimeStopPointSystem.TrySpend(player,6))
 				{
 					await PlayerCmd.GainEnergy(1,player);
 				}
@@ -46,6 +46,5 @@ public sealed class TimeMagicianPower : SakuyaPowerModel
 
 }
 }
-
 
 
