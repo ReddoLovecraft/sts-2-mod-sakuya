@@ -1,4 +1,5 @@
 using HarmonyLib;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
@@ -24,6 +25,9 @@ public static class CardPileOrderPatches
 	private static readonly FieldRef<NSimpleCardSelectScreen, HashSet<CardModel>> _simpleSelectedCardsRef =
 		FieldRefAccess<NSimpleCardSelectScreen, HashSet<CardModel>>("_selectedCards");
 
+	private static readonly FieldRef<NSimpleCardSelectScreen, CardSelectorPrefs> _simplePrefsRef =
+		FieldRefAccess<NSimpleCardSelectScreen, CardSelectorPrefs>("_prefs");
+
 	private static readonly FieldRef<NCardPileScreen, NCardGrid> _pileScreenGridRef =
 		FieldRefAccess<NCardPileScreen, NCardGrid>("_grid");
 
@@ -31,19 +35,21 @@ public static class CardPileOrderPatches
 		FieldRefAccess<NCardGridSelectionScreen, TaskCompletionSource<IEnumerable<CardModel>>>("_completionSource");
 
 	[HarmonyPatch(typeof(NSimpleCardSelectScreen), "OnCardClicked")]
-	[HarmonyPostfix]
-	private static void NSimpleCardSelectScreen_OnCardClicked_Postfix(NSimpleCardSelectScreen __instance, CardModel card)
+	[HarmonyPrefix]
+	private static void NSimpleCardSelectScreen_OnCardClicked_Prefix(NSimpleCardSelectScreen __instance, CardModel card)
 	{
 		HashSet<CardModel> selected = _simpleSelectedCardsRef(__instance);
+		CardSelectorPrefs prefs = _simplePrefsRef(__instance);
 		List<CardModel> order = _selectionOrder.GetOrCreateValue(__instance);
 		if (selected.Contains(card))
 		{
 			order.Remove(card);
-			order.Add(card);
+			return;
 		}
-		else
+		if (selected.Count < prefs.MaxSelect)
 		{
 			order.Remove(card);
+			order.Add(card);
 		}
 	}
 
@@ -52,10 +58,17 @@ public static class CardPileOrderPatches
 	private static bool NSimpleCardSelectScreen_CompleteSelection_Prefix(NSimpleCardSelectScreen __instance)
 	{
 		HashSet<CardModel> selected = _simpleSelectedCardsRef(__instance);
-		IEnumerable<CardModel> result;
+		List<CardModel> result;
 		if (_selectionOrder.TryGetValue(__instance, out List<CardModel>? order))
 		{
 			result = order.Where(selected.Contains).ToList();
+			foreach (CardModel c in selected)
+			{
+				if (!result.Contains(c))
+				{
+					result.Add(c);
+				}
+			}
 			_selectionOrder.Remove(__instance);
 		}
 		else
@@ -90,4 +103,3 @@ public static class CardPileOrderPatches
 		return false;
 	}
 }
-
