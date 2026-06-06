@@ -74,17 +74,7 @@ public sealed class KnifePower : SakuyaPowerModel
 			int ct=pmp.Amount;
 			await PowerCmd.Apply<PowerMovementStrengthPower>(Owner,ct,Owner,null);
 		 }
-		if(Owner.HasPower<GradualMovementPower>())
-		 {
-		  GradualMovementPower gmp=	Owner.GetPower<GradualMovementPower>();
-		  gmp.Trigger();
-		  int ct=gmp.Amount;
-		  await CardPileCmd.Draw(choiceContext,ct,Owner.Player);
-		 }
-         
-
-
-		 DamageVar damageVar=null;
+			 DamageVar damageVar=null;
 		   decimal dmg=CalculateDamage(damage);
 		   if(dmg<=0)
 		   {
@@ -170,6 +160,13 @@ public sealed class KnifePower : SakuyaPowerModel
 					break;
 			}
 		   }
+		   if(Owner.HasPower<GradualMovementPower>())
+		 {
+		  GradualMovementPower gmp=	Owner.GetPower<GradualMovementPower>();
+		  gmp.Trigger();
+		  int ct=gmp.Amount;
+		  await CardPileCmd.Draw(choiceContext,ct,Owner.Player);
+		 }
 		   await PowerCmd.ModifyAmount(this,-cnt,null,null);
 		}
 	

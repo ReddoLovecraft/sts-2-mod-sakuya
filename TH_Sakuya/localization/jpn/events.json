@@ -73,7 +73,7 @@
 
   "TH_SAKUYA-STRANGE_INVITE.title": "奇妙な宴会の招待",
   "TH_SAKUYA-STRANGE_INVITE.loss": "紅い庭園で死亡...",
-  "TH_SAKUYA-STRANGE_INVITE.pages.INITIAL.description": "道端で[jitter]奇妙な“人”[/jitter]に出会った。背は低く、トレイを手にしていて少し滑稽だが、尖った鼻と[jitter][red]血のにじんだ紅い牙[/red][/jitter]は少し恐ろしい。\n\nそれはあなたに黄ばんだ招待状を差し出し、無理やりにどこかへ案内した。わけもわからず、あなたは抵抗せずについて行き、見知らぬ場所へ——[jitter]廃れた[thinky_dots]...[/thinky_dots]庭園。[/jitter]\n\n庭園をよく見ると、あちこちに古びた石卓や石椅子があり、その上には明らかに怪しげな贅沢な食べ物が並べられ、隅には何箱ものワインが積まれていた。\n\n気づくと、あなたの周りには[jitter]奇形な生物[/jitter]が集まっていた。彼らは人間のように見えるが、[jitter][green]虫のような特徴[/green][/jitter]を持ち、[jitter]不気味[/jitter]だった。\n\n「[fade_in][red][jitter]食事[thinky_dots]...[/thinky_dots]食事[thinky_dots]...[/thinky_dots][/jitter][/red][/fade_in]」彼らの声が耳元で響き、あなたを急かしているようだった。",
+  "TH_SAKUYA-STRANGE_INVITE.pages.INITIAL.description": "道端で[jitter]奇妙な“人”[/jitter]に出会った。背は低く、トレイを手にしていて少し滑稽だが、尖った鼻と[jitter][red]血のにじんだ紅い牙[/red][/jitter]は少し恐ろしい。\n\nそれはあなたに黄ばんだ招待状を差し出し、無理やりにどこかへ案内した。わけもわからず、あなたは抵抗せずについて行き、見知らぬ場所へ——[jitter]廃れた[thinky_dots]...[/thinky_dots]庭園。[/jitter]\n\n気づくと、あなたの周りには[jitter]奇形な生物[/jitter]が集まっていた。彼らは人間のように見えるが、[jitter][green]虫のような特徴[/green][/jitter]を持ち、[jitter]不気味[/jitter]だった。\n\n「[fade_in][red][jitter]食事[thinky_dots]...[/thinky_dots]食事[thinky_dots]...[/thinky_dots][/jitter][/red][/fade_in]」彼らの声が耳元で響き、あなたを急かしているようだった。",
   "TH_SAKUYA-STRANGE_INVITE.pages.INITIAL.options.REFUSE.title": "食事を拒否",
   "TH_SAKUYA-STRANGE_INVITE.pages.INITIAL.options.REFUSE.description": "[red]15[/red]ライフを失う。",
   "TH_SAKUYA-STRANGE_INVITE.pages.REFUSE.description": "明らかに怪しいものを無暗に食べるのは賢明な判断ではない。あなたは食事を拒否した。\n\n[jitter]それらの怪しい生物は次々と襲いかかってきた[/jitter]。\n\n大きな代価を払って、何とか彼らを振り切った。",

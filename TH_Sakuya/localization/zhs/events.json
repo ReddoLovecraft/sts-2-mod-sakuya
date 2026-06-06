@@ -74,7 +74,7 @@
   
   "TH_SAKUYA-STRANGE_INVITE.title":"奇怪的宴会邀请",
   "TH_SAKUYA-STRANGE_INVITE.loss":"死于猩红庭院...",
-  "TH_SAKUYA-STRANGE_INVITE.pages.INITIAL.description": "你在路上碰到了一个[jitter]奇怪的“人”[/jitter]，它身材矮小，手拖餐盘，看起来有些滑稽，但尖锐的鼻子和[jitter][red]渗着血的猩红獠牙[/red][/jitter]看起来又有些恐怖。\n\n它向你递出了一封泛黄的邀请函，并不由分说地领着你向着不知何方走去。鬼使神差的，你并没有挣脱，跟着它去到了一个未知的地方——[jitter]一座破败的[thinky_dots]...[/thinky_dots]庭院。[/jitter]\n\n你仔细观察着这庭院，到处都是破败的石桌、石凳，上面摆放着各类看起来就很可疑的奢华食品，在一旁的角落还堆着许多箱红酒。\n\n就在你回过神来时，才发现在你的周围不知何时聚起了一堆[jitter]奇形怪状的生物[/jitter]，他们看起来像是人类，却有着[jitter][green]虫类[/green][/jitter]的特征，令人[jitter]不寒而栗[/jitter]。\n\n“[fade_in][red][jitter]进食[thinky_dots]...[/thinky_dots]进食[thinky_dots]...[/thinky_dots][/jitter][/red][/fade_in]”它们的声音在你耳边响起，似乎是在催促着你一般。",
+  "TH_SAKUYA-STRANGE_INVITE.pages.INITIAL.description": "你在路上碰到了一个[jitter]奇怪的“人”[/jitter]，它身材矮小，手拖餐盘，看起来有些滑稽，但尖锐的鼻子和[jitter][red]渗着血的猩红獠牙[/red][/jitter]看起来又有些恐怖。\n\n它向你递出了一封泛黄的邀请函，并不由分说地领着你向着不知何方走去。鬼使神差的，你并没有挣脱，跟着它去到了一个未知的地方——[jitter]一座破败的[thinky_dots]...[/thinky_dots]庭院。[/jitter]\n\n就在你回过神来时，才发现在你的周围不知何时聚起了一堆[jitter]奇形怪状的生物[/jitter]，他们看起来像是人类，却有着[jitter][green]虫类[/green][/jitter]的特征，令人[jitter]不寒而栗[/jitter]。\n\n“[fade_in][red][jitter]进食[thinky_dots]...[/thinky_dots]进食[thinky_dots]...[/thinky_dots][/jitter][/red][/fade_in]”它们的声音在你耳边响起，似乎是在催促着你一般。",
   "TH_SAKUYA-STRANGE_INVITE.pages.INITIAL.options.REFUSE.title": "拒绝进食",
   "TH_SAKUYA-STRANGE_INVITE.pages.INITIAL.options.REFUSE.description": "失去[red]15[/red]点生命。",
   "TH_SAKUYA-STRANGE_INVITE.pages.REFUSE.description": "盲目吃下这种明显就很可疑的东西并不是一个明智的决定，你选择了拒绝进食。\n\n[jitter]那些怪异的生物随后便前仆后继地向你袭来[/jitter]。\n\n在付出了不小的代价后，你终于摆脱了它们。",

@@ -33,7 +33,7 @@ public sealed class DangerousTricksterPower : SakuyaPowerModel
 				KnifePower kp= await PowerCmd.Apply<KnifePower>(Owner, Amount*cnt, null, null);
 				if(kp!=null)
 				{	
-				await kp.ThrowKnife(choiceContext,null,KnifeType.RandomEnemy,1,Amount*cnt);
+					await kp.ThrowKnife(choiceContext,null,KnifeType.RandomEnemy,1,Amount*cnt);
 				}
 			}
 		}
