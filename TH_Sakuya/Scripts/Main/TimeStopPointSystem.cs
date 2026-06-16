@@ -1,7 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
 using System;
 using System.Threading.Tasks;
 using TH_Sakuya.Scripts.Powers;
@@ -82,7 +81,7 @@ public static class TimeStopPointSystem
 		await Set(player, next);
 	}
 
-	public static void OnEnergySpent(Player player, int energySpent)
+	public static async Task OnEnergySpent(Player player, int energySpent)
 	{
 		if (player == null || energySpent <= 0)
 		{
@@ -92,8 +91,8 @@ public static class TimeStopPointSystem
 		{
 			return;
 		}
-		TaskHelper.RunSafely(Gain(player, energySpent * PointsPerEnergy));
-		CardPileCmd.Draw(new ThrowingPlayerChoiceContext(),player);
+		await Gain(player, energySpent * PointsPerEnergy);
+		await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(), player);
 	}
 
 	public static async Task<bool> TrySpend(Player player, int amount)
@@ -115,8 +114,8 @@ public static class TimeStopPointSystem
         if (player.Creature != null && player.Creature.HasPower<InfinitePower>())
 		{
              int cnt = amount / PointsPerEnergy;
-			 PlayerCmd.GainEnergy(cnt, player);
-			 await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(),player);
+			 await PlayerCmd.GainEnergy(cnt, player);
+			 await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(), player);
 		}
         //能力逻辑👆
 		await Set(player, Math.Max(current - amount, 0));

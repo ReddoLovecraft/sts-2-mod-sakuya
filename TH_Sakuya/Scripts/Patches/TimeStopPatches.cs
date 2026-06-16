@@ -199,7 +199,7 @@ public static class TimeStopPatches
 		{
 			return;
 		}
-		TimeStopPointSystem.OnEnergySpent(player, amount);
+		RunManager.Instance?.ActionQueueSynchronizer?.RequestEnqueue(new InfiniteEnergySpentAction(player, amount));
 	}
 
 	[HarmonyPatch(typeof(NCombatCardPile), "OnPress")]

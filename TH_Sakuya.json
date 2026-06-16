@@ -3,7 +3,7 @@
   "name": "十六夜咲夜",
   "author": "Reddo",
   "description": "增加了一个来自东方Project的新角色，十六夜咲夜。\n拥有107张角色卡牌(含多人游戏卡牌与先古牌)，7件新事件、15件新遗物和5瓶新药水。",
-  "version": "1.8",
+  "version": "1.9",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [ "BaseLib", "Patchoulib" ],
