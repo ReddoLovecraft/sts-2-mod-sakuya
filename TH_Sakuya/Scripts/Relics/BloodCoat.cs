@@ -51,8 +51,8 @@ public class BloodCoat : CustomRelicModel
 			return;
 		}
         Flash();
-		await PowerCmd.Apply<EnergyNextTurnPower>(Owner.Creature,1,null,null);
-		await PowerCmd.Apply<DrawCardsNextTurnPower>(Owner.Creature,1,null,null);
+		await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, Owner.Creature, 1, null, null);
+		await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, Owner.Creature, 1, null, null);
         await Task.CompletedTask;
 	}
 }

@@ -36,17 +36,17 @@ public class ImaginaryVerticalTime: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-		 await PowerCmd.Apply<BlockNextTurnPower>(Owner.Creature,Owner.Creature.Block,Owner.Creature, this);
+		 await PowerCmd.Apply<BlockNextTurnPower>(choiceContext, Owner.Creature,Owner.Creature.Block,Owner.Creature, this);
 		 int cnt=0;
 		 if(Owner.GetRelic<SakuyaWatch>()!=null)
 		 {
 			 cnt=Owner.GetRelic<SakuyaWatch>().DisplayAmount;
-			await PowerCmd.Apply<ImaginaryVerticalTimePower>(Owner.Creature, cnt,Owner.Creature,this);
+			await PowerCmd.Apply<ImaginaryVerticalTimePower>(choiceContext, Owner.Creature, cnt,Owner.Creature,this);
 		 }
 		 else if(Owner.GetRelic<SakuyaLunaDial>()!=null)
 		 {
 			 cnt=Owner.GetRelic<SakuyaLunaDial>().DisplayAmount;
-			await PowerCmd.Apply<ImaginaryVerticalTimePower>(Owner.Creature, cnt,Owner.Creature,this);
+			await PowerCmd.Apply<ImaginaryVerticalTimePower>(choiceContext, Owner.Creature, cnt,Owner.Creature,this);
 		 }
 	}
 	protected override void OnUpgrade()

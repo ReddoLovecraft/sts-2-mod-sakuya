@@ -17,7 +17,7 @@ public sealed class TimeWarpPower : SakuyaPowerModel
 	public override PowerType Type => PowerType.Buff;
 	public override PowerStackType StackType => PowerStackType.Counter;
 	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
-	public override bool IsInstanced => true;
+	public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/TWP232.png";
     public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/TWP264.png";
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [ HoverTipFactory.FromPower<StrengthPower>(),
@@ -39,10 +39,10 @@ public sealed class TimeWarpPower : SakuyaPowerModel
 				}
 				else
 				{
-					await PowerCmd.ModifyAmount(this,11,null,null);
+					await PowerCmd.ModifyAmount(context, this, 11, null, null);
 					Flash();
-					await PowerCmd.Apply<StrengthPower>(Owner,this.DynamicVars.Cards.BaseValue,null,null);
-					await PowerCmd.Apply<DexterityPower>(Owner,this.DynamicVars.Cards.BaseValue,null,null);
+					await PowerCmd.Apply<StrengthPower>(context, Owner, this.DynamicVars.Cards.BaseValue, null, null);
+					await PowerCmd.Apply<DexterityPower>(context, Owner, this.DynamicVars.Cards.BaseValue, null, null);
 				}
 			   }
 			}

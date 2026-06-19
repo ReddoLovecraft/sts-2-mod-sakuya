@@ -38,7 +38,7 @@ public class Infinite: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		 await PowerCmd.Apply<InfinitePower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<InfinitePower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

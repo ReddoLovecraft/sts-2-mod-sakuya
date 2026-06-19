@@ -41,9 +41,9 @@ public class Ban: SakuyaCardModel
 			{
 				if(mos.Monster.IntendsToAttack)
 				{
- 					await PowerCmd.Apply<StrengthPower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+ 					await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 				}
-				await PowerCmd.Apply<PowerDirectionPower>(mos, 2,Owner.Creature,this);
+				await PowerCmd.Apply<PowerDirectionPower>(choiceContext, mos, 2,Owner.Creature,this);
 			}
 		}
 		

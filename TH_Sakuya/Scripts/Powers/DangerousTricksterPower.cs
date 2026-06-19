@@ -2,6 +2,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -30,7 +31,7 @@ public sealed class DangerousTricksterPower : SakuyaPowerModel
 			if(cnt>0)
 			{
 				Flash();
-				KnifePower kp= await PowerCmd.Apply<KnifePower>(Owner, Amount*cnt, null, null);
+				KnifePower kp= await PowerCmd.Apply<KnifePower>(choiceContext, Owner, Amount*cnt, null, null);
 				if(kp!=null)
 				{	
 					await kp.ThrowKnife(choiceContext,null,KnifeType.RandomEnemy,1,Amount*cnt);
@@ -39,7 +40,7 @@ public sealed class DangerousTricksterPower : SakuyaPowerModel
 		}
 	}
 
-	public override Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	public override Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (side != base.Owner.Side)
 		{
@@ -68,7 +69,7 @@ public sealed class DangerousTricksterPower : SakuyaPowerModel
 		return Task.CompletedTask;
 	}
 
-	public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (side != base.Owner.Side)
 		{
@@ -88,7 +89,7 @@ public sealed class DangerousTricksterPower : SakuyaPowerModel
 		if (total > 0)
 		{
 			Flash();
-			KnifePower kp= await PowerCmd.Apply<KnifePower>(Owner, total, null, null);
+			KnifePower kp= await PowerCmd.Apply<KnifePower>(choiceContext, Owner, total, null, null);
 			if(kp!=null)
 			{
 				await kp.ThrowKnife(choiceContext,null,KnifeType.RandomEnemy,1,total);
@@ -104,4 +105,3 @@ public sealed class DangerousTricksterPower : SakuyaPowerModel
 
 }
 }
-

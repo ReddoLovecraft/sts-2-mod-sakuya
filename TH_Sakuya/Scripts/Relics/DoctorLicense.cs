@@ -54,7 +54,7 @@ public class DoctorLicense : CustomRelicModel
 		}
         Flash();
 		VfxCmd.PlayOnCreatureCenter(target, "vfx/vfx_bloody_impact");
-		await PowerCmd.Apply<DemisePower>( target, 1,null,null);
+		await PowerCmd.Apply<DemisePower>(choiceContext, target, 1, null, null);
         await Task.CompletedTask;
 	}
 }

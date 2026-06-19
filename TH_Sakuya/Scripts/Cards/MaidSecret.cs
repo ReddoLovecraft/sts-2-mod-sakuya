@@ -33,7 +33,7 @@ public class MaidSecret: SakuyaCardModel
 	   	list.Add(Owner.Creature.CombatState.CreateCard<MaidSecretD>(Owner.Creature.Player));
 	  	list.Add(Owner.Creature.CombatState.CreateCard<MaidSecretK>(Owner.Creature.Player));
 	   	list.Add(Owner.Creature.CombatState.CreateCard<MaidSecretM>(Owner.Creature.Player));
-	  	await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, addedByPlayer: true);
+	  	await CardPileCmd.AddGeneratedCardsToCombat(list, PileType.Hand, base.Owner);
 	  }
 	  else
 	  {
@@ -46,7 +46,7 @@ public class MaidSecret: SakuyaCardModel
 		CardModel cardModel = await CardSelectCmd.FromChooseACardScreen(choiceContext, cards, base.Owner, canSkip: false);
 		if (cardModel != null)
 		{
-		 	await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, addedByPlayer: true);
+		 	await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, base.Owner);
 		}
 	  }
 	}

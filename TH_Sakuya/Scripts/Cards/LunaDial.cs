@@ -32,7 +32,7 @@ public class LunaDial: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		 await PowerCmd.Apply<LunaDialPower>(Owner.Creature, 1,Owner.Creature,this);
+		 await PowerCmd.Apply<LunaDialPower>(choiceContext, Owner.Creature, 1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

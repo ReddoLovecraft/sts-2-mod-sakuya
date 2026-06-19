@@ -38,7 +38,7 @@ public class OverMind: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		 await PowerCmd.Apply<OverMindPower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<OverMindPower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

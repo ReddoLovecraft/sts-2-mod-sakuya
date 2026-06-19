@@ -29,8 +29,8 @@ public class MaidSecretM: SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-	     await PowerCmd.Apply<VulnerablePower>( cardPlay.Target, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
-	     await PowerCmd.Apply<WeakPower>( cardPlay.Target, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
+	     await PowerCmd.Apply<VulnerablePower>(choiceContext,  cardPlay.Target, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
+	     await PowerCmd.Apply<WeakPower>(choiceContext,  cardPlay.Target, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
 		 await CardPileCmd.Draw(choiceContext,base.DynamicVars.Cards.IntValue,Owner.Creature.Player);
 	}
 	protected override void OnUpgrade()

@@ -116,7 +116,7 @@ public sealed class OverMindPower : SakuyaPowerModel
 		if(cnt>2)
 		{
 		CardModel card = base.CombatState.CreateCard<SelfDisolve>(Owner.Player);
-        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, addedByPlayer: true,CardPilePosition.Random));
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, creator: Owner.Player,CardPilePosition.Random));
 		}
 		
 	}

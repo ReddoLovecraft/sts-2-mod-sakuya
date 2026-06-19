@@ -43,8 +43,8 @@ public class WeaponCatch: SakuyaCardModel
         {
 			if(mos.IsAlive)
 			{
-    			await PowerCmd.Apply<StrengthPower>(mos, -this.DynamicVars.Cards.IntValue,Owner.Creature,this);
-				await PowerCmd.Apply<StrengthPower>(Owner.Creature, this.DynamicVars.Cards.IntValue,Owner.Creature,this);
+    			await PowerCmd.Apply<StrengthPower>(choiceContext, mos, -this.DynamicVars.Cards.IntValue,Owner.Creature,this);
+				await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, this.DynamicVars.Cards.IntValue,Owner.Creature,this);
 			}
         }
 	}

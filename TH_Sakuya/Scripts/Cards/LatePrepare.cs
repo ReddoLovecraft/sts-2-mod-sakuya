@@ -44,7 +44,7 @@ public class LatePrepare: SakuyaCardModel
 	     int cost=Math.Min(this.DynamicVars.Cards.IntValue,TimeStopPointSystem.Get(Owner));
 		 if(await TimeStopPointSystem.TrySpend(Owner,cost))
 		 {
-			await PowerCmd.Apply<KnifePower>(Owner.Creature, cost,Owner.Creature,this);
+			await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature, cost,Owner.Creature,this);
 		 }
 	}
 	protected override void OnUpgrade()

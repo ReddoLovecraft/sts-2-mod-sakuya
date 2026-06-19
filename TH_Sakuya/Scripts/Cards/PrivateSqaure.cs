@@ -41,7 +41,7 @@ public class PrivateSquare: SakuyaCardModel
         {
             if(mos.IsAlive)
 			{
-				 await PowerCmd.Apply<SlowPower>(mos, 1,Owner.Creature,this);
+				 await PowerCmd.Apply<SlowPower>(choiceContext, mos, 1,Owner.Creature,this);
 			}
         }
 		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);

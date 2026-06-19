@@ -36,7 +36,7 @@ public class RepeatKillDoll: SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await using AttackContext attackContext = await AttackCommand.CreateContextAsync(base.CombatState, this);
+		await using AttackContext attackContext = await AttackCommand.CreateContextAsync(base.CombatState, choiceContext, this);
 		int attackCount = 1;
 		while (attackCount > 0)
 		{
@@ -45,7 +45,7 @@ public class RepeatKillDoll: SakuyaCardModel
 		{
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
-			await PowerCmd.Apply<KnifePower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+			await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 			IEnumerable<DamageResult> enumerable = await CreatureCmd.Damage(choiceContext, base.CombatState.HittableEnemies, base.DynamicVars.Damage, base.Owner.Creature, this);
 			attackContext.AddHit(enumerable);
 			attackCount += enumerable.Count((DamageResult r) => r.WasTargetKilled);

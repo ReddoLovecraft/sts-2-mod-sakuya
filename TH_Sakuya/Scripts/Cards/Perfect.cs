@@ -38,8 +38,8 @@ public class Perfect: SakuyaCardModel
 		{
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
-		 await PowerCmd.Apply<KnifePower>(Owner.Creature, this.DynamicVars.Cards.IntValue,Owner.Creature,this);
-		 await PowerCmd.Apply<PerfectPower>(Owner.Creature, 1,Owner.Creature,this);
+		 await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature, this.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<PerfectPower>(choiceContext, Owner.Creature, 1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

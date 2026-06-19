@@ -38,7 +38,7 @@ public class VanishingEverything: SakuyaCardModel
 	{
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 		await CardCmd.Discard(choiceContext, PileType.Hand.GetPile(base.Owner).Cards);
-		await PowerCmd.Apply<IntangiblePower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		await PowerCmd.Apply<IntangiblePower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

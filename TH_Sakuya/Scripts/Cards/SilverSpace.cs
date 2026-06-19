@@ -71,7 +71,7 @@ public class SilverSpace: SakuyaCardModel
 			.WithHitFx("vfx/vfx_attack_slash")
 			.Execute(choiceContext);
 		if(!Owner.Creature.HasPower<TimeStopPower>())
-	    await TimeStopPointSystem.Gain(Owner,attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage));
+	    await TimeStopPointSystem.Gain(Owner,attackCommand.Results.SelectMany(static r => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage));
 		else
 		{
 			if (RunManager.Instance.IsInProgress

@@ -35,7 +35,7 @@ public class SakuyaClock: SakuyaCardModel
 		{
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "TimeStop", base.Owner.Character.CastAnimDelay);
 		}
-		 await PowerCmd.Apply<TH_Sakuya.Scripts.Powers.SakuyaClock>(cardPlay.Target, 1,Owner.Creature,this);
+		 await PowerCmd.Apply<TH_Sakuya.Scripts.Powers.SakuyaClock>(choiceContext, cardPlay.Target, 1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

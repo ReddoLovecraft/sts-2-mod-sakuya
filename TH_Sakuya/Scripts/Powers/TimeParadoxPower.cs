@@ -26,7 +26,7 @@ public sealed class TimeParadoxPower : SakuyaPowerModel
 		if (dealer!=null&&dealer==Owner&&target.Side!=Owner.Side)
 		{
 			Flash();
-			await PowerCmd.ModifyAmount(this,amount,null,null);
+			await PowerCmd.ModifyAmount(choiceContext, this, amount, null, null);
 		}
 	}
 	 public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

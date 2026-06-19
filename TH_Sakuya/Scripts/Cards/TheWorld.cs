@@ -34,7 +34,7 @@ public class TheWorld: SakuyaCardModel
 	{
 		SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/world.wav"));
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		 await PowerCmd.Apply<TheWorldPower>(Owner.Creature, 1,Owner.Creature,this);
+		 await PowerCmd.Apply<TheWorldPower>(choiceContext, Owner.Creature, 1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

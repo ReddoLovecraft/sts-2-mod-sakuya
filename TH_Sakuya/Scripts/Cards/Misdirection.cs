@@ -37,7 +37,7 @@ public class Misdirection: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-		 await PowerCmd.Apply<WeakPower>(cardPlay.Target, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

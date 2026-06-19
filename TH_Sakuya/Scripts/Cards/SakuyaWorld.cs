@@ -82,7 +82,7 @@ public class SakuyaWorld: SakuyaCardModel
 				await dial.OnRightClick(choiceContext);
 			}
 		 }
-		 await PowerCmd.Apply<SakuyaWorldPower>(Owner.Creature, this.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<SakuyaWorldPower>(choiceContext, Owner.Creature, this.DynamicVars.Cards.IntValue,Owner.Creature,this);
 			
 	}
 	protected override void OnUpgrade()

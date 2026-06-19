@@ -44,7 +44,7 @@ public class KnifeMagic: SakuyaCardModel
 		{
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
-			await PowerCmd.Apply<KnifePower>(Owner.Creature,cnt,Owner.Creature,this);
+			await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature,cnt,Owner.Creature,this);
 		}
 	}
 	protected override void OnUpgrade()

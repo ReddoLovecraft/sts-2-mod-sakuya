@@ -34,7 +34,7 @@ public class ParallelTimeline: SakuyaCardModel
 	{
 		AttackCommand atkCmd = await DamageCmd.Attack(DynamicVars.Damage.BaseValue) .FromCard(this) .Targeting(cardPlay.Target).Execute(choiceContext);
 		if(cardPlay.Target.IsAlive&&cardPlay.Target.IsHittable)
-		await PowerCmd.Apply<DemisePower>(cardPlay.Target,atkCmd.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage),Owner.Creature,this);
+		await PowerCmd.Apply<DemisePower>(choiceContext, cardPlay.Target,atkCmd.Results.SelectMany(static r => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage),Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

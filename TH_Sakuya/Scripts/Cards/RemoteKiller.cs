@@ -38,10 +38,10 @@ public class RemoteKiller: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await DamageCmd.Attack(DynamicVars.Damage.BaseValue) .FromCard(this) .Targeting(cardPlay.Target).Execute(choiceContext);
-		await PowerCmd.Apply<KnifePower>(Owner.Creature,this.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature,this.DynamicVars.Cards.IntValue,Owner.Creature,this);
 		CardModel card = CreateClone();
 		CardCmd.ApplyKeyword(card,CardKeyword.Ethereal);
-		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, addedByPlayer: true), 1.6f);
+		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, base.Owner), 1.6f);
 	}
 	protected override void OnUpgrade()
 	{

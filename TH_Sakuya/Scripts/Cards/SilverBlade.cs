@@ -42,7 +42,7 @@ public class SilverBlade: SakuyaCardModel
 			.Targeting(cardPlay.Target)
 			.WithHitVfxNode((Creature t) => NScratchVfx.Create(t, goingRight: true))
 			.Execute(choiceContext);
-		await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, base.DynamicVars["Power"].IntValue,base.Owner.Creature,this);
+		await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Power"].IntValue,base.Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

@@ -31,7 +31,7 @@ public sealed class KnivesNextTurnPower : SakuyaPowerModel
             {
                 return;
             }
-            await PowerCmd.Apply<KnifePower>(Owner,this.DynamicVars.Cards.BaseValue,null,null);
+            await PowerCmd.Apply<KnifePower>(choiceContext, Owner, this.DynamicVars.Cards.BaseValue, null, null);
 			await PowerCmd.Decrement(this);
         }
 }

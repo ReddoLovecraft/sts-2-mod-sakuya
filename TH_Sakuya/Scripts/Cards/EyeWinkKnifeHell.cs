@@ -38,7 +38,7 @@ public class EyeWinkKnifeHell: SakuyaCardModel
 		{
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
-		 await PowerCmd.Apply<EyeWinkKnifeHellPower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<EyeWinkKnifeHellPower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

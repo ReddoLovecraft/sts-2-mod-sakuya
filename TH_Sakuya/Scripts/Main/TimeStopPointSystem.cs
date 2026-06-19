@@ -137,13 +137,13 @@ public static class TimeStopPointSystem
 			{
 				return;
 			}
-			await PowerCmd.Apply<TimeStopPointPower>(player.Creature, clamped, player.Creature, cardSource: null, silent: true);
+			await PowerCmd.Apply<TimeStopPointPower>(new ThrowingPlayerChoiceContext(), player.Creature, clamped, player.Creature, cardSource: null, silent: true);
 			return;
 		}
 		int delta = clamped - power.Amount;
 		if (delta != 0)
 		{
-			await PowerCmd.ModifyAmount(power, delta, applier: player.Creature, cardSource: null);
+			await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), power, delta, applier: player.Creature, cardSource: null);
 		}
 	}
 }

@@ -72,7 +72,7 @@ public sealed class KnifePower : SakuyaPowerModel
 		    PowerMovementPower pmp=Owner.GetPower<PowerMovementPower>();
 			pmp.Trigger();
 			int ct=pmp.Amount;
-			await PowerCmd.Apply<PowerMovementStrengthPower>(Owner,ct,Owner,null);
+			await PowerCmd.Apply<PowerMovementStrengthPower>(choiceContext, Owner, ct, Owner, null);
 		 }
 			 DamageVar damageVar=null;
 		   decimal dmg=CalculateDamage(damage);
@@ -167,7 +167,7 @@ public sealed class KnifePower : SakuyaPowerModel
 		  int ct=gmp.Amount;
 		  await CardPileCmd.Draw(choiceContext,ct,Owner.Player);
 		 }
-		   await PowerCmd.ModifyAmount(this,-cnt,null,null);
+		   await PowerCmd.ModifyAmount(choiceContext, this, -cnt, null, null);
 		}
 	
 }

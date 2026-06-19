@@ -29,6 +29,6 @@ public sealed class AllPotion : CustomPotionModel
     public override string? CustomPackedOutlinePath => "res://TH_Sakuya/ArtWorks/Potions/Outlines/ALL_POTION.png";
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
-       await PowerCmd.Apply<ArtifactPower>(Owner.Creature,2,Owner.Creature,null);
+       await PowerCmd.Apply<ArtifactPower>(choiceContext, Owner.Creature,2,Owner.Creature,null);
     }
 }

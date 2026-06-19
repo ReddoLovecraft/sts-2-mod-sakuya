@@ -25,7 +25,7 @@ public sealed class BarWomanPower : SakuyaPowerModel
             {
                 return;
             }
-			await PowerCmd.Apply<StrengthPower>(base.Owner,Amount,null,null);
+			await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner, Amount, null, null);
         }
 
 }

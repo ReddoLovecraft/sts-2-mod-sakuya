@@ -39,7 +39,7 @@ public class ProppingSilver: SakuyaCardModel
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
 		 await CardPileCmd.Draw(choiceContext,base.DynamicVars.Cards.IntValue,Owner);
-		 await PowerCmd.Apply<KnifePower>(Owner.Creature, 6,Owner.Creature,this);
+		 await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature, 6,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

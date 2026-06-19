@@ -15,11 +15,12 @@ namespace TH_Sakuya.Scrpits.Cards
 public class SelfDisolve : SakuyaCardModel
 {
 	public override int MaxUpgradeLevel => 0;
+    public override bool HasTurnEndInHandEffect => true;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Unpowered|ValueProp.Unblockable)];
 	public SelfDisolve() : base(1, CardType.Status, CardRarity.Status, TargetType.None)
 	{
 	}
-	public override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
+	protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
 	{
 		await CreatureCmd.Damage(choiceContext, base.Owner.Creature, base.DynamicVars.Damage.BaseValue, ValueProp.Unblockable | ValueProp.Unpowered, this);
 	}
@@ -30,7 +31,7 @@ public class SelfDisolve : SakuyaCardModel
 			if(Owner.Creature.HasPower<TimeStopPower>()&&!Owner.Creature.HasPower<SakuyaWorldPower>())
 			{
 				await PowerCmd.Remove<TimeStopPower>(Owner.Creature);
-				await PowerCmd.Apply<CannotTimeStopPower>(Owner.Creature,1,null,this);
+				await PowerCmd.Apply<CannotTimeStopPower>(choiceContext, Owner.Creature,1,null,this);
 			}
 		
 		}

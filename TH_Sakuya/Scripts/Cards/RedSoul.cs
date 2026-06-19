@@ -43,7 +43,7 @@ public class RedSoul: SakuyaCardModel
          .TargetingRandomOpponents(base.CombatState)
          .WithHitFx("vfx/vfx_attack_slash")
          .Execute(choiceContext);
-		await PowerCmd.Apply<BufferPower>(Owner.Creature,1,Owner.Creature,this);
+		await PowerCmd.Apply<BufferPower>(choiceContext, Owner.Creature,1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

@@ -33,8 +33,8 @@ public class Pad: SakuyaCardModel
 		.WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
 		.SpawningHitVfxOnEachCreature()
 		.Execute(choiceContext);
-		await PowerCmd.Apply<PadPower>(base.Owner.Creature, attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage),Owner.Creature,this);
-		await PowerCmd.Apply<VulnerablePower>(Owner.Creature,this.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		await PowerCmd.Apply<PadPower>(choiceContext, base.Owner.Creature, attackCommand.Results.SelectMany(static r => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage),Owner.Creature,this);
+		await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner.Creature,this.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

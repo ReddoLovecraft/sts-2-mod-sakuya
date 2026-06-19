@@ -40,8 +40,8 @@ public class ParallelBrane: SakuyaCardModel
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
 		await CreatureCmd.GainBlock(Owner.Creature,this.DynamicVars.Block,cardPlay);
-		 await PowerCmd.Apply<KnifePower>(Owner.Creature,4,Owner.Creature,this);
-		 (await PowerCmd.Apply<KnivesNextTurnPower>(Owner.Creature,this.DynamicVars.Cards.IntValue,Owner.Creature,this)).SetKnifeCount(4);
+		 await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature,4,Owner.Creature,this);
+		 (await PowerCmd.Apply<KnivesNextTurnPower>(choiceContext, Owner.Creature,this.DynamicVars.Cards.IntValue,Owner.Creature,this)).SetKnifeCount(4);
 	}
 	protected override void OnUpgrade()
 	{

@@ -34,7 +34,7 @@ public class NoMethod: SakuyaCardModel
 	{
 		if (card == this)
 		{
-			await PowerCmd.Apply<WeakPower>(Owner.Creature,2,null,null);
+			await PowerCmd.Apply<WeakPower>(choiceContext, Owner.Creature,2,null,null);
 		}
 	}
 	public NoMethod() : base(-1, CardType.Status, CardRarity.Status, TargetType.None)

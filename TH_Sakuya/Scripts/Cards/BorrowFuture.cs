@@ -35,7 +35,7 @@ public class BorrowFuture: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await PlayerCmd.GainEnergy(base.DynamicVars.Energy.IntValue,Owner.Creature.Player);
-		 await PowerCmd.Apply<BorrowFuturePower>(Owner.Creature, base.DynamicVars.Energy.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<BorrowFuturePower>(choiceContext, Owner.Creature, base.DynamicVars.Energy.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

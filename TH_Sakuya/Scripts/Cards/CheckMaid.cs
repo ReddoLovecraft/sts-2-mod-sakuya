@@ -39,7 +39,7 @@ public class CheckMaid: SakuyaCardModel
 		{
 			return;
 		}
-		CombatState combatState = creatures.First().CombatState;
+		ICombatState combatState = creatures.First().CombatState;
 		foreach (Creature creature in creatures)
 		{
 			int deadline=IsUpgraded?Owner.Creature.MaxHp:Owner.Creature.CurrentHp;

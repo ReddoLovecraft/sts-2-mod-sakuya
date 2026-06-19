@@ -28,7 +28,7 @@ public class MaidCloth : CustomRelicModel
     protected override string BigIconPath => $"res://TH_Sakuya/ArtWorks/Relics/{Id.Entry}.png";
 	
 	bool flag=true;
-       public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+       public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
         {
             if (player.Creature.CombatState.RoundNumber > 1)
             {

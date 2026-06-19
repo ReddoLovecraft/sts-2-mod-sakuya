@@ -39,7 +39,7 @@ public class JackRipper: SakuyaCardModel
 			.Targeting(cardPlay.Target)
 			.WithHitVfxNode((Creature t) => NScratchVfx.Create(t, goingRight: true))
 			.Execute(choiceContext);
-		await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

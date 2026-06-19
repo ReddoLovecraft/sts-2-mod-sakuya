@@ -44,7 +44,7 @@ public class InflationSquare: SakuyaCardModel
 			await CardCmd.Discard(choiceContext, item);
 			else
 			await CardCmd.Exhaust(choiceContext, item);
-			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, addedByPlayer: true), 0.8f);
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, base.Owner), 0.8f);
 		}
 	}
 	protected override void OnUpgrade()

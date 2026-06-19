@@ -31,7 +31,7 @@ public class ClockWork : CustomRelicModel
 	{
 		new EnergyVar(1)
 	});
-       public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+       public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
         {
             if (side != CombatSide.Player)
             {

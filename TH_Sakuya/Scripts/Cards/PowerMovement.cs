@@ -26,7 +26,7 @@ public class PowerMovement : SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await PowerCmd.Apply<PowerMovementPower>(Owner.Creature,base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		await PowerCmd.Apply<PowerMovementPower>(choiceContext, Owner.Creature,base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	
 	protected override void OnUpgrade()

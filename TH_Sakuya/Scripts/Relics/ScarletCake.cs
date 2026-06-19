@@ -32,7 +32,7 @@ public sealed class ScarletCake : CustomRelicModel
 			return;
 		}
 		Flash();
-		await PowerCmd.Apply<StrengthPower>(base.Owner.Creature, result.UnblockedDamage, base.Owner.Creature, cardSource);
+		await PowerCmd.Apply<StrengthPower>(choiceContext, base.Owner.Creature, result.UnblockedDamage, base.Owner.Creature, cardSource);
 	}
 
 	public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)

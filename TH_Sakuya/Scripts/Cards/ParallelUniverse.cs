@@ -35,7 +35,7 @@ public class ParallelUniverse: SakuyaCardModel
 		if (cardModel != null)
 		{
 			cardModel.SetToFreeThisTurn();
-			await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, addedByPlayer: true);
+			await CardPileCmd.AddGeneratedCardToCombat(cardModel, PileType.Hand, base.Owner);
 		}
 	}
 	protected override void OnUpgrade()

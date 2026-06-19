@@ -27,7 +27,7 @@ public class TimeParadox: SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		 await PowerCmd.Apply<TimeParadoxPower>(Owner.Creature, 1,Owner.Creature,this);
+		 await PowerCmd.Apply<TimeParadoxPower>(choiceContext, Owner.Creature, 1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

@@ -28,7 +28,7 @@ public class CanMaid: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		 await PowerCmd.Apply<CanMaidPower>(Owner.Creature, 1,Owner.Creature,this);
+		 await PowerCmd.Apply<CanMaidPower>(choiceContext, Owner.Creature, 1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

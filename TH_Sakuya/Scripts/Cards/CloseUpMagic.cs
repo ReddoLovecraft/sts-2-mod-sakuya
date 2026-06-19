@@ -42,7 +42,7 @@ public class CloseUpMagic: SakuyaCardModel
         {
           if(mos.IsAlive&&mos.Monster.IntendsToAttack)
 		  {
-			await PowerCmd.Apply<KnifePower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+			await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 		  }
         }
 	}

@@ -38,8 +38,8 @@ public class SilverAcute: SakuyaCardModel
 		{
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
-		 await PowerCmd.Apply<KnifePower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
-		 await PowerCmd.Apply<SilverAcutePower>(Owner.Creature, 1,Owner.Creature,this);
+		 await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<SilverAcutePower>(choiceContext, Owner.Creature, 1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

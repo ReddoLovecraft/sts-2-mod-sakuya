@@ -35,7 +35,7 @@ public class PowerDirection: SakuyaCardModel
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
 			.Execute(choiceContext);
-		 await PowerCmd.Apply<PowerDirectionPower>(cardPlay.Target, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<PowerDirectionPower>(choiceContext, cardPlay.Target, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

@@ -27,7 +27,7 @@ public class PrivateVision: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-	     await PowerCmd.Apply<PrivateVisionPower>(Owner.Creature, 1,Owner.Creature,this);
+	     await PowerCmd.Apply<PrivateVisionPower>(choiceContext, Owner.Creature, 1,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

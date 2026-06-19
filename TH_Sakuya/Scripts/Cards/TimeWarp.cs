@@ -36,7 +36,7 @@ public class TimeWarp: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		 (await PowerCmd.Apply<TimeWarpPower>(Owner.Creature, 12,Owner.Creature,this)).SetPowerCount(this.DynamicVars.Cards.IntValue);
+		 (await PowerCmd.Apply<TimeWarpPower>(choiceContext, Owner.Creature, 12,Owner.Creature,this)).SetPowerCount(this.DynamicVars.Cards.IntValue);
 	}
 	protected override void OnUpgrade()
 	{

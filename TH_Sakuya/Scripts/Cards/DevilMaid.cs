@@ -37,7 +37,7 @@ public class DevilMaid: SakuyaCardModel
 	{
 		VfxCmd.PlayOnCreatureCenter(base.Owner.Creature, "vfx/vfx_bloody_impact");
 		await CreatureCmd.Damage(choiceContext, base.Owner.Creature, base.DynamicVars.Cards.IntValue, ValueProp.Unblockable | ValueProp.Unpowered, this);
-		await PowerCmd.Apply<StrengthPower>(Owner.Creature, DynamicVars["Power"].IntValue,Owner.Creature,this);
+		await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars["Power"].IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

@@ -41,7 +41,7 @@ public class FullClean: SakuyaCardModel
 			.WithHitVfxNode(NGoopyImpactVfx.Create)
 			.Execute(choiceContext);
 		CardModel card = base.CombatState.CreateCard<NoMethod>(base.Owner);
-		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, addedByPlayer: true));
+		CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, base.Owner));
 		await Cmd.Wait(0.5f);
 	}
 	protected override void OnUpgrade()

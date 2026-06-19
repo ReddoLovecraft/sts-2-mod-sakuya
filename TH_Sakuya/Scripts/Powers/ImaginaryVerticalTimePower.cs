@@ -13,7 +13,7 @@ namespace TH_Sakuya.Scripts.Powers
 public sealed class ImaginaryVerticalTimePower : SakuyaPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
-	public override bool IsInstanced => true;
+	public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 	public override PowerStackType StackType => PowerStackType.Counter;
 	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
     public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/IVTP32.png";

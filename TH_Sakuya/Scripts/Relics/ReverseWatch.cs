@@ -152,7 +152,7 @@ public sealed class ReverseWatch : CustomRelicModel, IRightCilckable
 				continue;
 			}
 			PowerModel power = ModelDb.GetById<PowerModel>(id).ToMutable();
-			await PowerCmd.Apply(power, player.Creature, amount, null, null, silent: true);
+			await PowerCmd.Apply(new ThrowingPlayerChoiceContext(), power, player.Creature, amount, null, null, silent: true);
 		}
 
 		CardPile hand = PileType.Hand.GetPile(player);

@@ -36,7 +36,7 @@ public class SmartRobber: SakuyaCardModel
 		AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
 			.WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
 			.Execute(choiceContext);
-		await PlayerCmd.GainGold(attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage),Owner);
+		await PlayerCmd.GainGold(attackCommand.Results.SelectMany(static r => r).Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage),Owner);
 	}
 	protected override void OnUpgrade()
 	{

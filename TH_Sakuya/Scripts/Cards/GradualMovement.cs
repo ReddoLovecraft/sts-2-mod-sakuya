@@ -25,7 +25,7 @@ public class GradualMovement : SakuyaCardModel
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-		await PowerCmd.Apply<GradualMovementPower>(Owner.Creature,base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		await PowerCmd.Apply<GradualMovementPower>(choiceContext, Owner.Creature,base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

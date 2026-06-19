@@ -59,11 +59,11 @@ public class MaidSecretAll: SakuyaCardModel
 			.Execute(choiceContext);
         foreach(Creature mos in Owner.Creature.CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<VulnerablePower>( mos, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
-            await PowerCmd.Apply<WeakPower>( mos, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
+            await PowerCmd.Apply<VulnerablePower>(choiceContext,  mos, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
+            await PowerCmd.Apply<WeakPower>(choiceContext,  mos, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
         }
 		 await CardPileCmd.Draw(choiceContext,base.DynamicVars["Power"].IntValue,Owner.Creature.Player);
-		 await PowerCmd.Apply<KnifePower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

@@ -42,8 +42,8 @@ public class DreamMisdirection: SakuyaCardModel
         {
             if(mos.IsAlive)
 			{
-            await PowerCmd.Apply<VulnerablePower>( mos, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
-            await PowerCmd.Apply<WeakPower>( mos, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+            await PowerCmd.Apply<VulnerablePower>(choiceContext,  mos, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+            await PowerCmd.Apply<WeakPower>(choiceContext,  mos, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 			await CreatureCmd.LoseBlock(mos, mos.Block);
 			}
         }

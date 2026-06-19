@@ -115,8 +115,8 @@ public static class TimeStopPatches
 			{
 				await PowerCmd.Remove<TimeStopPower>(card.Owner.Creature);
 			}
-			await PowerCmd.Apply<WeakPower>(card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true);
-			await PowerCmd.Apply<VulnerablePower>(card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true);
+			await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true);
+			await PowerCmd.Apply<VulnerablePower>(new ThrowingPlayerChoiceContext(), card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true);
 		}
 
 		int starsToSpend = Math.Max(0, card.GetStarCostWithModifiers());

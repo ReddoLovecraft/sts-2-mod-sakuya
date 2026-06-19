@@ -1,5 +1,6 @@
 using BaseLib.Abstracts;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -32,6 +33,7 @@ using TH_Sakuya.Scripts.GameActions;
         private const int MaxTimeStopCount = 12;
         private int _timeStopCount = MaxTimeStopCount;
         private bool _shouldRefillOnNextTurnStart;
+        private bool _isToggleInProgress;
 
         public override RelicRarity Rarity => RelicRarity.Ancient;
         public override string PackedIconPath => $"res://TH_Sakuya/ArtWorks/Relics/{Id.Entry}.png";
@@ -67,6 +69,8 @@ using TH_Sakuya.Scripts.GameActions;
         public override Task AfterCombatEnd(MegaCrit.Sts2.Core.Rooms.CombatRoom room)
         {
             _shouldRefillOnNextTurnStart = false;
+            _isToggleInProgress = false;
+            TimeStopScreenOverlay.Reset();
             return Task.CompletedTask;
         }
 
@@ -110,6 +114,17 @@ using TH_Sakuya.Scripts.GameActions;
 
         internal async Task ToggleTimeStop(Player player, int? firstGrantTspOverride = null)
         {
+            if (!CombatManager.Instance.IsInProgress)
+            {
+                return;
+            }
+            if (_isToggleInProgress)
+            {
+                return;
+            }
+            _isToggleInProgress = true;
+            try
+            {
             if (player.Creature.HasPower<CannotTimeStopPower>())
             {
                 return;
@@ -151,8 +166,13 @@ using TH_Sakuya.Scripts.GameActions;
                 await TryGrantFirstTimeStopTsp(player, firstGrantTspOverride);
                 SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/entertimestop.wav"));
                 await CreatureCmd.TriggerAnim(base.Owner.Creature, "TimeStop", base.Owner.Character.CastAnimDelay);
-                await PowerCmd.Apply<TimeStopPower>(player.Creature, 1m, player.Creature, cardSource: null, silent: true);
+                await PowerCmd.Apply<TimeStopPower>(new ThrowingPlayerChoiceContext(), player.Creature, 1m, player.Creature, cardSource: null, silent: true);
                 await TriggerWhenEnterTimeStop(player);
+            }
+            }
+            finally
+            {
+                _isToggleInProgress = false;
             }
         }
         private async Task TriggerWhenEnterTimeStop(Player player)
@@ -209,7 +229,7 @@ using TH_Sakuya.Scripts.GameActions;
             {
                 await TimeStopPointSystem.Gain(player, gained);
             }
-            await PowerCmd.Apply<TimeStopFirstGrantPower>(player.Creature, 1m, player.Creature, cardSource: null, silent: true);
+            await PowerCmd.Apply<TimeStopFirstGrantPower>(new ThrowingPlayerChoiceContext(), player.Creature, 1m, player.Creature, cardSource: null, silent: true);
         }
 
         private static int CalculateEnemyAttackIntentTotal(Player player)
@@ -299,6 +319,10 @@ using TH_Sakuya.Scripts.GameActions;
         public Task OnRightClick(PlayerChoiceContext context)
         {
             if (Owner?.Creature == null)
+            {
+                return Task.CompletedTask;
+            }
+            if (!CombatManager.Instance.IsInProgress)
             {
                 return Task.CompletedTask;
             }

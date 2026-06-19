@@ -36,7 +36,7 @@ public class KnifeReturn: SakuyaCardModel
 		 {
 			cnt=sc.UsedKnivesCount();
 		 }
-		 await PowerCmd.Apply<KnifePower>(Owner.Creature, cnt,Owner.Creature,this);
+		 await PowerCmd.Apply<KnifePower>(choiceContext, Owner.Creature, cnt,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

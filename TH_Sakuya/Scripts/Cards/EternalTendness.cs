@@ -41,7 +41,7 @@ public class EternalTendness: SakuyaCardModel
 		 await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
         foreach(Creature mos in Owner.Creature.CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<StrengthPower>(mos, -this.DynamicVars.Cards.IntValue,Owner.Creature,this);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, mos, -this.DynamicVars.Cards.IntValue,Owner.Creature,this);
         }
 	}
 	protected override void OnUpgrade()

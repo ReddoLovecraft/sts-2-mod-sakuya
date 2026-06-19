@@ -37,7 +37,7 @@ public class TimeMagician: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		 (await PowerCmd.Apply<TimeMagicianPower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this)).InitPower();
+		 (await PowerCmd.Apply<TimeMagicianPower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this)).InitPower();
 	}
 	protected override void OnUpgrade()
 	{

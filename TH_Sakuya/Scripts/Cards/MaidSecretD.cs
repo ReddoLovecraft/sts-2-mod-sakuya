@@ -29,7 +29,7 @@ public class MaidSecretD : SakuyaCardModel
 		{
 			 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
 		}
-		await PowerCmd.Apply<KnifePower>( base.Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		await PowerCmd.Apply<KnifePower>(choiceContext,  base.Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
 
 	}
 	protected override void OnUpgrade()

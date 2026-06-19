@@ -72,7 +72,7 @@ public sealed class BloodCursePower : SakuyaPowerModel
 		this.Flash();
 		return (base.DynamicVars.Cards.IntValue==1)?2:1;
 	}
-	 public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	 public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
         {
             if (side != base.Owner.Side)
             {
@@ -95,9 +95,9 @@ public sealed class BloodCursePower : SakuyaPowerModel
            if(base.DynamicVars.Cards.IntValue==3)
 			{
 				this.Flash();
-                await PowerCmd.Apply<WeakPower>(Owner,1,null,null);
-                await PowerCmd.Apply<FrailPower>(Owner,1,null,null);
-                await PowerCmd.Apply<VulnerablePower>(Owner,1,null,null);
+                await PowerCmd.Apply<WeakPower>(choiceContext, Owner, 1, null, null);
+                await PowerCmd.Apply<FrailPower>(choiceContext, Owner, 1, null, null);
+                await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner, 1, null, null);
 				await PlayerCmd.LoseGold(1,Owner.Player);
 			}
         }

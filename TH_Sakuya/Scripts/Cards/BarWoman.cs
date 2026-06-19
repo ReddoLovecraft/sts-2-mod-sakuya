@@ -38,9 +38,9 @@ public class BarWoman: SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-		 await PowerCmd.Apply<StrengthPower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
-		 await PowerCmd.Apply<BarWomanPower>(Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
-		 await PowerCmd.Apply<WeakPower>(Owner.Creature, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<BarWomanPower>(choiceContext, Owner.Creature, base.DynamicVars.Cards.IntValue,Owner.Creature,this);
+		 await PowerCmd.Apply<WeakPower>(choiceContext, Owner.Creature, base.DynamicVars["Power"].IntValue,Owner.Creature,this);
 	}
 	protected override void OnUpgrade()
 	{

@@ -42,7 +42,7 @@ public class BloodCurse: SakuyaCardModel
 			}
 			else
 			{
-				await PowerCmd.Apply<BloodCursePower>(Owner.Creature,1,null,null);
+				await PowerCmd.Apply<BloodCursePower>(choiceContext, Owner.Creature,1,null,null);
 			}
 		}
 	}

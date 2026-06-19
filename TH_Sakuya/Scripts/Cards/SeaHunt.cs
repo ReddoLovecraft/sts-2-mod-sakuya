@@ -50,7 +50,7 @@ public class SeaHunt: SakuyaCardModel
 		{
 			await CreatureCmd.GainBlock(cardPlay.Target,new BlockVar(value,ValueProp.Unpowered),null);
 		}
-		if (shouldTriggerFatal && attackCommand.Results.Any((DamageResult r) => r.WasTargetKilled))
+		if (shouldTriggerFatal && attackCommand.Results.SelectMany(static r => r).Any((DamageResult r) => r.WasTargetKilled))
 		{
 			await CreatureCmd.GainMaxHp(base.Owner.Creature, base.DynamicVars.Cards.IntValue);
 		}

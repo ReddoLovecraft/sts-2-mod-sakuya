@@ -39,7 +39,7 @@ public sealed class LittleKnife : SakuyaCardModel
 		{
 			if (enemy.IsAlive)
 			{
-				await PowerCmd.Apply<StrengthPower>(enemy, -hitCount * damage, base.Owner.Creature, this);
+				await PowerCmd.Apply<StrengthPower>(choiceContext, enemy, -hitCount * damage, base.Owner.Creature, this);
 			}
 		}
 	}

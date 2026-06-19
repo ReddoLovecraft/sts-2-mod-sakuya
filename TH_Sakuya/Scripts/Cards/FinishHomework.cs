@@ -28,7 +28,7 @@ public class FinishHomework : SakuyaCardModel
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		await CreatureCmd.Damage(choiceContext, Owner.Creature.CombatState.HittableEnemies, base.DynamicVars.Damage, base.Owner.Creature);
-		await PowerCmd.Apply<EnergyNextTurnPower>( base.Owner.Creature, base.DynamicVars.Energy.IntValue,Owner.Creature,this);
+		await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext,  base.Owner.Creature, base.DynamicVars.Energy.IntValue,Owner.Creature,this);
 
 	}
 	protected override void OnUpgrade()

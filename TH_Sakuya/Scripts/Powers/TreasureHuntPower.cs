@@ -16,7 +16,7 @@ public sealed class TreasureHuntPower : SakuyaPowerModel
 {
 	public override PowerType Type => PowerType.Buff;
 	public override PowerStackType StackType => PowerStackType.Single;
-	public override bool IsInstanced => true;
+	public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 	public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
     public override string? CustomPackedIconPath => "res://TH_Sakuya/ArtWorks/Powers/THP32.png";
     public override string? CustomBigIconPath => "res://TH_Sakuya/ArtWorks/Powers/THP64.png";
