@@ -1,9 +1,15 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models.Cards;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using TH_Sakuya.Scrpits.Cards;
 using TH_Sakuya.Scripts.Powers;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace TH_Sakuya.Scripts.Main;
 
@@ -120,6 +126,31 @@ public static class TimeStopPointSystem
         //能力逻辑👆
 		await Set(player, Math.Max(current - amount, 0));
 		return true;
+	}
+
+	public static async Task RestoreExitCards(Player player)
+	{
+		if (player?.Creature?.CombatState == null)
+		{
+			return;
+		}
+
+		List<CardModel> finishHomeworkCards =
+		[
+			.. PileType.Hand.GetPile(player).Cards.Where(c => c != null && c is FinishHomework),
+			.. PileType.Draw.GetPile(player).Cards.Where(c => c != null && c is FinishHomework),
+			.. PileType.Discard.GetPile(player).Cards.Where(c => c != null && c is FinishHomework),
+		];
+
+		foreach (CardModel card in finishHomeworkCards)
+		{
+			CardModel sweep = player.Creature.CombatState.CreateCard<Sweep>(player);
+			if (card.IsUpgraded)
+			{
+				CardCmd.Upgrade(sweep);
+			}
+			await CardCmd.Transform(card, sweep);
+		}
 	}
 
 	private static async Task Set(Player player, int value)

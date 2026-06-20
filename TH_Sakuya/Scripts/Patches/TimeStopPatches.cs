@@ -114,6 +114,7 @@ public static class TimeStopPatches
 			 if(!card.Owner.Creature.HasPower<SakuyaWorldPower>())
 			{
 				await PowerCmd.Remove<TimeStopPower>(card.Owner.Creature);
+				await TimeStopPointSystem.RestoreExitCards(card.Owner);
 			}
 			await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true);
 			await PowerCmd.Apply<VulnerablePower>(new ThrowingPlayerChoiceContext(), card.Owner.Creature, 1m, card.Owner.Creature, cardSource: null, silent: true);

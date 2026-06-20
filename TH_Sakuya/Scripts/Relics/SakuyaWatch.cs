@@ -25,70 +25,15 @@ using TH_Sakuya.Scrpits.Relics;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Runs;
-using System;
 using TH_Sakuya.Scripts.GameActions;
-using System.IO;
-using System.Text;
-using System.Text.Json;
 
 [Pool(typeof(SakuyaRelicPool))]
     public class SakuyaWatch : CustomRelicModel, IRightCilckable
     {
-        // #region debug-point A:config
-        private const string DebugEnvPath = ".dbg/timestop-toggle-crash.env";
-        private const string DebugFallbackUrl = "http://127.0.0.1:7777/event";
-        private const string DebugSessionId = "timestop-toggle-crash";
-        private const string DebugRunId = "pre-fix";
-        private static readonly System.Net.Http.HttpClient _debugHttp = new System.Net.Http.HttpClient();
-        // #endregion
-
         private const int MaxTimeStopCount = 12;
         private int _timeStopCount = MaxTimeStopCount;
         private bool _shouldRefillOnNextTurnStart;
         private bool _isToggleInProgress;
-
-        // #region debug-point A:report
-        private static void ReportDebug(string hypothesisId, string location, string msg, object data)
-        {
-            Task.Run(async () =>
-            {
-                try
-                {
-                    string url = DebugFallbackUrl;
-                    string sessionId = DebugSessionId;
-                    if (File.Exists(DebugEnvPath))
-                    {
-                        foreach (string line in File.ReadAllLines(DebugEnvPath))
-                        {
-                            if (line.StartsWith("DEBUG_SERVER_URL=", StringComparison.Ordinal))
-                            {
-                                url = line["DEBUG_SERVER_URL=".Length..];
-                            }
-                            else if (line.StartsWith("DEBUG_SESSION_ID=", StringComparison.Ordinal))
-                            {
-                                sessionId = line["DEBUG_SESSION_ID=".Length..];
-                            }
-                        }
-                    }
-                    string payload = JsonSerializer.Serialize(new
-                    {
-                        sessionId,
-                        runId = DebugRunId,
-                        hypothesisId,
-                        location,
-                        msg = "[DEBUG] " + msg,
-                        data,
-                        ts = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
-                    });
-                    using System.Net.Http.StringContent content = new System.Net.Http.StringContent(payload, Encoding.UTF8, "application/json");
-                    await _debugHttp.PostAsync(url, content);
-                }
-                catch
-                {
-                }
-            });
-        }
-        // #endregion
 
         public override RelicRarity Rarity => RelicRarity.Starter;
         public override string PackedIconPath => $"res://TH_Sakuya/ArtWorks/Relics/{Id.Entry}.png";
@@ -166,29 +111,12 @@ using System.Text.Json;
 
         internal async Task ToggleTimeStop(Player player, int? firstGrantTspOverride = null)
         {
-            // #region debug-point A:toggle-enter
-            ReportDebug("A", "SakuyaWatch.ToggleTimeStop", "toggle-enter", new
-            {
-                inProgress = _isToggleInProgress,
-                isInCombat = CombatManager.Instance.IsInProgress,
-                hasTimeStop = player?.Creature?.HasPower<TimeStopPower>() ?? false,
-                timeStopCount = _timeStopCount,
-                sweepCount = CountCardsInPiles<Sweep>(),
-                finishHomeworkCount = CountCardsInPiles<FinishHomework>()
-            });
-            // #endregion
             if (!CombatManager.Instance.IsInProgress)
             {
                 return;
             }
             if (_isToggleInProgress)
             {
-                // #region debug-point A:toggle-skip
-                ReportDebug("A", "SakuyaWatch.ToggleTimeStop", "toggle-skip-in-progress", new
-                {
-                    timeStopCount = _timeStopCount
-                });
-                // #endregion
                 return;
             }
             _isToggleInProgress = true;
@@ -200,14 +128,6 @@ using System.Text.Json;
             }
             if (player.Creature.HasPower<TimeStopPower>())
             {
-                // #region debug-point B:exit-start
-                ReportDebug("B", "SakuyaWatch.ToggleTimeStop", "exit-time-stop-start", new
-                {
-                    finishHomeworkCount = CountCardsInPiles<FinishHomework>(),
-                    sweepCount = CountCardsInPiles<Sweep>(),
-                    hasOverMind = Owner.Creature.HasPower<OverMindPower>()
-                });
-                // #endregion
                 if(player.Creature.HasPower<SakuyaWorldPower>())
                 return;
                 if(Owner.Creature.HasPower<OverMindPower>())
@@ -216,53 +136,16 @@ using System.Text.Json;
                 await omp.TriggerOverMind(true);
                 }
                 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-                List<CardModel> list = new List<CardModel>();
-                list.AddRange(PileType.Hand.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
-                list.AddRange(PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
-                list.AddRange(PileType.Discard.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
                 await PowerCmd.Remove<TimeStopPower>(player.Creature);
-                // #region debug-point D:exit-after-remove
-                ReportDebug("D", "SakuyaWatch.ToggleTimeStop", "exit-time-stop-after-remove-power", new
-                {
-                    queuedTransformCount = list.Count,
-                    hasTimeStop = player.Creature.HasPower<TimeStopPower>()
-                });
-                // #endregion
+                await TimeStopPointSystem.RestoreExitCards(player);
 				bool hasAliveEnemy = player.Creature.CombatState?.HittableEnemies.Any(e => e != null && e.IsAlive) ?? false;
 				if (!hasAliveEnemy)
 				{
 					return;
 				}
-                if(list.Count>0)
-                foreach (CardModel card in list)
-                {
-                   CardModel cardModel = player.Creature.CombatState.CreateCard<Sweep>(base.Owner);
-                    if (card.IsUpgraded)
-                    {
-                    CardCmd.Upgrade(cardModel);
-                    }
-                    await CardCmd.Transform(card, cardModel);
-                }
-                // #region debug-point B:exit-done
-                ReportDebug("B", "SakuyaWatch.ToggleTimeStop", "exit-time-stop-finished-transforms", new
-                {
-                    transformedCount = list.Count,
-                    finishHomeworkCount = CountCardsInPiles<FinishHomework>(),
-                    sweepCount = CountCardsInPiles<Sweep>()
-                });
-                // #endregion
-                
             }
             else
             {
-                // #region debug-point B:enter-start
-                ReportDebug("B", "SakuyaWatch.ToggleTimeStop", "enter-time-stop-start", new
-                {
-                    firstGrantTspOverride,
-                    sweepCount = CountCardsInPiles<Sweep>(),
-                    finishHomeworkCount = CountCardsInPiles<FinishHomework>()
-                });
-                // #endregion
                 await TryGrantFirstTimeStopTsp(player, firstGrantTspOverride);
                 SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/entertimestop.wav"));
                 await CreatureCmd.TriggerAnim(base.Owner.Creature, "TimeStop", base.Owner.Character.CastAnimDelay);
@@ -272,15 +155,6 @@ using System.Text.Json;
             }
             finally
             {
-                // #region debug-point A:toggle-finally
-                ReportDebug("A", "SakuyaWatch.ToggleTimeStop", "toggle-finally", new
-                {
-                    hadTimeStopAtFinally = player?.Creature?.HasPower<TimeStopPower>() ?? false,
-                    timeStopCount = _timeStopCount,
-                    sweepCount = CountCardsInPiles<Sweep>(),
-                    finishHomeworkCount = CountCardsInPiles<FinishHomework>()
-                });
-                // #endregion
                 _isToggleInProgress = false;
             }
         }
@@ -297,13 +171,6 @@ using System.Text.Json;
                     .. PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Sweep),
                     .. PileType.Discard.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Sweep),
                 ];
-                // #region debug-point B:enter-transform-begin
-                ReportDebug("B", "SakuyaWatch.TriggerWhenEnterTimeStop", "enter-transform-begin", new
-                {
-                    sweepCount = list.Count,
-                    finishHomeworkCount = CountCardsInPiles<FinishHomework>()
-                });
-                // #endregion
                  if(list.Count>0)
                 foreach (CardModel card in list)
                 {
@@ -320,15 +187,6 @@ using System.Text.Json;
                      .. PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Circle),
                      .. PileType.Discard.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is Circle),
                  ];
-                 // #region debug-point B:enter-transform-done
-                 ReportDebug("B", "SakuyaWatch.TriggerWhenEnterTimeStop", "enter-transform-done", new
-                 {
-                     transformedCount = list.Count,
-                     circleCount = list2.Count,
-                     sweepCount = CountCardsInPiles<Sweep>(),
-                     finishHomeworkCount = CountCardsInPiles<FinishHomework>()
-                 });
-                 // #endregion
                  if(list2.Count>0)
                 foreach (Circle c in list2)
                 {
@@ -381,19 +239,6 @@ using System.Text.Json;
             return sum;
         }
 
-        private int CountCardsInPiles<TCard>() where TCard : CardModel
-        {
-            if (Owner == null)
-            {
-                return 0;
-            }
-            int count = 0;
-            count += PileType.Hand.GetPile(Owner).Cards.Count(c => c != null && c is TCard);
-            count += PileType.Draw.GetPile(Owner).Cards.Count(c => c != null && c is TCard);
-            count += PileType.Discard.GetPile(Owner).Cards.Count(c => c != null && c is TCard);
-            return count;
-        }
-
         public void ResetCounter()
         {
             _timeStopCount = MaxTimeStopCount;
@@ -444,6 +289,7 @@ using System.Text.Json;
                 if(!player.Creature.HasPower<SakuyaWorldPower>())
                 {
                     await PowerCmd.Remove<TimeStopPower>(player.Creature);
+                    await TimeStopPointSystem.RestoreExitCards(player);
                 }
                 SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/timestop.wav"));
                 bool hasAliveEnemy = player.Creature.CombatState?.HittableEnemies.Any(e => e != null && e.IsAlive) ?? false;

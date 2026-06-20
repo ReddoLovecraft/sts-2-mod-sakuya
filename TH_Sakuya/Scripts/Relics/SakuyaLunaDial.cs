@@ -139,27 +139,13 @@ using TH_Sakuya.Scripts.GameActions;
                 await omp.TriggerOverMind(true);
                 }
                 await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-                List<CardModel> list = new List<CardModel>();
-                list.AddRange(PileType.Hand.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
-                list.AddRange(PileType.Draw.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
-                list.AddRange(PileType.Discard.GetPile(base.Owner).Cards.Where((CardModel c) => c != null && c is FinishHomework));
                 await PowerCmd.Remove<TimeStopPower>(player.Creature);
+                await TimeStopPointSystem.RestoreExitCards(player);
 				bool hasAliveEnemy = player.Creature.CombatState?.HittableEnemies.Any(e => e != null && e.IsAlive) ?? false;
 				if (!hasAliveEnemy)
 				{
 					return;
 				}
-                if(list.Count>0)
-                foreach (CardModel card in list)
-                {
-                   CardModel cardModel = player.Creature.CombatState.CreateCard<Sweep>(base.Owner);
-                    if (card.IsUpgraded)
-                    {
-                    CardCmd.Upgrade(cardModel);
-                    }
-                    await CardCmd.Transform(card, cardModel);
-                }
-                
             }
             else
             {
@@ -306,6 +292,7 @@ using TH_Sakuya.Scripts.GameActions;
                 if(!player.Creature.HasPower<SakuyaWorldPower>())
                 {
                     await PowerCmd.Remove<TimeStopPower>(player.Creature);
+                    await TimeStopPointSystem.RestoreExitCards(player);
                 }
                 SfxCmd.Play(SakuyaInit.ToModSfxPath("TH_Sakuya/ArtWorks/SFX/timestop.wav"));
                 bool hasAliveEnemy = player.Creature.CombatState?.HittableEnemies.Any(e => e != null && e.IsAlive) ?? false;

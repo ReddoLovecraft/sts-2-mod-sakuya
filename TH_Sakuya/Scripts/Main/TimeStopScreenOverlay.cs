@@ -2,12 +2,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using TH_Sakuya.Scripts.Powers;
 
 namespace TH_Sakuya.Scripts.Main;
@@ -22,13 +17,6 @@ public static class TimeStopScreenOverlay
 	private const string ShaderPath = "res://TH_Sakuya/ArtWorks/VFX/screen_grayscale.gdshader";
 	private const int OverlayZIndex = -8;
 	private const int ExemptCreatureZIndex = OverlayZIndex + 1;
-	// #region debug-point A:config
-	private const string DebugEnvPath = ".dbg/timestop-toggle-crash.env";
-	private const string DebugFallbackUrl = "http://127.0.0.1:7777/event";
-	private const string DebugSessionId = "timestop-toggle-crash";
-	private const string DebugRunId = "pre-fix";
-	private static readonly System.Net.Http.HttpClient _debugHttp = new System.Net.Http.HttpClient();
-	// #endregion
 
 	private static BackBufferCopy? _sceneOverlayRoot;
 	private static ColorRect? _sceneOverlayRect;
@@ -39,59 +27,9 @@ public static class TimeStopScreenOverlay
 	private static ShaderMaterial? _mat;
 	private static readonly Dictionary<NCreature, SavedZ> _savedZ = new Dictionary<NCreature, SavedZ>();
 
-	// #region debug-point A:report
-	private static void ReportDebug(string hypothesisId, string location, string msg, object data)
-	{
-		Task.Run(async () =>
-		{
-			try
-			{
-				string url = DebugFallbackUrl;
-				string sessionId = DebugSessionId;
-				if (File.Exists(DebugEnvPath))
-				{
-					foreach (string line in File.ReadAllLines(DebugEnvPath))
-					{
-						if (line.StartsWith("DEBUG_SERVER_URL=", StringComparison.Ordinal))
-						{
-							url = line["DEBUG_SERVER_URL=".Length..];
-						}
-						else if (line.StartsWith("DEBUG_SESSION_ID=", StringComparison.Ordinal))
-						{
-							sessionId = line["DEBUG_SESSION_ID=".Length..];
-						}
-					}
-				}
-				string payload = JsonSerializer.Serialize(new
-				{
-					sessionId,
-					runId = DebugRunId,
-					hypothesisId,
-					location,
-					msg = "[DEBUG] " + msg,
-					data,
-					ts = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
-				});
-				using System.Net.Http.StringContent content = new System.Net.Http.StringContent(payload, Encoding.UTF8, "application/json");
-				await _debugHttp.PostAsync(url, content);
-			}
-			catch
-			{
-			}
-		});
-	}
-	// #endregion
-
 	public static void ApplyIfNeeded()
 	{
 		PruneInvalidState();
-		// #region debug-point A:apply-enter
-		ReportDebug("A", "TimeStopScreenOverlay.ApplyIfNeeded", "enter", new
-		{
-			overlayCount = CountValidOverlays(),
-			roomExists = NCombatRoom.Instance != null
-		});
-		// #endregion
 		NCombatRoom? room = NCombatRoom.Instance;
 		if (room == null)
 		{
@@ -99,34 +37,14 @@ public static class TimeStopScreenOverlay
 		}
 		CleanupLegacyOverlays(room);
 		EnsureShaderMaterial();
-		int createdCount = EnsureOverlays(room);
+		EnsureOverlays(room);
 		UpdateOverlayRectsIfPossible();
 		RefreshExemptCreatures();
-		// #region debug-point A:create
-		ReportDebug("A", "TimeStopScreenOverlay.ApplyIfNeeded", "ensured-overlay-root", new
-		{
-			createdCount,
-			overlayCount = CountValidOverlays(),
-			sceneParent = _sceneOverlayRoot?.GetParent()?.Name.ToString(),
-			backVfxParent = _backVfxOverlayRoot?.GetParent()?.Name.ToString(),
-			combatVfxParent = _combatVfxOverlayRoot?.GetParent()?.Name.ToString(),
-			sceneContainerZ = room.SceneContainer?.ZIndex,
-			backVfxZ = room.BackCombatVfxContainer?.ZIndex,
-			combatVfxZ = room.CombatVfxContainer?.ZIndex
-		});
-		// #endregion
 	}
 
 	public static void Restore()
 	{
 		PruneInvalidState();
-		// #region debug-point E:restore
-		ReportDebug("E", "TimeStopScreenOverlay.Restore", "restore-begin", new
-		{
-			savedCount = _savedZ.Count,
-			overlayCount = CountValidOverlays()
-		});
-		// #endregion
 		foreach (var kv in _savedZ)
 		{
 			if (GodotObject.IsInstanceValid(kv.Key))
@@ -189,15 +107,6 @@ public static class TimeStopScreenOverlay
 				_savedZ.Remove(node);
 			}
 		}
-		// #region debug-point B:refresh
-		ReportDebug("B", "TimeStopScreenOverlay.RefreshExemptCreatures", "refresh-exempt-creatures", new
-		{
-			creatureCount,
-			exemptCount,
-			savedCount = _savedZ.Count,
-			overlayCount = CountValidOverlays()
-		});
-		// #endregion
 	}
 
 	private static void UpdateOverlayRectsIfPossible()
@@ -225,24 +134,6 @@ public static class TimeStopScreenOverlay
 		}
 		Shader shader = GD.Load<Shader>(ShaderPath);
 		_mat = new ShaderMaterial { Shader = shader };
-	}
-
-	private static int EnsureOverlays(NCombatRoom room)
-	{
-		int createdCount = 0;
-		if (EnsureOverlay(room.SceneContainer, SceneOverlayName, ref _sceneOverlayRoot, ref _sceneOverlayRect))
-		{
-			createdCount++;
-		}
-		if (EnsureOverlay(room.BackCombatVfxContainer, BackVfxOverlayName, ref _backVfxOverlayRoot, ref _backVfxOverlayRect))
-		{
-			createdCount++;
-		}
-		if (EnsureOverlay(room.CombatVfxContainer, CombatVfxOverlayName, ref _combatVfxOverlayRoot, ref _combatVfxOverlayRect))
-		{
-			createdCount++;
-		}
-		return createdCount;
 	}
 
 	private static bool EnsureOverlay(Node? parent, string overlayName, ref BackBufferCopy? overlayRoot, ref ColorRect? overlayRect)
@@ -390,24 +281,6 @@ public static class TimeStopScreenOverlay
 		}
 	}
 
-	private static int CountValidOverlays()
-	{
-		int count = 0;
-		if (GodotObject.IsInstanceValid(_sceneOverlayRoot))
-		{
-			count++;
-		}
-		if (GodotObject.IsInstanceValid(_backVfxOverlayRoot))
-		{
-			count++;
-		}
-		if (GodotObject.IsInstanceValid(_combatVfxOverlayRoot))
-		{
-			count++;
-		}
-		return count;
-	}
-
 	private static bool HasVisibleOverlays()
 	{
 		return IsOverlayVisible(_sceneOverlayRoot)
@@ -434,6 +307,13 @@ public static class TimeStopScreenOverlay
 		{
 			_combatVfxOverlayRoot.Visible = visible;
 		}
+	}
+
+	private static void EnsureOverlays(NCombatRoom room)
+	{
+		EnsureOverlay(room.SceneContainer, SceneOverlayName, ref _sceneOverlayRoot, ref _sceneOverlayRect);
+		EnsureOverlay(room.BackCombatVfxContainer, BackVfxOverlayName, ref _backVfxOverlayRoot, ref _backVfxOverlayRect);
+		EnsureOverlay(room.CombatVfxContainer, CombatVfxOverlayName, ref _combatVfxOverlayRoot, ref _combatVfxOverlayRect);
 	}
 
 	private readonly struct SavedZ
