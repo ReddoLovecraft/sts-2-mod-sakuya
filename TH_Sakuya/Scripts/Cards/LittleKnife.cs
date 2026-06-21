@@ -26,7 +26,10 @@ public sealed class LittleKnife : SakuyaCardModel
 	public LittleKnife() : base(0, CardType.Attack, CardRarity.Event, TargetType.AllEnemies)
 	{
 	}
-
+	protected override void OnUpgrade()
+	{
+		this.DynamicVars.Cards.UpgradeValueBy(2);
+	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
 		decimal hitCount = base.DynamicVars.Cards.BaseValue;
